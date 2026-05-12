@@ -1,0 +1,8 @@
+{
+  "name": "Control Gestion Veterinaria",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "e10c063c"
+}

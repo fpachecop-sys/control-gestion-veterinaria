@@ -1,0 +1,50 @@
+/* Estilo muy básico para que parezca hecho a mano */
+.cuadro-accion {
+  border: 1px solid #000; /* Borde negro simple como en el dibujo */
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+.cuadro-accion p {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.item-cita {
+  --padding-start: 0;
+  margin-bottom: 10px;
+  border: 1px solid #eee; /* Un borde muy tenue para separar */
+  border-radius: 10px;
+}
+
+.fecha-simple {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 50px;
+  line-height: 1;
+}
+
+.fecha-simple b {
+  font-size: 1.2rem;
+}
+
+h3 {
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+/* Quitamos el fondo gris del buscador para que sea más plano */
+ion-searchbar {
+  --background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  padding: 0;
+}

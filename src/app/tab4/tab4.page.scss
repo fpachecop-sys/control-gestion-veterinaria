@@ -1,0 +1,144 @@
+ion-content {
+  --background: #ffffff;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 5px 0 5px;
+
+  .user-name {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #2c3e50;
+    margin: 0;
+  }
+  .welcome-text {
+    font-size: 0.95rem;
+    color: #7f8c8d;
+    margin: 3px 0 0 0;
+  }
+  .mini-logo {
+    width: 55px;
+    height: auto;
+  }
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ddd, transparent);
+  border: none;
+  margin: 20px 5px;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #333;
+  margin: 20px 0 0 5px;
+}
+
+.instruction-text {
+  color: #95a5a6;
+  font-size: 0.85rem;
+  margin: 3px 0 15px 5px;
+}
+
+/* Cajas grises superiores */
+.status-container {
+  display: flex;
+  gap: 8px;
+  padding: 0 5px;
+
+  .status-box {
+    flex: 1;
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 12px 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin: 0;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #444;
+    }
+  }
+}
+
+/* Botones Azules de Acceso Rápido */
+.btn-box-admin {
+  background: #ebf3ff;
+  border: 1px solid #3880ff;
+  height: 85px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 6px;
+  padding: 10px;
+
+  p {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* Estructura de Tabla Alumno-Friendly */
+.custom-table {
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  margin: 15px 5px 30px 5px;
+  overflow: hidden;
+
+  .table-header {
+    display: flex;
+    background: #e0e0e0;
+    border-bottom: 1px solid #bbb;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: #333;
+    
+    div {
+      flex: 1;
+      padding: 10px 5px;
+      text-align: center;
+      border-right: 1px solid #bbb;
+      &:last-child { border-right: none; }
+    }
+  }
+
+  .table-row {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    font-size: 0.75rem;
+    color: #555;
+    &:last-child { border-bottom: none; }
+
+    div {
+      flex: 1;
+      padding: 10px 5px;
+      text-align: center;
+      border-right: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:last-child { border-right: none; }
+    }
+    
+    .text-pending {
+      color: #f39c12;
+      font-weight: 600;
+    }
+  }
+}

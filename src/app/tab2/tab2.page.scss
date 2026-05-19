@@ -1,0 +1,80 @@
+ion-content {
+  --background: #ffffff;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.logo-header {
+  margin-top: 10px;
+}
+
+.logo-header .logo-small {
+  width: 60px;
+  height: auto;
+  opacity: 0.8;
+}
+
+.title-section {
+  margin: 20px 0 25px 10px;
+}
+
+.title-section .page-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.title-section .page-subtitle {
+  font-size: 0.9rem;
+  color: #95a5a6;
+  margin-top: 4px;
+}
+
+.form-container {
+  padding: 0 10px;
+}
+
+.form-container .custom-input {
+  margin-bottom: 15px;
+  --border-radius: 12px;
+  --border-color: #e0e0e0;
+  --highlight-color-focused: #3880ff;
+}
+
+.form-container .custom-input ion-label {
+  font-weight: 600 !important;
+  color: #555 !important;
+  margin-bottom: 8px !important;
+}
+
+.terms-container {
+  margin: 20px 0;
+}
+
+.terms-container ion-checkbox {
+  --size: 18px;
+  --checkbox-background-checked: #3880ff;
+  --border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.terms-text {
+  color: #7f8c8d;
+  margin-left: 10px;
+}
+
+.button-container {
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
+
+.btn-create {
+  height: 50px;
+  --border-width: 1.5px;
+  --border-color: #222;
+  --color: #222;
+  --background: #f8f9fa;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: none; /* Para que no salga todo en mayúsculas */
+}

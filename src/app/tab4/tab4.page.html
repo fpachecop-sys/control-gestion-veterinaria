@@ -1,0 +1,80 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <div class="admin-header">
+    <div>
+      <h2 class="user-name">Hola Admin</h2>
+      <p class="welcome-text">¡Bienvenido de Vuelta!</p>
+    </div>
+    <img src="assets/icon/logo.jpg" alt="Logo" class="mini-logo">
+  </div>
+
+  <hr class="divider">
+
+  <div class="panel-section">
+    <h3 class="section-title">Panel De administración</h3>
+    <p class="instruction-text">Bienvenido Administrador</p>
+    
+    <div class="status-container">
+      <div class="status-box"><p>Total Dueños: 7</p></div>
+      <div class="status-box"><p>Total Mascotas: 8</p></div>
+      <div class="status-box"><p>Citas pendientes: 3</p></div>
+    </div>
+  </div>
+
+  <div class="actions-section">
+    <h3 class="section-title">Acceso Rápido</h3>
+    
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="6">
+          <div class="btn-box-admin"><p>AGENDAR CITA</p></div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="btn-box-admin"><p>GESTION MASCOTA</p></div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <div class="btn-box-admin"><p>GESTION DUEÑO</p></div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="btn-box-admin"><p>AGREGAR VETERINARIOS</p></div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <div class="btn-box-admin"><p>VER ESTADISTICAS</p></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="table-section">
+    <h3 class="section-title">Citas Recientes</h3>
+    
+    <div class="custom-table">
+      <div class="table-header">
+        <div>Fecha</div>
+        <div>Mascota</div>
+        <div>Dueño</div>
+        <div>Veterinario</div>
+        <div>Estado</div>
+      </div>
+      <div class="table-row">
+        <div>15/11</div>
+        <div>Firulais</div>
+        <div>Carlos</div>
+        <div>Dr. Vega</div>
+        <div class="text-pending">Pendiente</div>
+      </div>
+      <div class="table-row">
+        <div>18/11</div>
+        <div>Michi</div>
+        <div>Ana</div>
+        <div>Dra. Martínez</div>
+        <div class="text-pending">Pendiente</div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

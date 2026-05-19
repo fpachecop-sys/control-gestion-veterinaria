@@ -1,0 +1,159 @@
+ion-content {
+  --background: #ffffff;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Cabecera Estilo Tab 1 & Tab 4 */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 5px 0 5px;
+
+  .user-name {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #2c3e50;
+    margin: 0;
+  }
+  .welcome-text {
+    font-size: 0.95rem;
+    color: #7f8c8d;
+    margin: 3px 0 0 0;
+  }
+  .mini-logo {
+    width: 55px;
+    height: auto;
+  }
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ddd, transparent);
+  border: none;
+  margin: 20px 5px;
+}
+
+/* Título de Sección con Icono */
+.title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0 15px 5px;
+
+  .section-icon {
+    font-size: 1.6rem;
+    color: #16a085; /* Tono verde azulado del título del boceto */
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #16a085;
+    margin: 0;
+  }
+}
+
+/* Botón Agregar Dueño Manual */
+.action-container {
+  padding: 0 5px;
+  margin-bottom: 20px;
+}
+
+.btn-agregar-dueno {
+  background: #ebf3ff;
+  color: #2c3e50;
+  border: 1px solid #3880ff;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: background 0.2s;
+
+  &:active {
+    background: #d4e6ff;
+  }
+}
+
+/* Tabla Estilo Cuaderno de Trabajo */
+.custom-table {
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  margin: 0 5px 30px 5px;
+  overflow: hidden;
+
+  .table-header {
+    display: flex;
+    background: #e0e0e0;
+    border-bottom: 1px solid #bbb;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: #333;
+    
+    div {
+      padding: 10px 4px;
+      text-align: center;
+      border-right: 1px solid #bbb;
+      &:last-child { border-right: none; }
+    }
+  }
+
+  .table-row {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    font-size: 0.75rem;
+    color: #444;
+    min-height: 38px;
+
+    div {
+      padding: 10px 4px;
+      text-align: center;
+      border-right: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:last-child { border-right: none; }
+    }
+  }
+
+  /* Filas vacías del boceto */
+  .empty-row {
+    background-color: #fafafa;
+    &:nth-child(even) {
+      background-color: #ffffff;
+    }
+    div {
+      height: 38px;
+    }
+  }
+
+  /* Acciones de Editar / Eliminar */
+  .action-buttons {
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .btn-edit {
+      color: #3880ff;
+      cursor: pointer;
+    }
+    .btn-divider {
+      color: #999;
+    }
+    .btn-delete {
+      color: #e74c3c;
+      cursor: pointer;
+    }
+  }
+
+  .text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

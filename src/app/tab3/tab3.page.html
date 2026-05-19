@@ -1,17 +1,65 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="ion-padding">
+    <h2 style="margin-top: 20px;">Hola Franco</h2>
+    <p>Bienvenido de vuelta</p>
+  </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="ion-padding">
+    <ion-searchbar placeholder="Buscar mascotas, citas..."></ion-searchbar>
+    
+    <h3>Acciones Rápidas</h3>
+    
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <div class="cuadro-accion">
+            <p>UBICACIÓN</p>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="cuadro-accion">
+            <p>MIS MASCOTAS</p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <div class="cuadro-accion">
+            <p>VETERINARIOS</p>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="cuadro-accion">
+            <p>HISTORIAL</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <h3>Próximas Citas</h3>
+
+    <ion-item class="item-cita">
+      <div slot="start" class="fecha-simple">
+        <b>15</b><br>NOV
+      </div>
+      <ion-label>
+        <h2>Firulais</h2>
+        <p>10:00 AM - Vacunación</p>
+        <p>Dr. Roberto Vega</p>
+      </ion-label>
+      <ion-note slot="end">Pendiente</ion-note>
+    </ion-item>
+
+    <ion-item class="item-cita">
+      <div slot="start" class="fecha-simple">
+        <b>18</b><br>NOV
+      </div>
+      <ion-label>
+        <h2>Michi</h2>
+        <p>02:30 PM - Control</p>
+        <p>Dra. Ana Martinez</p>
+      </ion-label>
+      <ion-note slot="end">Pendiente</ion-note>
+    </ion-item>
+  </div>
 </ion-content>

@@ -1,65 +1,95 @@
-<ion-content [fullscreen]="true">
-  <div class="ion-padding">
-    <h2 style="margin-top: 20px;">Hola Franco</h2>
-    <p>Bienvenido de vuelta</p>
+<ion-content [fullscreen]="true" class="bg-claro">
+
+  <div class="header-container ion-padding-horizontal">
+    <div class="saludo-bloque">
+      <h2>Hola Franco</h2>
+      <p>Bienvenido de Vuelta!</p>
+    </div>
+    <div class="logo-bloque">
+      <img src="assets/icon/logo.jpg" alt="Logo Veterinaria" class="logo-clinica" />
+    </div>
+    <div class="avatar-bloque">
+      <div class="avatar-wrapper">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <span class="notificacion-badge"></span>
+      </div>
+    </div>
   </div>
 
-  <div class="ion-padding">
-    <ion-searchbar placeholder="Buscar mascotas, citas..."></ion-searchbar>
+  <div class="ion-padding-horizontal">
+    <ion-searchbar placeholder="Buscar mascotas, citas...." class="buscador-personalizado"></ion-searchbar>
     
-    <h3>Acciones Rápidas</h3>
+    <h3 class="seccion-titulo">Acciones Rapidas</h3>
     
-    <ion-grid>
+    <ion-grid class="ion-no-padding">
       <ion-row>
         <ion-col size="6">
-          <div class="cuadro-accion">
-            <p>UBICACIÓN</p>
+          <div class="cuadro-accion ion-activatable" [routerLink]="['/ubicacion']">
+            <p>UBICACION</p>
+            <ion-ripple-effect></ion-ripple-effect>
           </div>
         </ion-col>
+        
         <ion-col size="6">
-          <div class="cuadro-accion">
+          <div class="cuadro-accion ion-activatable" [routerLink]="['/mascotas']">
             <p>MIS MASCOTAS</p>
+            <ion-ripple-effect></ion-ripple-effect>
           </div>
         </ion-col>
       </ion-row>
+      
       <ion-row>
         <ion-col size="6">
-          <div class="cuadro-accion">
-            <p>VETERINARIOS</p>
+          <div class="cuadro-accion ion-activatable" [routerLink]="['/solicitar-consulta']">
+            <p>SOLICITAR CONSULTA</p>
+            <ion-ripple-effect></ion-ripple-effect>
           </div>
         </ion-col>
+        
         <ion-col size="6">
-          <div class="cuadro-accion">
+          <div class="cuadro-accion ion-activatable" [routerLink]="['/historial']">
             <p>HISTORIAL</p>
+            <ion-ripple-effect></ion-ripple-effect>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <h3>Próximas Citas</h3>
+    <h3 class="seccion-titulo">Próximas Citas</h3>
 
-    <ion-item class="item-cita">
-      <div slot="start" class="fecha-simple">
-        <b>15</b><br>NOV
+    <div class="tarjeta-cita">
+      <div class="bloque-fecha">
+        <span class="dia-numero">15</span>
+        <span class="mes-texto">NOV</span>
       </div>
-      <ion-label>
-        <h2>Firulais</h2>
-        <p>10:00 AM - Vacunación</p>
-        <p>Dr. Roberto Vega</p>
-      </ion-label>
-      <ion-note slot="end">Pendiente</ion-note>
-    </ion-item>
+      <div class="info-cita">
+        <h4>Firulais - Vacunación</h4>
+        <p class="detalle-hora">
+          <ion-icon name="time-outline"></ion-icon> 10:00 AM
+        </p>
+        <p class="detalle-doctor">Dr. Roberto Vega</p>
+      </div>
+      <div class="estado-cita text-pendiente">
+        <span>Pendiente</span>
+      </div>
+    </div>
 
-    <ion-item class="item-cita">
-      <div slot="start" class="fecha-simple">
-        <b>18</b><br>NOV
+    <div class="tarjeta-cita">
+      <div class="bloque-fecha">
+        <span class="dia-numero">18</span>
+        <span class="mes-texto">NOV</span>
       </div>
-      <ion-label>
-        <h2>Michi</h2>
-        <p>02:30 PM - Control</p>
-        <p>Dra. Ana Martinez</p>
-      </ion-label>
-      <ion-note slot="end">Pendiente</ion-note>
-    </ion-item>
+      <div class="info-cita">
+        <h4>Michi - Control</h4>
+        <p class="detalle-hora">
+          <ion-icon name="time-outline"></ion-icon> 2:30 PM
+        </p>
+        <p class="detalle-doctor">Dra. Ana Martínez</p>
+      </div>
+      <div class="estado-cita text-pendiente">
+        <span>Pendiente</span>
+      </div>
+    </div>
+
   </div>
 </ion-content>

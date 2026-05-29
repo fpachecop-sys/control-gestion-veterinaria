@@ -1,50 +1,192 @@
-/* Estilo muy básico para que parezca hecho a mano */
+// Forzar fondo blanco limpio de la página
+.bg-claro {
+  --background: #ffffff;
+}
+
+// Estructura del Header Superior
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+  margin-bottom: 15px;
+
+  .saludo-bloque {
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #000000;
+      margin: 0;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #666666;
+      margin: 2px 0 0 0;
+    }
+  }
+
+  .logo-bloque {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    // Si tienes una imagen del logo la ajustará perfecto aquí
+    .logo-clinica {
+      height: 45px;
+      object-fit: contain;
+    }
+  }
+
+  .avatar-bloque {
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+
+      ion-icon {
+        font-size: 2.4rem;
+        color: #333333;
+      }
+
+      .notificacion-badge {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        width: 10px;
+        height: 10px;
+        background-color: #e74c3c;
+        border-radius: 50%;
+        border: 1.5px solid #ffffff;
+      }
+    }
+  }
+}
+
+// Títulos de sección estilo Sketch
+.seccion-titulo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #000000;
+  margin: 25px 0 15px 0;
+}
+
+// Buscador personalizado idéntico al dibujo
+.buscador-personalizado {
+  --background: #ffffff;
+  --box-shadow: none;
+  --border-radius: 25px;
+  border: 1.5px solid #000000;
+  border-radius: 25px;
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+// Cuadros de acción con bordes suaves "hechos a mano"
 .cuadro-accion {
-  border: 1px solid #000; /* Borde negro simple como en el dibujo */
-  height: 100px;
+  border: 1.5px solid #000000;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-radius: 8px;
-  margin: 5px;
+  border-radius: 14px;
+  margin: 6px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+
+  p {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
 }
 
-.cuadro-accion p {
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin: 0;
-}
+// Tarjetas de próximas citas estilizadas
+.tarjeta-cita {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1.5px solid #ebebeb;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
 
-.item-cita {
-  --padding-start: 0;
-  margin-bottom: 10px;
-  border: 1px solid #eee; /* Un borde muy tenue para separar */
-  border-radius: 10px;
-}
+  // El bloque verde del calendario del mockup
+  .bloque-fecha {
+    background: #0f7a67; // Color verde calipso/pino del mockup
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 8px;
+    min-width: 52px;
+    height: 54px;
+    text-align: center;
 
-.fecha-simple {
-  background: #f4f4f4;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-  min-width: 50px;
-  line-height: 1;
-}
+    .dia-numero {
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1;
+    }
 
-.fecha-simple b {
-  font-size: 1.2rem;
-}
+    .mes-texto {
+      font-size: 0.65rem;
+      font-weight: 700;
+      margin-top: 1px;
+      letter-spacing: 0.5px;
+    }
+  }
 
-h3 {
-  margin-top: 25px;
-  font-weight: bold;
-}
+  // Información textual interna
+  .info-cita {
+    flex: 1;
+    padding-left: 14px;
 
-/* Quitamos el fondo gris del buscador para que sea más plano */
-ion-searchbar {
-  --background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50px;
-  padding: 0;
+    h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #333333;
+      margin: 0 0 4px 0;
+    }
+
+    .detalle-hora {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      color: #7f8c8d;
+      margin: 0 0 2px 0;
+
+      ion-icon {
+        font-size: 0.9rem;
+      }
+    }
+
+    .detalle-doctor {
+      font-size: 0.8rem;
+      color: #95a5a6;
+      margin: 0;
+    }
+  }
+
+  // El tag de estado amarillo suave
+  .estado-cita {
+    span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+    
+    &.text-pendiente span {
+      background-color: #fef5d1; // Amarillo pastel del mockup
+      color: #bfa11c;
+    }
+  }
 }

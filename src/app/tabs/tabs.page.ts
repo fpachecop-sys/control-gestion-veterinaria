@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-tabs',
@@ -8,6 +9,10 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
+  // Esta función leerá el rol directamente desde el servicio en tiempo real
+  get rolUsuario(): string {
+    return this.authService.getRol();
+  }
 }

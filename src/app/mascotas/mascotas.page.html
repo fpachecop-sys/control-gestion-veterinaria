@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar class="toolbar-personalizado">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab3" color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo-header">Mis Mascotas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-claro ion-padding">
+
+  <div class="titulo-seccion">
+    <ion-icon name="paw" class="icono-patita"></ion-icon>
+    <h2>Mis Mascotas</h2>
+  </div>
+
+  <ion-card class="tarjeta-mascota">
+    <div class="contenedor-avatar">
+      <ion-icon name="dog" class="icono-mascota-avatar"></ion-icon>
+      <h3 class="nombre-mascota">Canela</h3>
+    </div>
+
+    <div class="datos-mascota">
+      <p><strong>Especie:</strong> Perro</p>
+      <p><strong>Raza:</strong> Pitbull</p>
+      <p><strong>Edad:</strong> 5 años</p>
+      <p><strong>Registrado:</strong> 27/11/2025</p>
+    </div>
+  </ion-card>
+
+  <div class="seccion-registro-nueva">
+    <h3>¿Tienes nueva mascota?</h3>
+    <h3>Contáctanos para registrarla</h3>
+
+    <button class="boton-contacto ion-activatable">
+      <ion-icon name="call-outline"></ion-icon>
+      Ver Contacto
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+  </div>
+
+</ion-content>

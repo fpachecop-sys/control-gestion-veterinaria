@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth'; // 1. Importamos el servicio
 
 @Component({
   selector: 'app-tab2',
@@ -17,27 +18,33 @@ export class Tab2Page {
   confirmarContrasena: string='';
   aceptaTerminos: boolean = false;
 
-  constructor(private router: Router) {}
+  // 2. Inyectamos el AuthService en el constructor
+  constructor(private router: Router, private authService: AuthService) {}
 
   registrarCuenta(){
-   if (this.nombreCompleto === '' || this.dni === '' || this.telefono === '' || 
+    if (this.nombreCompleto === '' || this.dni === '' || this.telefono === '' || 
         this.correo === '' || this.contrasena === '' || this.confirmarContrasena === '') {
       alert('Por favor, completa todos los campos del formulario.');
       return;
-  }
+    }
 
-  if(this.contrasena!==this.confirmarContrasena){
-    alert('Las contraseña no coinciden')
-    return;
-  } 
-  if(this.aceptaTerminos == false){
-    alert('Debes aceptar los Tèrminos y Condiciones para completar el registro')
-    return;
-  }
+    if(this.contrasena !== this.confirmarContrasena){
+      alert('Las contraseñas no coinciden');
+      return;
+    } 
 
-  alert('Cuenta registrada con èxito');
+    if(this.aceptaTerminos == false){
+      alert('Debes aceptar los Términos y Condiciones para completar el registro');
+      return;
+    }
 
-  this.nombreCompleto = '';
+    alert('Cuenta registrada con éxito');
+
+    // 3. Enviamos el correo y contraseña al servicio antes de borrar las variables
+    this.authService.guardarCredencialesRegistro(this.correo, this.contrasena);
+
+    // Limpiamos los campos del formulario
+    this.nombreCompleto = '';
     this.dni = '';
     this.telefono = '';
     this.correo = '';
@@ -45,6 +52,7 @@ export class Tab2Page {
     this.confirmarContrasena = '';
     this.aceptaTerminos = false;
     
+    // Redirigimos al Login (Tab 1)
     this.router.navigate(['/tabs/tab1']);
   }
 }

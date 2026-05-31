@@ -1,0 +1,98 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab4" text="" color="dark"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="admin-header">
+    <div>
+      <h2 class="user-name">Hola Admin</h2>
+      <p class="welcome-text">¡Bienvenido de Vuelta!</p>
+    </div>
+    <img src="assets/icon/logo.jpg" alt="Logo" class="mini-logo">
+  </div>
+
+  <hr class="divider">
+
+  <div class="listado-section">
+    <div class="title-with-icon">
+      <ion-icon name="people" class="section-icon"></ion-icon>
+      <h3 class="section-title">Listado de Dueños</h3>
+    </div>
+
+    <div class="action-container">
+      <button class="btn-agregar-dueno-moderno ion-activatable">
+        <ion-icon name="person-add-outline"></ion-icon>
+        AGREGAR DUEÑO
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </div>
+
+    <div class="contenedor-tarjetas">
+
+      <div class="tarjeta-datos">
+        <div class="tarjeta-header">
+          <h3 class="nombre-principal">Franco Pacheco</h3>
+          <span class="dni-badge">DNI: 75...</span>
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <div class="info-grupo">
+            <label>Teléfono</label>
+            <p>96523...</p>
+          </div>
+          <div class="info-grupo">
+            <label>Dirección</label>
+            <p>MZd...</p>
+          </div>
+        </div>
+
+        <div class="tarjeta-acciones">
+          <button class="btn-card editar ion-activatable">
+            EDITAR
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+          <button class="btn-card eliminar ion-activatable">
+            ELIMINAR
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+        </div>
+      </div>
+
+      <div class="tarjeta-datos">
+        <div class="tarjeta-header">
+          <h3 class="nombre-principal">Juan Perez</h3>
+          <span class="dni-badge">DNI: 45...</span>
+        </div>
+
+        <div class="tarjeta-cuerpo">
+          <div class="info-grupo">
+            <label>Teléfono</label>
+            <p>987654321</p>
+          </div>
+          <div class="info-grupo">
+            <label>Dirección</label>
+            <p>Av. Larco 123</p>
+          </div>
+        </div>
+
+        <div class="tarjeta-acciones">
+          <button class="btn-card editar ion-activatable">
+            EDITAR
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+          <button class="btn-card eliminar ion-activatable">
+            ELIMINAR
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,209 @@
+// Estilos del Layout Base Compartido
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .user-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+  }
+
+  .welcome-text {
+    font-size: 0.9rem;
+    color: #666666;
+    margin: 2px 0 0 0;
+  }
+
+  .mini-logo {
+    height: 45px;
+    object-fit: contain;
+  }
+}
+
+.divider {
+  border: 0;
+  border-top: 1.5px solid #ebebeb;
+  margin: 15px 0;
+}
+
+// Sección Título
+.listado-section {
+  .title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    .section-icon {
+      font-size: 1.5rem;
+      color: #0f7a67; // Tu verde de marca
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0f7a67;
+      margin: 0;
+    }
+  }
+}
+
+// Botón Agregar Cita Moderno
+.btn-agregar-cita-moderno {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background: linear-gradient(135deg, #0f7a67, #139c83);
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(15, 122, 103, 0.2);
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 1.3rem;
+  }
+}
+
+// Lista vertical de Tarjetas
+.contenedor-tarjetas {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-bottom: 20px;
+}
+
+// Tarjeta estructural basada en image_f8be13.png
+.tarjeta-cita {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eef0f3;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  // Zona interna superior de la tarjeta
+  .tarjeta-main-content {
+    padding: 18px 18px 12px 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .nombre-mascota {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #000000;
+      margin: 0 0 4px 0;
+    }
+
+    .txt-dueno {
+      font-size: 0.95rem;
+      color: #444444;
+      margin: 0 0 14px 0;
+      strong {
+        color: #000000;
+      }
+    }
+
+    // Bloque central grande de fecha y hora
+    .bloque-horario {
+      margin-bottom: 12px;
+      h2 {
+        font-size: 1.45rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0;
+        letter-spacing: -0.3px;
+      }
+    }
+
+    // Badge del estado de atención
+    .badge-estado {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+
+      &.atendida {
+        background: #e2f5ec;
+        color: #27ae60;
+      }
+
+      &.pendiente {
+        background: #fff3cd;
+        color: #856404;
+      }
+    }
+  }
+
+  // Caja inferior gris para Veterinario y Motivo
+  .detalles-sub-box {
+    background: #f4f5f7;
+    padding: 12px 18px;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    p {
+      font-size: 0.92rem;
+      color: #333333;
+      margin: 0;
+      
+      strong {
+        color: #000000;
+        font-weight: 600;
+      }
+    }
+  }
+
+  // Fila inferior de botones de acción
+  .tarjeta-acciones {
+    display: flex;
+    gap: 12px;
+    padding: 12px 18px 16px 18px;
+
+    .btn-card {
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+      border: none;
+      padding: 11px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    // Naranja Vibrante para Editar
+    .editar {
+      background: #f39c12;
+      color: #ffffff;
+    }
+
+    // Rojo Suave / Coral para Eliminar
+    .eliminar {
+      background: #e74c3c;
+      color: #ffffff;
+    }
+  }
+}

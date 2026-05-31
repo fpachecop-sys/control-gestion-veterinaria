@@ -9,23 +9,22 @@
       <img src="assets/icon/logo.jpg" alt="Logo Veterinaria" class="logo-clinica" />
     </div>
     <div class="avatar-bloque">
-      <div class="avatar-wrapper">
-        <ion-icon name="person-circle-outline"></ion-icon>
-        <span class="notificacion-badge"></span>
-      </div>
+      <button class="btn-logout-header" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </button>
     </div>
   </div>
 
   <div class="ion-padding-horizontal">
     <ion-searchbar placeholder="Buscar mascotas, citas...." class="buscador-personalizado"></ion-searchbar>
     
-    <h3 class="seccion-titulo">Acciones Rapidas</h3>
+    <h3 class="seccion-titulo">Acciones Rápidas</h3>
     
     <ion-grid class="ion-no-padding">
       <ion-row>
         <ion-col size="6">
           <div class="cuadro-accion ion-activatable" [routerLink]="['/ubicacion']">
-            <p>UBICACION</p>
+            <p>UBICACIÓN</p>
             <ion-ripple-effect></ion-ripple-effect>
           </div>
         </ion-col>
@@ -39,14 +38,7 @@
       </ion-row>
       
       <ion-row>
-        <ion-col size="6">
-          <div class="cuadro-accion ion-activatable" [routerLink]="['/solicitar-consulta']">
-            <p>SOLICITAR CONSULTA</p>
-            <ion-ripple-effect></ion-ripple-effect>
-          </div>
-        </ion-col>
-        
-        <ion-col size="6">
+        <ion-col size="12">
           <div class="cuadro-accion ion-activatable" [routerLink]="['/historial']">
             <p>HISTORIAL</p>
             <ion-ripple-effect></ion-ripple-effect>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // 1. Importamos el Router para viajar entre pantallas
-import { AuthService } from '../services/auth'; // 2. Importamos tu servicio con la ruta corregida
+import { NavController } from '@ionic/angular'; // Cambiado Router por NavController para mayor fluidez en Ionic
+import { AuthService } from '../services/auth'; 
 
 @Component({
   selector: 'app-tab1',
@@ -13,34 +13,39 @@ export class Tab1Page {
   correo: string = '';
   contrasena: string = '';
 
-  // 3. Inyectamos el Router y el AuthService dentro del constructor
-  constructor(private router: Router, private authService: AuthService) {}
+  // Inyectamos NavController de Ionic y el AuthService
+  constructor(private navCtrl: NavController, private authService: AuthService) {}
 
   ionViewWillEnter() {
+    // Cada vez que entramos al login, nos aseguramos de que el rol esté en limpio si viene de un deslogueo
+    // Esto garantiza que la barra de tabs permanezca oculta al 100%
+    if (this.authService.getRol() !== 'ninguno') {
+      this.authService.clearSession();
+    }
+
     // Revisamos si el servicio tiene datos del registro reciente
     const datosRegistro = this.authService.obtenerCredencialesRegistro();
-    
     if (datosRegistro.correo && datosRegistro.contrasena) {
-      // Si existen datos, los pintamos automáticamente en los inputs de la pantalla
       this.correo = datosRegistro.correo;
       this.contrasena = datosRegistro.contrasena;
     }
   }
+
   iniciarSesion() {
     if (this.correo === '' || this.contrasena === '') {
       alert('Por favor, completa todos los campos.');
     } 
     // Validación para entrar como ADMINISTRADOR 
     else if (this.correo === 'admin@correo.com' && this.contrasena === 'admin123') {
-      this.authService.setRol('admin'); // Cambia la barra inferior a modo admin
+      this.authService.setRol('admin'); // Guarda el rol 'admin' de manera persistente en LocalStorage
       alert('¡Bienvenido Administrador!');
-      this.router.navigate(['/tabs/tab4']); // Te manda al Home de Admin (Tab 4)
+      this.navCtrl.navigateRoot('/tabs/tab4'); // navigateRoot limpia el historial y redibuja la barra de tabs del admin
     } 
-    // Validación para entrar como CLIENTE / FRANCO 
+    // Validación para entrar como CLIENTE
     else if (this.correo === 'franco@correo.com' && this.contrasena === 'franco123') {
-      this.authService.setRol('cliente'); // Cambia la barra inferior a modo cliente
+      this.authService.setRol('cliente'); // Guarda el rol 'cliente' de manera persistente en LocalStorage
       alert('¡Hola Franco, bienvenido de vuelta!');
-      this.router.navigate(['/tabs/tab3']); // Te manda a tus Acciones Rápidas (Tab 3)
+      this.navCtrl.navigateRoot('/tabs/tab3'); // navigateRoot limpia el historial y redibuja la barra de tabs del cliente
     } 
     // Si ponen cualquier otro dato
     else {
@@ -59,5 +64,4 @@ export class Tab1Page {
   recuperarContrasena(){
     alert('Se ha enviado un enlace de recuperación a tu correo...');
   }
-  
 }

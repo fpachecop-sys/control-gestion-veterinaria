@@ -1,144 +1,180 @@
-ion-content {
+// Forzar fondo blanco limpio de la página
+.bg-claro {
   --background: #ffffff;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-.admin-header {
+// Estructura del Header Superior heredado del Tab 3
+.header-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: 20px 5px 0 5px;
+  justify-content: space-between;
+  margin-top: 25px;
+  margin-bottom: 15px;
 
-  .user-name {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #2c3e50;
-    margin: 0;
+  .saludo-bloque {
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #000000;
+      margin: 0;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #666666;
+      margin: 2px 0 0 0;
+    }
   }
-  .welcome-text {
-    font-size: 0.95rem;
-    color: #7f8c8d;
-    margin: 3px 0 0 0;
-  }
-  .mini-logo {
-    width: 55px;
-    height: auto;
-  }
-}
 
-.divider {
-  height: 1px;
-  background: linear-gradient(to right, transparent, #ddd, transparent);
+  .logo-bloque .logo-clinica {
+    height: 45px;
+    object-fit: contain;
+  }
+
+  .avatar-bloque .avatar-wrapper ion-icon {
+    font-size: 2.4rem;
+    color: #333333;
+  }
+.btn-logout-header {
+  background: #fdf2f2; /* Fondo rojo sutil */
   border: none;
-  margin: 20px 5px;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+
+  ion-icon {
+    font-size: 1.4rem;
+    color: #e74c3c; /* Icono rojo de salida */
+  }
+
+  &:active {
+    transform: scale(0.92);
+    background: #fcdede;
+  }
+}
 }
 
-.section-title {
-  font-size: 1.25rem;
+// Títulos de sección unificados
+.seccion-titulo {
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #333;
-  margin: 20px 0 0 5px;
+  color: #000000;
+  margin: 25px 0 15px 0;
 }
 
-.instruction-text {
-  color: #95a5a6;
-  font-size: 0.85rem;
-  margin: 3px 0 15px 5px;
-}
-
-/* Cajas grises superiores */
+// Cajas de estado adaptadas al look del cliente
 .status-container {
   display: flex;
   gap: 8px;
-  padding: 0 5px;
+  margin-bottom: 5px;
 
   .status-box {
     flex: 1;
-    background: #f4f4f4;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 12px 5px;
+    background: #ffffff;
+    border: 1.5px solid #000000;
+    border-radius: 14px;
+    padding: 12px 4px;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.01);
 
     p {
       margin: 0;
       font-size: 0.75rem;
-      font-weight: 600;
-      color: #444;
+      font-weight: 700;
+      color: #000000;
     }
   }
 }
 
-/* Botones Azules de Acceso Rápido */
-.btn-box-admin {
-  background: #ebf3ff;
-  border: 1px solid #3880ff;
-  height: 85px;
-  border-radius: 12px;
+// Botones de acción idénticos a los del Tab 3
+.cuadro-accion {
+  border: 1.5px solid #000000;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  border-radius: 14px;
   margin: 6px;
-  padding: 10px;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 
   p {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 700;
-    color: #2c3e50;
+    color: #000000;
     margin: 0;
     letter-spacing: 0.5px;
   }
 }
 
-/* Estructura de Tabla Alumno-Friendly */
+// Tabla administrativa integrada con el estilo del cliente
 .custom-table {
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  margin: 15px 5px 30px 5px;
+  border: 1.5px solid #000000;
+  border-radius: 14px;
+  margin: 15px 0 30px 0;
   overflow: hidden;
+  background: #ffffff;
 
   .table-header {
     display: flex;
-    background: #e0e0e0;
-    border-bottom: 1px solid #bbb;
+    background: #f4f4f4;
+    border-bottom: 1.5px solid #000000;
     font-weight: 700;
     font-size: 0.75rem;
-    color: #333;
+    color: #000000;
     
     div {
       flex: 1;
-      padding: 10px 5px;
+      padding: 12px 4px;
       text-align: center;
-      border-right: 1px solid #bbb;
+      border-right: 1px solid #ebebeb;
       &:last-child { border-right: none; }
     }
   }
 
   .table-row {
     display: flex;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1.5px solid #ebebeb;
     font-size: 0.75rem;
-    color: #555;
+    color: #333333;
+    align-items: center;
     &:last-child { border-bottom: none; }
 
     div {
       flex: 1;
-      padding: 10px 5px;
+      padding: 12px 4px;
       text-align: center;
-      border-right: 1px solid #eee;
+      border-right: 1px solid #ebebeb;
       display: flex;
       align-items: center;
       justify-content: center;
       &:last-child { border-right: none; }
     }
     
-    .text-pending {
-      color: #f39c12;
-      font-weight: 600;
+    .texto-destacado {
+      font-weight: 700;
+      color: #000000;
     }
   }
+
+  // Tags de estado integrados del Tab 3
+  .estado-cita {
+    span {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 12px;
+      background-color: #fef5d1; // Amarillo pastel
+      color: #bfa11c;
+    }
+  }
+  
 }

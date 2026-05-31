@@ -1,0 +1,61 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab3" text="" color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo-header">Mis Mascotas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-blanco ion-padding">
+
+  <div class="header-bienvenida">
+    <div class="saludo">
+      <h2>Mis Mascotas</h2>
+      <p>Información de tus consentidos</p>
+    </div>
+    <div class="logo-clinica">
+      <img src="assets/icon/logo.jpg" alt="Logo" />
+    </div>
+  </div>
+
+  <hr class="linea-divisoria" />
+
+  <div class="contenedor-tarjetas">
+
+    <div class="tarjeta-datos">
+      <div class="tarjeta-header">
+        <h3 class="nombre-principal">Canela</h3>
+        <span class="id-badge">ID: 1</span>
+      </div>
+
+      <div class="tag-especie">
+        <span>Perro • Pitbull</span>
+      </div>
+
+      <div class="tarjeta-cuerpo">
+        <div class="info-grupo">
+          <label>Edad</label>
+          <p>5 años</p>
+        </div>
+        <div class="info-grupo">
+          <label>Registrado</label>
+          <p>27/11/2025</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="seccion-registro-nueva">
+    <h3>¿Tienes una nueva mascota?</h3>
+    <p>Contáctanos para gestionarla y registrarla en el sistema.</p>
+
+    <button class="boton-contacto ion-activatable">
+      <ion-icon name="call-outline"></ion-icon>
+      Ver Contacto
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
+  </div>
+
+</ion-content>

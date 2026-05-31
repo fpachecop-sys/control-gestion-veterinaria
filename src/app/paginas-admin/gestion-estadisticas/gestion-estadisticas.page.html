@@ -1,0 +1,100 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab4" text="" color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo-header-reportes">Reportes y Estadísticas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-blanco ion-padding">
+
+  <div class="grid-contadores">
+    <div class="card-contador primary">
+      <span class="label">Mascotas</span>
+      <h2>{{ estadisticas?.total_mascotas || 0 }}</h2>
+    </div>
+    <div class="card-contador secondary">
+      <span class="label">Dueños</span>
+      <h2>{{ estadisticas?.total_duenos || 0 }}</h2>
+    </div>
+    <div class="card-contador warning">
+      <span class="label">Veterinarios</span>
+      <h2>{{ estadisticas?.total_veterinarios || 0 }}</h2>
+    </div>
+    <div class="card-contador success">
+      <span class="label">Total Citas</span>
+      <h2>{{ estadisticas?.total_citas || 0 }}</h2>
+    </div>
+  </div>
+
+  <hr class="linea-divisoria" />
+
+  <div class="bloque-cuadrado">
+    <div class="titulo-interno">
+      <ion-icon name="calendar" color="primary"></ion-icon>
+      <h3>Estados de Citas</h3>
+    </div>
+    
+    <div class="item-fila">
+      <p><span class="dot pendiente"></span> Pendientes</p>
+      <span class="badge-num info">{{ estadisticas?.citas_pendientes || 0 }}</span>
+    </div>
+    <div class="item-fila">
+      <p><span class="dot atendida"></span> Atendidas</p>
+      <span class="badge-num verde">{{ estadisticas?.citas_atendidas || 0 }}</span>
+    </div>
+    <div class="item-fila">
+      <p><span class="dot cancelada"></span> Canceladas</p>
+      <span class="badge-num rojo">{{ estadisticas?.citas_canceladas || 0 }}</span>
+    </div>
+  </div>
+
+  <hr class="linea-divisoria" />
+
+  <div class="bloque-cuadrado">
+    <div class="titulo-interno">
+      <ion-icon name="paw" style="color: #16a085;"></ion-icon>
+      <h3>Mascotas por Especie</h3>
+    </div>
+
+    <div class="item-fila">
+      <p>🐶 Perros</p>
+      <span class="badge-num gris">15</span>
+    </div>
+    <div class="item-fila">
+      <p>🐱 Gatos</p>
+      <span class="badge-num gris">9</span>
+    </div>
+    <div class="item-fila">
+      <p>🦜 Aves</p>
+      <span class="badge-num gris">2</span>
+    </div>
+  </div>
+
+  <hr class="linea-divisoria" />
+
+  <div class="bloque-cuadrado">
+    <div class="titulo-interno">
+      <ion-icon name="medal" style="color: #f39c12;"></ion-icon>
+      <h3>Veterinarios Más Solicitados</h3>
+    </div>
+
+    <div class="item-fila">
+      <div>
+        <h4>Dr. Junior Alva</h4>
+        <span class="subtxt">Neurología</span>
+      </div>
+      <span class="badge-num azul">12 Citas</span>
+    </div>
+
+    <div class="item-fila">
+      <div>
+        <h4>Dr. Roberto Vega</h4>
+        <span class="subtxt">Medicina General</span>
+      </div>
+      <span class="badge-num azul">8 Citas</span>
+    </div>
+  </div>
+
+</ion-content>

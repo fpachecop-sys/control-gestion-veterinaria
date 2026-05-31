@@ -1,0 +1,108 @@
+.bg-blanco {
+  --background: #ffffff;
+}
+
+.titulo-header {
+  font-weight: 700;
+  color: #333333;
+  font-size: 1.15rem;
+}
+
+.titulo-seccion-mapa {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+
+  .icono-mapa {
+    font-size: 2rem;
+    color: #1e88e5; 
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: #7d8793;
+    margin: 2px 0 0 0;
+  }
+}
+
+.contenedor-mapa {
+  width: 100%;
+  height: 250px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #eef0f3;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+// Nueva tarjeta de horario optimizada estilo app moderna
+.tarjeta-horario {
+  background: #f8f9fa;
+  border: 1px solid #eef0f3;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .titulo-horario {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #eef0f3;
+    padding-bottom: 10px;
+    margin-bottom: 4px;
+
+    ion-icon {
+      font-size: 1.3rem;
+      color: #0f7a67; // Tu verde insignia en el reloj
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin: 0;
+    }
+  }
+
+  // Filas internas para cada rango de días
+  .fila-horario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #f1f3f5;
+
+    .dias {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #333333;
+    }
+
+    .horas {
+      font-size: 0.88rem;
+      font-weight: 700;
+      
+      &.text-primary {
+        color: #1e88e5; // Azul para resaltar las horas regulares
+      }
+      
+      &.text-warning {
+        color: #f39c12; // Naranja/Ambar sutil para domingos y feriados
+      }
+    }
+  }
+}

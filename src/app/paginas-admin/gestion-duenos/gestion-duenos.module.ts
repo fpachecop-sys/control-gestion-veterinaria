@@ -1,23 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { Tab4PageRoutingModule } from './tab4-routing.module';
-import {RouterModule} from '@angular/router';
 
+import { GestionDuenosPageRoutingModule } from './gestion-duenos-routing.module';
 
-import { Tab4Page } from './tab4.page';
+import { GestionDuenosPage } from './gestion-duenos.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Tab4PageRoutingModule,
-    RouterModule,
-    
-    
+    GestionDuenosPageRoutingModule
   ],
-  declarations: [Tab4Page ] 
+  declarations: [GestionDuenosPage]
 })
-export class Tab4PageModule {}
+export class GestionDuenosPageModule {}

@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar class="toolbar-admin">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab4" color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo-header">Panel Administrativo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-blanco ion-padding">
+
+  <div class="header-bienvenida">
+    <div class="saludo">
+      <h2>Hola Admin</h2>
+      <p>Bienvenido de Vuelta!</p>
+    </div>
+    <div class="logo-clinica">
+      <img src="assets/icon/logo.jpg" alt="Logo" />
+    </div>
+  </div>
+
+  <hr class="linea-divisoria" />
+
+  <div class="titulo-seccion">
+    <ion-icon name="paw" class="icono-patita"></ion-icon>
+    <h2>Listado de Mascotas</h2>
+  </div>
+
+  <button class="boton-agregar-moderno ion-activatable">
+    <ion-icon name="add-circle-outline"></ion-icon>
+    AGREGAR MASCOTA
+    <ion-ripple-effect></ion-ripple-effect>
+  </button>
+
+  <div class="contenedor-tarjetas">
+
+    <div class="tarjeta-datos">
+      <div class="tarjeta-header">
+        <h3 class="nombre-principal">Canela</h3>
+        <span class="id-badge">ID: 1</span>
+      </div>
+
+      <div class="tag-especie">
+        <span>Perro • Pitbull</span>
+      </div>
+
+      <div class="tarjeta-cuerpo">
+        <div class="info-grupo">
+          <label>Edad</label>
+          <p>6 años</p>
+        </div>
+        <div class="info-grupo">
+          <label>Dueño</label>
+          <p>Franco Pacheco</p>
+        </div>
+      </div>
+
+      <div class="tarjeta-acciones">
+        <button class="btn-moderno editar ion-activatable">
+          EDITAR
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+        <button class="btn-moderno eliminar ion-activatable">
+          ELIMINAR
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </div>
+    </div>
+
+    <div class="tarjeta-datos">
+      <div class="tarjeta-header">
+        <h3 class="nombre-principal">Toby</h3>
+        <span class="id-badge">ID: 2</span>
+      </div>
+
+      <div class="tag-especie">
+        <span>Gato • Siamés</span>
+      </div>
+
+      <div class="tarjeta-cuerpo">
+        <div class="info-grupo">
+          <label>Edad</label>
+          <p>2 años</p>
+        </div>
+        <div class="info-grupo">
+          <label>Dueño</label>
+          <p>Maria Torres</p>
+        </div>
+      </div>
+
+      <div class="tarjeta-acciones">
+        <button class="btn-moderno editar ion-activatable">
+          EDITAR
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+        <button class="btn-moderno eliminar ion-activatable">
+          ELIMINAR
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

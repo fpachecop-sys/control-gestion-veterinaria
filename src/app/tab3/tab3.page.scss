@@ -30,7 +30,6 @@
     justify-content: center;
     align-items: center;
     
-    // Si tienes una imagen del logo la ajustará perfecto aquí
     .logo-clinica {
       height: 45px;
       object-fit: contain;
@@ -38,26 +37,34 @@
   }
 
   .avatar-bloque {
-    .avatar-wrapper {
-      position: relative;
-      display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
 
-      ion-icon {
-        font-size: 2.4rem;
-        color: #333333;
-      }
+// Botón de Cerrar Sesión (Ubicado correctamente en la raíz del SCSS)
+.btn-logout-header {
+  background: #fdf2f2; /* Fondo rojo muy sutil */
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.15);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 
-      .notificacion-badge {
-        position: absolute;
-        top: 2px;
-        right: 2px;
-        width: 10px;
-        height: 10px;
-        background-color: #e74c3c;
-        border-radius: 50%;
-        border: 1.5px solid #ffffff;
-      }
-    }
+  ion-icon {
+    font-size: 1.4rem;
+    color: #e74c3c; /* Icono rojo de salida */
+  }
+
+  &:active {
+    transform: scale(0.92);
+    background: #fcdede;
   }
 }
 
@@ -69,7 +76,7 @@
   margin: 25px 0 15px 0;
 }
 
-// Buscador personalizado idéntico al dibujo
+// Buscador personalizado
 .buscador-personalizado {
   --background: #ffffff;
   --box-shadow: none;
@@ -80,7 +87,7 @@
   margin-bottom: 5px;
 }
 
-// Cuadros de acción con bordes suaves "hechos a mano"
+// Cuadros de acción con bordes suaves
 .cuadro-accion {
   border: 1.5px solid #000000;
   height: 110px;
@@ -117,7 +124,7 @@
 
   // El bloque verde del calendario del mockup
   .bloque-fecha {
-    background: #0f7a67; // Color verde calipso/pino del mockup
+    background: #0f7a67; // Color verde de tu marca
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -185,7 +192,7 @@
     }
     
     &.text-pendiente span {
-      background-color: #fef5d1; // Amarillo pastel del mockup
+      background-color: #fef5d1; // Amarillo pastel
       color: #bfa11c;
     }
   }

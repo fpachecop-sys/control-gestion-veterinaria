@@ -1,14 +1,53 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/tab3"></ion-back-button>
+      <ion-back-button defaultHref="/tabs/tab3" text="" color="dark"></ion-back-button>
     </ion-buttons>
-    <ion-title>Ubicación</ion-title>
+    <ion-title class="titulo-header">Nuestra Ubicación</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <h2>Ubicación</h2>
-  <p>Aquí se mostrará la ubicación de la veterinaria y cómo llegar.</p>
-  
-  </ion-content>
+<ion-content class="bg-blanco ion-padding">
+
+  <div class="titulo-seccion-mapa">
+    <ion-icon name="map-outline" class="icono-mapa"></ion-icon>
+    <div>
+      <h2>¿Cómo llegar?</h2>
+      <p>Encuéntranos fácilmente y ven a visitarnos</p>
+    </div>
+  </div>
+
+  <div class="contenedor-mapa">
+    <iframe 
+      src="https://maps.google.com/maps?q=Avenida%20Universitaria%20Norte%207817%20El%20Retablo%20Comas&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+      width="100%" 
+      height="100%" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <div class="tarjeta-horario">
+    <div class="titulo-horario">
+      <ion-icon name="time-outline"></ion-icon>
+      <h3>Horario de Atención</h3>
+    </div>
+
+    <div class="fila-horario">
+      <span class="dias">Lunes - Viernes</span>
+      <span class="horas text-primary">9:00 AM - 11:00 PM</span>
+    </div>
+
+    <div class="fila-horario">
+      <span class="dias">Sábados</span>
+      <span class="horas text-primary">9:00 AM - 10:00 PM</span>
+    </div>
+
+    <div class="fila-horario">
+      <span class="dias">Domingos y Feriados</span>
+      <span class="horas text-warning">10:00 AM - 3:00 PM</span>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,56 +1,76 @@
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="bg-claro">
   
-  <div class="admin-header">
-    <div>
-      <h2 class="user-name">Hola Admin</h2>
-      <p class="welcome-text">¡Bienvenido de Vuelta!</p>
+  <div class="header-container ion-padding-horizontal">
+    <div class="saludo-bloque">
+      <h2>Hola Admin</h2>
+      <p>¡Bienvenido de Vuelta!</p>
     </div>
-    <img src="assets/icon/logo.jpg" alt="Logo" class="mini-logo">
+    <div class="logo-bloque">
+      <img src="assets/icon/logo.jpg" alt="Logo Veterinaria" class="logo-clinica" />
+    </div>
+    <div class="avatar-bloque">
+      <button class="btn-logout-header" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </button>
+    </div>
   </div>
 
-  <hr class="divider">
-
-  <div class="panel-section">
-    <h3 class="section-title">Panel De administración</h3>
-    <p class="instruction-text">Bienvenido Administrador</p>
+  <div class="ion-padding-horizontal">
+    
+    <h3 class="seccion-titulo">Panel de Administración</h3>
     
     <div class="status-container">
       <div class="status-box"><p>Total Dueños: 7</p></div>
       <div class="status-box"><p>Total Mascotas: 8</p></div>
       <div class="status-box"><p>Citas pendientes: 3</p></div>
     </div>
-  </div>
 
-  <div class="actions-section">
-    <h3 class="section-title">Acceso Rápido</h3>
+    <h3 class="seccion-titulo">Acceso Rápido</h3>
     
     <ion-grid class="ion-no-padding">
       <ion-row>
         <ion-col size="6">
-          <div class="btn-box-admin"><p>AGENDAR CITA</p></div>
+          <div class="cuadro-accion ion-activatable" [routerLink]="['/gestion-citas']">
+            <p>AGENDAR CITA</p>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
         </ion-col>
+        
         <ion-col size="6">
-          <div class="btn-box-admin"><p>GESTION MASCOTA</p></div>
+          <div class="cuadro-accion ion-activatable" [routerLink]="['/gestion-mascotas']">
+            <p>GESTION MASCOTA</p>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size="6">
-          <div class="btn-box-admin"><p>GESTION DUEÑO</p></div>
+          <div class="cuadro-accion ion-activatable" [routerLink]="['/gestion-duenos']">
+            <p>GESTION DUEÑO</p>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
         </ion-col>
+        
         <ion-col size="6">
-          <div class="btn-box-admin"><p>AGREGAR VETERINARIOS</p></div>
+          <div class="cuadro-accion ion-activatable" [routerLink]="['/gestion-veterinarios']">
+            <p>AGREGAR VETERINARIOS</p>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
         </ion-col>
       </ion-row>
+
       <ion-row>
         <ion-col size="6">
-          <div class="btn-box-admin"><p>VER ESTADISTICAS</p></div>
+          <div class="cuadro-accion ion-activatable" [routerLink]="['/gestion-estadisticas']">
+            <p>VER ESTADISTICAS</p>
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </div>
 
-  <div class="table-section">
-    <h3 class="section-title">Citas Recientes</h3>
+    <h3 class="seccion-titulo">Citas Recientes</h3>
     
     <div class="custom-table">
       <div class="table-header">
@@ -62,19 +82,19 @@
       </div>
       <div class="table-row">
         <div>15/11</div>
-        <div>Firulais</div>
+        <div class="texto-destacado">Firulais</div>
         <div>Carlos</div>
         <div>Dr. Vega</div>
-        <div class="text-pending">Pendiente</div>
+        <div class="estado-cita text-pendiente"><span>Pendiente</span></div>
       </div>
       <div class="table-row">
         <div>18/11</div>
-        <div>Michi</div>
+        <div class="texto-destacado">Michi</div>
         <div>Ana</div>
         <div>Dra. Martínez</div>
-        <div class="text-pending">Pendiente</div>
+        <div class="estado-cita text-pendiente"><span>Pendiente</span></div>
       </div>
     </div>
-  </div>
 
+  </div>
 </ion-content>

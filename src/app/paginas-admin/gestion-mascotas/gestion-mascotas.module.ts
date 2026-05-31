@@ -1,23 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { Tab4PageRoutingModule } from './tab4-routing.module';
-import {RouterModule} from '@angular/router';
 
+import { GestionMascotasPageRoutingModule } from './gestion-mascotas-routing.module';
 
-import { Tab4Page } from './tab4.page';
+import { GestionMascotasPage } from './gestion-mascotas.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Tab4PageRoutingModule,
-    RouterModule,
-    
-    
+    GestionMascotasPageRoutingModule
   ],
-  declarations: [Tab4Page ] 
+  declarations: [GestionMascotasPage]
 })
-export class Tab4PageModule {}
+export class GestionMascotasPageModule {}

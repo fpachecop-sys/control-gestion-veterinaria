@@ -4,20 +4,32 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private rolActual: string = 'invitado';
 
-  // Nuevas variables temporales para guardar los datos del registro
+  // Almacenamiento temporal para el registro de credenciales
   private correoRegistrado: string = '';
   private contrasenaRegistrada: string = '';
 
   constructor() { }
 
+  /**
+   * Guarda el rol de forma persistente en el almacenamiento local
+   */
   setRol(rol: string) {
-    this.rolActual = rol;
+    localStorage.setItem('rolUsuario', rol);
   }
 
+  /**
+   * Obtiene el rol persistente. Si no hay ninguno iniciado, devuelve 'ninguno'
+   */
   getRol(): string {
-    return this.rolActual;
+    return localStorage.getItem('rolUsuario') || 'ninguno';
+  }
+
+  /**
+   * Limpia el rol guardado al momento de dar click en cerrar sesión
+   */
+  clearSession() {
+    localStorage.removeItem('rolUsuario');
   }
 
   // Guarda las credenciales recién creadas
@@ -26,13 +38,12 @@ export class AuthService {
     this.contrasenaRegistrada = contrasena;
   }
 
-  // Obtiene las credenciales y luego las limpia para que no se queden guardadas por siempre
+  // Obtiene las credenciales y luego las limpia de la memoria temporal
   obtenerCredencialesRegistro() {
     const datos = {
       correo: this.correoRegistrado,
       contrasena: this.contrasenaRegistrada
     };
-    // Limpiamos la memoria temporal
     this.correoRegistrado = '';
     this.contrasenaRegistrada = '';
     return datos;

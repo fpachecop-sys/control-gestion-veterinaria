@@ -1,159 +1,167 @@
-ion-content {
+.bg-whatsapp-lista {
   --background: #ffffff;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Cabecera Estilo Tab 1 & Tab 4 */
+// Estructura del Header Superior del Admin
 .admin-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: 20px 5px 0 5px;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-bottom: 10px;
 
   .user-name {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
     margin: 0;
   }
   .welcome-text {
-    font-size: 0.95rem;
-    color: #7f8c8d;
-    margin: 3px 0 0 0;
+    font-size: 0.88rem;
+    color: #0f7a67; // Tu verde insignia
+    font-weight: 600;
+    margin: 2px 0 0 0;
   }
   .mini-logo {
-    width: 55px;
-    height: auto;
+    height: 40px;
+    object-fit: contain;
   }
 }
 
 .divider {
-  height: 1px;
-  background: linear-gradient(to right, transparent, #ddd, transparent);
-  border: none;
-  margin: 20px 5px;
+  border: 0;
+  border-top: 1px solid #f0f2f5;
+  margin: 15px 0;
 }
 
-/* Título de Sección con Icono */
 .title-with-icon {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 20px 0 15px 5px;
+  margin-bottom: 20px;
 
-  .section-icon {
-    font-size: 1.6rem;
-    color: #16a085; /* Tono verde azulado del título del boceto */
+  .section-icon-chat {
+    font-size: 1.4rem;
+    color: #075e54; // Verde oscuro característico de la barra de WhatsApp
   }
 
   .section-title {
-    font-size: 1.4rem;
+    font-size: 1.15rem;
     font-weight: 700;
-    color: #16a085;
+    color: #2c3e50;
     margin: 0;
   }
 }
 
-/* Botón Agregar Dueño Manual */
-.action-container {
-  padding: 0 5px;
-  margin-bottom: 20px;
+// --- CONTENEDOR ESTILO WHATSAPP ---
+.contenedor-chats-whatsapp {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
 }
 
-.btn-agregar-dueno {
-  background: #ebf3ff;
-  color: #2c3e50;
-  border: 1px solid #3880ff;
-  padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 6px;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  transition: background 0.2s;
-
-  &:active {
-    background: #d4e6ff;
-  }
-}
-
-/* Tabla Estilo Cuaderno de Trabajo */
-.custom-table {
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  margin: 0 5px 30px 5px;
+.item-chat-wp {
+  display: flex;
+  align-items: center;
+  padding: 12px 4px;
+  position: relative;
   overflow: hidden;
+  border-bottom: 1px solid #f6f6f6;
+  cursor: pointer;
 
-  .table-header {
+  // Círculo del perfil (Avatar)
+  .avatar-chat {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e1f3ef; // Fondo suave para resaltar las letras
     display: flex;
-    background: #e0e0e0;
-    border-bottom: 1px solid #bbb;
-    font-weight: 700;
-    font-size: 0.75rem;
-    color: #333;
-    
-    div {
-      padding: 10px 4px;
-      text-align: center;
-      border-right: 1px solid #bbb;
-      &:last-child { border-right: none; }
-    }
-  }
-
-  .table-row {
-    display: flex;
-    border-bottom: 1px solid #ccc;
-    font-size: 0.75rem;
-    color: #444;
-    min-height: 38px;
-
-    div {
-      padding: 10px 4px;
-      text-align: center;
-      border-right: 1px solid #ccc;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      &:last-child { border-right: none; }
-    }
-  }
-
-  /* Filas vacías del boceto */
-  .empty-row {
-    background-color: #fafafa;
-    &:nth-child(even) {
-      background-color: #ffffff;
-    }
-    div {
-      height: 38px;
-    }
-  }
-
-  /* Acciones de Editar / Eliminar */
-  .action-buttons {
-    font-size: 0.65rem;
-    font-weight: 700;
-    display: flex;
-    gap: 3px;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    margin-right: 14px;
+    flex-shrink: 0;
 
-    .btn-edit {
-      color: #3880ff;
-      cursor: pointer;
-    }
-    .btn-divider {
-      color: #999;
-    }
-    .btn-delete {
-      color: #e74c3c;
-      cursor: pointer;
+    span {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0f7a67; // Iniciales con el color de tu marca
     }
   }
 
-  .text-truncate {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  // Contenido de la conversación
+  .contenido-chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    // Nombre del cliente y la hora
+    .fila-superior {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .nombre-cliente {
+        font-size: 1.02rem;
+        font-weight: 700;
+        color: #111111;
+        margin: 0;
+      }
+
+      .tiempo-chat {
+        font-size: 0.78rem;
+        color: #8696a0;
+        font-weight: 500;
+
+        &.nuevo {
+          color: #25d366; // Hora en verde si hay mensajes pendientes
+          font-weight: 600;
+        }
+      }
+    }
+
+    // Texto de la consulta y el globo de notificación
+    .fila-inferior {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .ultimo-mensaje {
+        font-size: 0.88rem;
+        color: #667781;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; // Agrega los tres puntos "..." si el texto es muy largo
+        max-width: 85%;
+      }
+
+      // Globo verde idéntico al de WhatsApp
+      .badge-wp-no-leido {
+        background-color: #25d366; 
+        color: #ffffff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        min-width: 19px;
+        height: 19px;
+        padding: 2px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  // Atenuación sutil para los mensajes ya leídos
+  &.leido {
+    .avatar-chat {
+      background: #f0f2f5;
+      span { color: #667781; }
+    }
+    .contenido-chat .fila-superior .nombre-cliente {
+      font-weight: 600; // Un poco menos grueso que los no leídos
+      color: #3b3b3b;
+    }
   }
 }

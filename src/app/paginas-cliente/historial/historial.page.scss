@@ -1,0 +1,143 @@
+.bg-blanco {
+  --background: #ffffff;
+}
+
+.titulo-header {
+  font-weight: 700;
+  color: #333333;
+  font-size: 1.15rem;
+}
+
+// Encabezado principal igual a la imagen
+.titulo-seccion-citas {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 24px;
+
+  .emoji-calendario {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #0f7a67; // Tu verde de marca para el título
+    margin: 0;
+  }
+}
+
+.contenedor-citas {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// Formato de tarjeta calcado al de tu captura
+.tarjeta-cita {
+  background: #f8fcfb; // Fondo sutilmente verdoso claro para dar limpieza
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1px solid #eef3f1;
+  
+  // Línea lateral izquierda gruesa característica de tu diseño
+  &.status-atendida {
+    border-left: 4px solid #27ae60; 
+  }
+
+  .cita-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #eef0f2;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+
+    .fecha-tiempo {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .fila-fecha {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .emoji-reloj {
+          font-size: 1.1rem;
+        }
+
+        h3 {
+          font-size: 1.15rem;
+          font-weight: 700;
+          color: #0f7a67;
+          margin: 0;
+        }
+      }
+
+      .fila-hora {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #888888;
+        padding-left: 2px;
+
+        ion-icon {
+          font-size: 0.95rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+          margin: 0;
+          font-weight: 500;
+        }
+      }
+    }
+
+    // Badge de estado idéntico
+    .badge-estado {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 8px;
+
+      &.atendida {
+        background: #27ae60;
+        color: #ffffff;
+      }
+    }
+  }
+
+  // Cuerpo con filas alineadas en cuadrícula
+  .cita-cuerpo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .detalle-fila {
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+
+      .icono-detalle {
+        font-size: 1rem;
+        width: 24px;
+        display: inline-block;
+      }
+
+      .label {
+        font-weight: 700;
+        color: #2c3e50;
+        width: 95px; // Ancho fijo para alinear perfectamente los textos de la derecha
+      }
+
+      .valor {
+        font-weight: 500;
+        color: #7f8c8d;
+      }
+    }
+  }
+}

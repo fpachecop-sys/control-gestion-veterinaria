@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab3" text="" color="dark"></ion-back-button>
+    </ion-buttons>
+    <div class="header-chat-clinica">
+      <div class="avatar-clinica-mini">🏥</div>
+      <div class="info-clinica-mini">
+        <h3 class="nombre-veterinaria-header">Mascotas Portalino y Rondón</h3>
+        <p class="estado-linea">En línea de atención</p>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-chat-usuario">
+
+  <div class="chat-container ion-padding">
+    
+    <div *ngFor="let msg of historialMensajes" 
+         [ngClass]="{'burbuja-recibida': msg.remitente === 'clinica', 'burbuja-enviada': msg.remitente === 'usuario'}">
+      
+      <div class="contenido-burbuja">
+        <p class="saludo-automatica" *ngIf="msg.remitente === 'clinica' && msg.texto.includes('Franco')">
+          
+        </p>
+        
+        <p>{{ msg.texto }}</p>
+        <span class="hora-mensaje">{{ msg.hora }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-footer class="ion-no-border bg-footer-chat">
+  <ion-toolbar style="--background: #ffffff;" class="ion-padding-horizontal">
+    <div class="caja-envio-mensaje">
+      
+      <ion-input 
+        type="text" 
+        placeholder="Escribe el nombre de tu mascota y síntoma..." 
+        class="input-chat-personalizado"
+        [(ngModel)]="nuevoMensaje"
+        (keyup.enter)="enviarMensaje()">
+      </ion-input>
+
+      <button class="btn-enviar-consulta" (click)="enviarMensaje()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+
+    </div>
+  </ion-toolbar>
+</ion-footer>

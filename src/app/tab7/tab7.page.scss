@@ -1,0 +1,107 @@
+.bg-blanco {
+  --background: #ffffff;
+}
+
+.titulo-header {
+  font-weight: 700;
+  color: #333333;
+  font-size: 1.15rem;
+}
+
+// Encabezado de la sección calcado de tu imagen
+.titulo-seccion-perfil {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 24px;
+
+  .emoji-avatar {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #0f7a67; // Tu verde insignia corporativo
+    margin: 0;
+  }
+}
+
+// Tarjeta contenedora con sombreado suave
+.tarjeta-perfil {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #eef0f3;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+
+  // Encabezado interno de la tarjeta
+  .perfil-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #eef0f2;
+    padding-bottom: 14px;
+    margin-bottom: 10px;
+
+    .emoji-documento {
+      font-size: 1.3rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #0f7a67;
+      margin: 0;
+    }
+  }
+
+  // Listado de datos del cliente
+  .perfil-cuerpo {
+    display: flex;
+    flex-direction: column;
+
+    .fila-perfil {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #f5f6f8;
+
+      &:last-child {
+        border-bottom: none; // Quita la línea divisoria a la última fila
+      }
+
+      .label {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #2c3e50;
+      }
+
+      .valor {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #95a5a6;
+        text-align: right;
+      }
+
+      // Estilos especiales con color gris claro atenuado para textos largos
+      .valor-correo {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #b0bfc0; 
+        text-align: right;
+        word-break: break-all; // Evita que el correo largo deforme la pantalla
+      }
+
+      .valor-direccion {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #b0bfc0;
+        text-align: right;
+        max-width: 65%; // Controla el espacio de la dirección
+      }
+    }
+  }
+}

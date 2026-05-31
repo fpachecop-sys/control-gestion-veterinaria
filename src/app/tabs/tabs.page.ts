@@ -11,7 +11,9 @@ export class TabsPage {
 
   constructor(private authService: AuthService) {}
 
-  // Esta función leerá el rol directamente desde el servicio en tiempo real
+  /**
+   * Lee el rol directamente desde el LocalStorage a través del servicio
+   */
   get rolUsuario(): string {
     return this.authService.getRol();
   }

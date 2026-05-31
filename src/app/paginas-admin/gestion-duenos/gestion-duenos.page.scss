@@ -1,0 +1,186 @@
+// Estilos base de tu Layout original
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .user-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+  }
+
+  .welcome-text {
+    font-size: 0.9rem;
+    color: #666666;
+    margin: 2px 0 0 0;
+  }
+
+  .mini-logo {
+    height: 45px;
+    object-fit: contain;
+  }
+}
+
+.divider {
+  border: 0;
+  border-top: 1.5px solid #ebebeb;
+  margin: 15px 0;
+}
+
+// Sección de Listado
+.listado-section {
+  .title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    .section-icon {
+      font-size: 1.5rem;
+      color: #0f7a67;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0f7a67;
+      margin: 0;
+    }
+  }
+}
+
+// Botón Agregar Dueño Rediseñado (Moderno y full-width para móvil)
+.btn-agregar-dueno-moderno {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background: linear-gradient(135deg, #0f7a67, #139c83);
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(15, 122, 103, 0.2);
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 1.3rem;
+  }
+}
+
+// Contenedor Vertical de las Tarjetas
+.contenedor-tarjetas {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; 
+  padding-bottom: 20px;
+}
+
+// Estructura de cada Tarjeta / Cuadrado de datos
+.tarjeta-datos {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef0f2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .tarjeta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .nombre-principal {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    .dni-badge {
+      font-size: 0.85rem;
+      color: #8c96a3;
+      font-weight: 600;
+      background: #eef2f5;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+  }
+
+  // Distribución de datos en columnas organizadas
+  .tarjeta-cuerpo {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 1px solid #eaedf1;
+    padding-bottom: 12px;
+
+    .info-grupo {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+
+      label {
+        font-size: 0.75rem;
+        color: #7d8793;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      p {
+        font-size: 0.95rem;
+        color: #2c3e50;
+        margin: 0;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; // Protege los textos de desbordes accidentales
+      }
+    }
+  }
+
+  // Fila de botones inferiores alineados lado a lado
+  .tarjeta-acciones {
+    display: flex;
+    gap: 12px;
+
+    .btn-card {
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    // Naranja Vibrante para Editar
+    .editar {
+      background: #f39c12;
+      color: #ffffff;
+    }
+
+    // Rojo Suave / Coral para Eliminar
+    .eliminar {
+      background: #e74c3c;
+      color: #ffffff;
+    }
+  }
+}

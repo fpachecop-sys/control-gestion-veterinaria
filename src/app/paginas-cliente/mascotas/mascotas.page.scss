@@ -1,0 +1,160 @@
+.bg-blanco {
+  --background: #ffffff;
+}
+
+.titulo-header {
+  font-weight: 700;
+  color: #333333;
+  font-size: 1.15rem;
+}
+
+.header-bienvenida {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+
+  .saludo {
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0f7a67;
+      margin: 0;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #7d8793;
+      margin: 2px 0 0 0;
+    }
+  }
+
+  .logo-clinica img {
+    height: 45px;
+    object-fit: contain;
+  }
+}
+
+.linea-divisoria {
+  border: 0;
+  border-top: 1.5px solid #f0f2f5;
+  margin: 18px 0;
+}
+
+.contenedor-tarjetas {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.tarjeta-datos {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #eef0f3;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+
+  .tarjeta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .nombre-principal {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    .id-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: #eef2f7;
+      color: #555555;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+  }
+
+  .tag-especie {
+    margin-top: 6px;
+    span {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1e88e5;
+      background: #e3f2fd;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+  }
+
+  .tarjeta-cuerpo {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px; // Eliminado el margen inferior innecesario al no haber botones abajo
+
+    .info-grupo {
+      flex: 1;
+      label {
+        font-size: 0.75rem;
+        color: #7d8793;
+        font-weight: 600;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 2px;
+      }
+      p {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #333333;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.seccion-registro-nueva {
+  background: #f8f9fa;
+  border: 1px solid #eef0f3;
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 6px 0;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: #666666;
+    margin: 0 0 14px 0;
+  }
+
+  .boton-contacto {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0f7a67, #139c83);
+    color: #ffffff;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(15, 122, 103, 0.15);
+    cursor: pointer;
+
+    ion-icon {
+      font-size: 1.15rem;
+    }
+  }
+}

@@ -20,9 +20,9 @@
     <h3 class="seccion-titulo">Panel de Administración</h3>
     
     <div class="status-container">
-      <div class="status-box"><p>Total Dueños: 7</p></div>
-      <div class="status-box"><p>Total Mascotas: 8</p></div>
-      <div class="status-box"><p>Citas pendientes: 3</p></div>
+      <div class="status-box"><p>Total Dueños: {{ totalDuenos }}</p></div>
+      <div class="status-box"><p>Total Mascotas: {{ totalMascotas }}</p></div>
+      <div class="status-box"><p>Citas pendientes: {{ citasPendientes }}</p></div>
     </div>
 
     <h3 class="seccion-titulo">Acceso Rápido</h3>
@@ -71,30 +71,32 @@
     </ion-grid>
 
     <h3 class="seccion-titulo">Citas Recientes</h3>
-    
-    <div class="custom-table">
-      <div class="table-header">
-        <div>Fecha</div>
-        <div>Mascota</div>
-        <div>Dueño</div>
-        <div>Veterinario</div>
-        <div>Estado</div>
-      </div>
-      <div class="table-row">
-        <div>15/11</div>
-        <div class="texto-destacado">Firulais</div>
-        <div>Carlos</div>
-        <div>Dr. Vega</div>
-        <div class="estado-cita text-pendiente"><span>Pendiente</span></div>
-      </div>
-      <div class="table-row">
-        <div>18/11</div>
-        <div class="texto-destacado">Michi</div>
-        <div>Ana</div>
-        <div>Dra. Martínez</div>
-        <div class="estado-cita text-pendiente"><span>Pendiente</span></div>
-      </div>
-    </div>
+
+<div class="custom-table">
+  <div class="table-header">
+    <div>Fecha</div>
+    <div>Mascota</div>
+    <div>Dueño</div>
+    <div>Veterinario</div>
+    <div>Estado</div>
+  </div>
+
+  <div class="table-row" *ngFor="let cita of citasRecientes">
+  <div>{{ cita.fecha | date:'yyyy-MM-dd':'UTC' }}</div>
+  <div class="texto-destacado">{{ cita.mascota }}</div>
+  <div>{{ cita.dueno }}</div>
+  <div>{{ cita.veterinario }}</div>
+  
+  <div class="estado-cita" [ngClass]="cita.estado?.toLowerCase() === 'atendida' ? 'atendida-box' : 'pendiente-box'">
+    <span>{{ cita.estado | uppercase }}</span>
+  </div>
+</div>
+
+  <div class="table-row" *ngIf="citasRecientes.length === 0" style="justify-content: center; padding: 15px; color: #666;">
+    No hay citas registradas de momento.
+  </div>
+
+</div>
 
   </div>
 </ion-content>

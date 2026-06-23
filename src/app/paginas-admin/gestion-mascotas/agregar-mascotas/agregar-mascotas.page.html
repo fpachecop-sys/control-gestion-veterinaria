@@ -1,0 +1,70 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/gestion-mascotas" text="" color="dark"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-formulario-blanco ion-padding">
+
+  <div class="titulo-seccion-formulario">
+    <span class="emoji-titulo">🐾</span>
+    <h2>Agregar Mascota</h2>
+  </div>
+
+  <div class="tarjeta-formulario">
+
+    <form (ngSubmit)="guardarMascota()">
+      
+      <div class="campo-formulario">
+        <label>NOMBRE DE LA MASCOTA</label>
+        <input type="text" name="nombre" [(ngModel)]="mascota.nombre" placeholder="Ej: Firulais" required />
+      </div>
+
+      <div class="campo-formulario">
+        <label>ESPECIE</label>
+        <select name="especie" [(ngModel)]="mascota.especie" required>
+          <option value="" disabled selected>--Seleccione--</option>
+          <option value="Perro">Perro</option>
+          <option value="Gato">Gato</option>
+          <option value="Ave">Ave</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="campo-formulario">
+        <label>RAZA</label>
+        <input type="text" name="raza" [(ngModel)]="mascota.raza" placeholder="Ej: Labrador" required />
+      </div>
+
+      <div class="campo-formulario">
+        <label>EDAD (AÑOS)</label>
+        <input type="number" name="edad" [(ngModel)]="mascota.edad" min="0" required />
+      </div>
+
+      <div class="campo-formulario">
+        <label>DUEÑO</label>
+        <select name="id_dueno" [(ngModel)]="mascota.id_dueno" required>
+          <option value="" disabled selected>--Seleccione un dueño--</option>
+          <option *ngFor="let d of duenos" [value]="d.id_dueno">
+            {{ d.nombre }} (DNI: {{ d.dni }})
+          </option>
+        </select>
+      </div>
+
+      <div class="contenedor-botones-accion">
+        <button type="submit" class="btn-accion btn-guardar">
+          GUARDAR
+        </button>
+        
+        <button type="button" class="btn-accion btn-cancelar" (click)="cancelar()">
+          CANCELAR
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</ion-content>

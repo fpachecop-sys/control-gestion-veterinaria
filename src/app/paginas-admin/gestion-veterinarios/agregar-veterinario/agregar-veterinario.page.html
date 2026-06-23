@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/gestion-veterinarios" text="" color="dark"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-formulario-blanco ion-padding">
+
+  <div class="titulo-seccion-formulario">
+    <span class="emoji-titulo">🩺</span>
+    <h2>Agregar Veterinario</h2>
+  </div>
+
+  <div class="tarjeta-formulario">
+
+    <form (ngSubmit)="guardarVeterinario()">
+      
+      <div class="campo-formulario">
+        <label>NOMBRE COMPLETO</label>
+        <input type="text" name="nombre" [(ngModel)]="veterinario.nombre" placeholder="Dr. Juan Pérez" required />
+      </div>
+
+      <div class="campo-formulario">
+        <label>ESPECIALIDAD</label>
+        <input type="text" name="especialidad" [(ngModel)]="veterinario.especialidad" placeholder="Medicina General, Cirugía, etc." required />
+      </div>
+
+      <div class="campo-formulario">
+        <label>CORREO ELECTRÓNICO</label>
+        <input type="email" name="correo" [(ngModel)]="veterinario.correo" placeholder="ejemplo@veterinaria.com" required />
+      </div>
+
+      <div class="campo-formulario">
+        <label>TELÉFONO</label>
+        <input type="text" name="telefono" [(ngModel)]="veterinario.telefono" placeholder="987654321" required />
+      </div>
+
+      <div class="contenedor-botones-accion">
+        <button type="submit" class="btn-accion btn-guardar">
+          GUARDAR
+        </button>
+        
+        <button type="button" class="btn-accion btn-cancelar" (click)="cancelar()">
+          CANCELAR
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</ion-content>

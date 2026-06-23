@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: GestionDuenosPage
+  },
+  {
+    path: 'agregar-dueno',
+    loadChildren: () => import('./agregar-dueno/agregar-dueno.module').then( m => m.AgregarDuenoPageModule)
   }
 ];
 

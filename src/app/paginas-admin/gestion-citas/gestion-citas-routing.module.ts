@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: GestionCitasPage
+  },
+  {
+    path: 'agregar-cita',
+    loadChildren: () => import('./agregar-cita/agregar-cita.module').then( m => m.AgregarCitaPageModule)
   }
 ];
 

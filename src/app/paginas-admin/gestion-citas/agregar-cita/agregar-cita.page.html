@@ -1,0 +1,71 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/gestion-citas" text="" color="dark"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-formulario-verde ion-padding">
+
+  <div class="titulo-seccion-formulario">
+    <span class="emoji-titulo">📆</span>
+    <h2>Agendar Nueva Cita</h2>
+  </div>
+
+  <div class="tarjeta-formulario">
+
+    <form (ngSubmit)="guardarCita()">
+      
+      <div class="fila-doble-responsive">
+        <div class="campo-formulario">
+          <label>FECHA</label>
+          <input type="date" name="fecha" [(ngModel)]="cita.fecha" required />
+        </div>
+
+        <div class="campo-formulario">
+          <label>HORA</label>
+          <input type="time" name="hora" [(ngModel)]="cita.hora" required />
+        </div>
+      </div>
+
+      <div class="campo-formulario">
+        <label>MASCOTA</label>
+        <select name="id_mascota" [(ngModel)]="cita.id_mascota" required>
+          <option value="" disabled selected>--Seleccione una mascota--</option>
+          <option *ngFor="let m of mascotas" [value]="m.id_mascota">
+            {{ m.nombre }} (Dueño: {{ m.dueno }})
+          </option>
+        </select>
+      </div>
+
+      <div class="campo-formulario">
+        <label>VETERINARIO</label>
+        <select name="id_veterinario" [(ngModel)]="cita.id_veterinario" required>
+          <option value="" disabled selected>--Seleccione un veterinario--</option>
+          <option *ngFor="let v of veterinarios" [value]="v.id_veterinario">
+            {{ v.nombre }} — {{ v.especialidad }}
+          </option>
+        </select>
+      </div>
+
+      <div class="campo-formulario">
+        <label>MOTIVO DE LA CONSULTA</label>
+        <textarea name="motivo" [(ngModel)]="cita.motivo" placeholder="Describa el motivo de la cita..." rows="4" required></textarea>
+      </div>
+
+      <div class="contenedor-botones-accion">
+        <button type="submit" class="btn-accion btn-agendar">
+          AGENDAR CITA
+        </button>
+        
+        <button type="button" class="btn-accion btn-cancelar" (click)="cancelar()">
+          CANCELAR
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</ion-content>

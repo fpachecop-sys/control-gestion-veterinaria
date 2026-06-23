@@ -1,180 +1,261 @@
-// Forzar fondo blanco limpio de la página
+// Forzar fondo con un degradado sutil para dar frescura clínica
 .bg-claro {
-  --background: #ffffff;
+  --background: linear-gradient(135deg, #f7fbf9 0%, #ffffff 100%);
 }
 
-// Estructura del Header Superior heredado del Tab 3
+// Estructura del Header Superior
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 25px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 
   .saludo-bloque {
     h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #000000;
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #0b7a63, #1c3d36);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin: 0;
     }
     p {
-      font-size: 0.9rem;
-      color: #666666;
-      margin: 2px 0 0 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #7f8c8d;
+      margin: 4px 0 0 0;
     }
   }
 
-  .logo-bloque .logo-clinica {
-    height: 45px;
-    object-fit: contain;
+  .logo-bloque {
+    background: #ffffff;
+    padding: 6px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .logo-clinica {
+      height: 42px;
+      object-fit: contain;
+    }
   }
 
-  .avatar-bloque .avatar-wrapper ion-icon {
-    font-size: 2.4rem;
-    color: #333333;
-  }
-.btn-logout-header {
-  background: #fdf2f2; /* Fondo rojo sutil */
-  border: none;
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.15);
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  .avatar-bloque .btn-logout-header {
+    background: #fff0f0; 
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.15);
+    cursor: pointer;
+    transition: all 0.2s ease;
 
-  ion-icon {
-    font-size: 1.4rem;
-    color: #e74c3c; /* Icono rojo de salida */
-  }
+    ion-icon {
+      font-size: 1.5rem;
+      color: #e74c3c; 
+    }
 
-  &:active {
-    transform: scale(0.92);
-    background: #fcdede;
+    &:active {
+      transform: scale(0.92);
+      background: #fcdede;
+    }
   }
 }
-}
 
-// Títulos de sección unificados
+// Títulos de sección vívidos con un pequeño acento moderno
 .seccion-titulo {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: #000000;
-  margin: 25px 0 15px 0;
+  color: #1e272c;
+  margin: 28px 0 16px 0;
+  letter-spacing: -0.3px;
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 25px;
+    height: 3px;
+    background: #109e82;
+    border-radius: 2px;
+  }
 }
 
-// Cajas de estado adaptadas al look del cliente
+// Cajas de Estado Superiores (Estilo Tarjeta de Métricas)
 .status-container {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 5px;
 
   .status-box {
     flex: 1;
     background: #ffffff;
-    border: 1.5px solid #000000;
-    border-radius: 14px;
-    padding: 12px 4px;
+    border: none; // Eliminamos borde negro tosco
+    border-radius: 16px;
+    padding: 16px 6px;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease;
+
+    // Colores temáticos individuales para dar dinamismo visual
+    &:nth-child(1) { background: linear-gradient(145deg, #ffffff, #eef7f5); border-bottom: 3px solid #109e82; }
+    &:nth-child(2) { background: linear-gradient(145deg, #ffffff, #f0f5fa); border-bottom: 3px solid #2980b9; }
+    &:nth-child(3) { background: linear-gradient(145deg, #ffffff, #fffdf0); border-bottom: 3px solid #f39c12; }
+
+    &:active {
+      transform: scale(0.96);
+    }
 
     p {
       margin: 0;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      color: #000000;
+      color: #2c3e50;
+      line-height: 1.2;
     }
   }
 }
 
-// Botones de acción idénticos a los del Tab 3
+// Botones de Acceso Rápido Modernizados (Grid)
 .cuadro-accion {
-  border: 1.5px solid #000000;
-  height: 110px;
+  border: none; // Fuera borde duro
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-radius: 14px;
+  border-radius: 16px;
   margin: 6px;
-  background: #ffffff;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  box-shadow: 0 4px 15px rgba(16, 158, 130, 0.08);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Fondo base degradado premium usando la paleta de la veterinaria
+  background: linear-gradient(135deg, #109e82 0%, #0b7a63 100%);
+
+  // Variaciones de color para romper la monotonía de los botones
+  ion-row:nth-child(1) ion-col:nth-child(2) & {
+    background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+  }
+  ion-row:nth-child(2) ion-col:nth-child(1) & {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+  }
+  ion-row:nth-child(2) ion-col:nth-child(2) & {
+    background: linear-gradient(135deg, #2980b9 0%, #2471a3 100%);
+  }
+  ion-row:nth-child(3) ion-col:nth-child(1) & {
+    background: linear-gradient(135deg, #8e44ad 0%, #732d91 100%);
+  }
 
   p {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #000000;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #ffffff; // Texto blanco para contraste óptimo
     margin: 0;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    padding: 0 10px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+
+  &:hover, &:active {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
 }
 
-// Tabla administrativa integrada con el estilo del cliente
+// Tabla Administrativa Pulida e Integrada
 .custom-table {
-  border: 1.5px solid #000000;
-  border-radius: 14px;
-  margin: 15px 0 30px 0;
+  border: none;
+  border-radius: 16px;
+  margin: 15px 0 35px 0;
   overflow: hidden;
   background: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
 
   .table-header {
     display: flex;
-    background: #f4f4f4;
-    border-bottom: 1.5px solid #000000;
+    background: #f8fafc;
+    border-bottom: 1.5px solid #edf2f7;
     font-weight: 700;
-    font-size: 0.75rem;
-    color: #000000;
+    font-size: 0.78rem;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
     
     div {
       flex: 1;
-      padding: 12px 4px;
+      padding: 14px 4px;
       text-align: center;
-      border-right: 1px solid #ebebeb;
-      &:last-child { border-right: none; }
     }
   }
 
   .table-row {
     display: flex;
-    border-bottom: 1.5px solid #ebebeb;
-    font-size: 0.75rem;
-    color: #333333;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.78rem;
+    color: #4a5568;
     align-items: center;
-    &:last-child { border-bottom: none; }
+    transition: background-color 0.2s ease;
+
+    &:last-child { 
+      border-bottom: none; 
+    }
+
+    &:nth-child(even) {
+      background-color: #fafbfe;
+    }
+
+    &:hover {
+      background-color: #f1f9f7;
+    }
 
     div {
       flex: 1;
-      padding: 12px 4px;
+      padding: 14px 4px;
       text-align: center;
-      border-right: 1px solid #ebebeb;
       display: flex;
       align-items: center;
       justify-content: center;
-      &:last-child { border-right: none; }
     }
     
     .texto-destacado {
       font-weight: 700;
-      color: #000000;
+      color: #0b7a63; // Nombre de mascota con verde clínico resaltado
     }
   }
 
-  // Tags de estado integrados del Tab 3
+  // Tags de estado dinámicos e hiper-estilizados
   .estado-cita {
     span {
       font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 12px;
-      background-color: #fef5d1; // Amarillo pastel
-      color: #bfa11c;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
     }
   }
-  
+}
+
+// Clases dinámicas inyectadas por el backend / ngClass
+.pendiente-box span {
+  background-color: #fff9e6 !important; // Amarillo/Naranja pastel vivo
+  color: #d4ac0d !important;
+  border: 1px solid #f9ebd2;
+}
+
+.atendida-box span {
+  background-color: #eafaf1 !important; // Verde pastel vivo
+  color: #2ecc71 !important;
+  border: 1px solid #d5f5e3;
 }

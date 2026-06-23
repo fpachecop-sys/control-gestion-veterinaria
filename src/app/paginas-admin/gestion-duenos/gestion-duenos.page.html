@@ -25,7 +25,7 @@
     </div>
 
     <div class="action-container">
-      <button class="btn-agregar-dueno-moderno ion-activatable">
+      <button class="btn-agregar-dueno-moderno ion-activatable" [routerLink]="['agregar-dueno']">
         <ion-icon name="person-add-outline"></ion-icon>
         AGREGAR DUEÑO
         <ion-ripple-effect></ion-ripple-effect>
@@ -33,65 +33,28 @@
     </div>
 
     <div class="contenedor-tarjetas">
-
-      <div class="tarjeta-datos">
+      <div class="tarjeta-datos" *ngFor="let dueno of duenos">
         <div class="tarjeta-header">
-          <h3 class="nombre-principal">Franco Pacheco</h3>
-          <span class="dni-badge">DNI: 75...</span>
+          <h3 class="nombre-principal">{{ dueno.nombre }}</h3>
+          <span class="dni-badge">DNI: {{ dueno.dni }}</span>
         </div>
 
         <div class="tarjeta-cuerpo">
           <div class="info-grupo">
             <label>Teléfono</label>
-            <p>96523...</p>
+            <p>{{ dueno.telefono }}</p>
           </div>
           <div class="info-grupo">
             <label>Dirección</label>
-            <p>MZd...</p>
+            <p>{{ dueno.direccion }}</p>
           </div>
         </div>
 
         <div class="tarjeta-acciones">
-          <button class="btn-card editar ion-activatable">
-            EDITAR
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
-          <button class="btn-card eliminar ion-activatable">
-            ELIMINAR
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
+          <button class="btn-card editar">EDITAR</button>
+          <button class="btn-card eliminar">ELIMINAR</button>
         </div>
       </div>
-
-      <div class="tarjeta-datos">
-        <div class="tarjeta-header">
-          <h3 class="nombre-principal">Juan Perez</h3>
-          <span class="dni-badge">DNI: 45...</span>
-        </div>
-
-        <div class="tarjeta-cuerpo">
-          <div class="info-grupo">
-            <label>Teléfono</label>
-            <p>987654321</p>
-          </div>
-          <div class="info-grupo">
-            <label>Dirección</label>
-            <p>Av. Larco 123</p>
-          </div>
-        </div>
-
-        <div class="tarjeta-acciones">
-          <button class="btn-card editar ion-activatable">
-            EDITAR
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
-          <button class="btn-card eliminar ion-activatable">
-            ELIMINAR
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
-        </div>
-      </div>
-
     </div>
   </div>
 

@@ -1,13 +1,12 @@
-<ion-header>
-  <ion-toolbar class="toolbar-admin">
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/tab4" color="dark"></ion-back-button>
+      <ion-back-button defaultHref="/tabs/tab4" text="" color="dark"></ion-back-button>
     </ion-buttons>
-    <ion-title class="titulo-header">Panel Administrativo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="bg-blanco ion-padding">
+<ion-content [fullscreen]="true" class="bg-blanco ion-padding">
 
   <div class="header-bienvenida">
     <div class="saludo">
@@ -26,7 +25,7 @@
     <h2>Listado de Veterinarios</h2>
   </div>
 
-  <button class="boton-agregar-moderno ion-activatable">
+  <button class="boton-agregar-moderno ion-activatable" [routerLink]="['agregar-veterinario']">
     <ion-icon name="add-circle-outline"></ion-icon>
     AGREGAR VETERINARIO
     <ion-ripple-effect></ion-ripple-effect>
@@ -34,72 +33,43 @@
 
   <div class="contenedor-tarjetas">
 
-    <div class="tarjeta-veterinario">
-      <div class="tarjeta-header">
-        <h3 class="nombre-principal">Dr Junior Alva</h3>
-        <span class="id-badge">ID: 4</span>
-      </div>
+  <div class="tarjeta-veterinario" *ngFor="let v of veterinarios">
+    <div class="tarjeta-header">
+      <h3 class="nombre-principal">{{ v.nombre }}</h3>
+      <span class="id-badge">ID: {{ v.id_veterinario }}</span>
+    </div>
 
-      <div class="tag-especialidad">
-        <span>Neurología</span>
-      </div>
+    <div class="tag-especialidad">
+      <span>{{ v.especialidad }}</span>
+    </div>
 
-      <div class="tarjeta-cuerpo">
-        <div class="info-grupo">
-          <label>Correo</label>
-          <p class="texto-correo">JuniorAlva@gmail.com</p>
-        </div>
-        <div class="info-grupo alignment-right">
-          <label>Teléfono</label>
-          <p>995678473</p>
-        </div>
+    <div class="tarjeta-cuerpo">
+      <div class="info-grupo">
+        <label>Correo</label>
+        <p class="texto-correo">{{ v.correo }}</p>
       </div>
-
-      <div class="tarjeta-acciones">
-        <button class="btn-card editar ion-activatable">
-          EDITAR
-          <ion-ripple-effect></ion-ripple-effect>
-        </button>
-        <button class="btn-card eliminar ion-activatable">
-          ELIMINAR
-          <ion-ripple-effect></ion-ripple-effect>
-        </button>
+      <div class="info-grupo alignment-right">
+        <label>Teléfono</label>
+        <p>{{ v.telefono }}</p>
       </div>
     </div>
 
-    <div class="tarjeta-veterinario">
-      <div class="tarjeta-header">
-        <h3 class="nombre-principal">Dr. Roberto Vega</h3>
-        <span class="id-badge">ID: 1</span>
-      </div>
-
-      <div class="tag-especialidad">
-        <span>Medicina General</span>
-      </div>
-
-      <div class="tarjeta-cuerpo">
-        <div class="info-grupo">
-          <label>Correo</label>
-          <p class="texto-correo">rvega@veterinaria.com</p>
-        </div>
-        <div class="info-grupo alignment-right">
-          <label>Teléfono</label>
-          <p>999888777</p>
-        </div>
-      </div>
-
-      <div class="tarjeta-acciones">
-        <button class="btn-card editar ion-activatable">
-          EDITAR
-          <ion-ripple-effect></ion-ripple-effect>
-        </button>
-        <button class="btn-card eliminar ion-activatable">
-          ELIMINAR
-          <ion-ripple-effect></ion-ripple-effect>
-        </button>
-      </div>
+    <div class="tarjeta-acciones">
+      <button class="btn-card editar ion-activatable">
+        EDITAR
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+      <button class="btn-card eliminar ion-activatable">
+        ELIMINAR
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
     </div>
-
   </div>
+
+  <div *ngIf="veterinarios.length === 0" style="text-align: center; padding: 20px; color: #777;">
+    No hay veterinarios registrados en el sistema.
+  </div>
+
+</div>
 
 </ion-content>

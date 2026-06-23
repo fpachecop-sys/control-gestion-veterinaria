@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: GestionVeterinariosPage
+  },
+  {
+    path: 'agregar-veterinario',
+    loadChildren: () => import('./agregar-veterinario/agregar-veterinario.module').then( m => m.AgregarVeterinarioPageModule)
   }
 ];
 

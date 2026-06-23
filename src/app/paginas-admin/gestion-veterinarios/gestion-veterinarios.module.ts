@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { GestionVeterinariosPageRoutingModule } from './gestion-veterinarios-routing.module';
@@ -13,7 +13,8 @@ import { GestionVeterinariosPage } from './gestion-veterinarios.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    GestionVeterinariosPageRoutingModule
+    GestionVeterinariosPageRoutingModule,
+    RouterModule
   ],
   declarations: [GestionVeterinariosPage]
 })

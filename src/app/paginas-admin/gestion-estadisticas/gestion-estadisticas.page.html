@@ -12,19 +12,19 @@
   <div class="grid-contadores">
     <div class="card-contador primary">
       <span class="label">Mascotas</span>
-      <h2>{{ estadisticas?.total_mascotas || 0 }}</h2>
+      <h2>{{ estadisticas?.total_mascotas }}</h2>
     </div>
     <div class="card-contador secondary">
       <span class="label">Dueños</span>
-      <h2>{{ estadisticas?.total_duenos || 0 }}</h2>
+      <h2>{{ estadisticas?.total_duenos }}</h2>
     </div>
     <div class="card-contador warning">
       <span class="label">Veterinarios</span>
-      <h2>{{ estadisticas?.total_veterinarios || 0 }}</h2>
+      <h2>{{ estadisticas?.total_veterinarios }}</h2>
     </div>
     <div class="card-contador success">
       <span class="label">Total Citas</span>
-      <h2>{{ estadisticas?.total_citas || 0 }}</h2>
+      <h2>{{ estadisticas?.total_citas }}</h2>
     </div>
   </div>
 
@@ -38,15 +38,15 @@
     
     <div class="item-fila">
       <p><span class="dot pendiente"></span> Pendientes</p>
-      <span class="badge-num info">{{ estadisticas?.citas_pendientes || 0 }}</span>
+      <span class="badge-num info">{{ estadisticas?.citas_pendientes }}</span>
     </div>
     <div class="item-fila">
       <p><span class="dot atendida"></span> Atendidas</p>
-      <span class="badge-num verde">{{ estadisticas?.citas_atendidas || 0 }}</span>
+      <span class="badge-num verde">{{ estadisticas?.citas_atendidas }}</span>
     </div>
     <div class="item-fila">
       <p><span class="dot cancelada"></span> Canceladas</p>
-      <span class="badge-num rojo">{{ estadisticas?.citas_canceladas || 0 }}</span>
+      <span class="badge-num rojo">{{ estadisticas?.citas_canceladas }}</span>
     </div>
   </div>
 
@@ -58,17 +58,13 @@
       <h3>Mascotas por Especie</h3>
     </div>
 
-    <div class="item-fila">
-      <p>🐶 Perros</p>
-      <span class="badge-num gris">15</span>
+    <div class="item-fila" *ngFor="let esp of conteoEspecies">
+      <p>{{ esp.nombre }}</p>
+      <span class="badge-num gris">{{ esp.cantidad }}</span>
     </div>
-    <div class="item-fila">
-      <p>🐱 Gatos</p>
-      <span class="badge-num gris">9</span>
-    </div>
-    <div class="item-fila">
-      <p>🦜 Aves</p>
-      <span class="badge-num gris">2</span>
+
+    <div class="item-fila" *ngIf="conteoEspecies.length === 0" style="justify-content: center; color: #999; font-size: 0.8rem;">
+      No hay registros de especies en la base de datos.
     </div>
   </div>
 
@@ -80,20 +76,16 @@
       <h3>Veterinarios Más Solicitados</h3>
     </div>
 
-    <div class="item-fila">
+    <div class="item-fila" *ngFor="let vet of veterinariosPopulares">
       <div>
-        <h4>Dr. Junior Alva</h4>
-        <span class="subtxt">Neurología</span>
+        <h4>{{ vet.nombre }}</h4>
+        <span class="subtxt">{{ vet.especialidad }}</span>
       </div>
-      <span class="badge-num azul">12 Citas</span>
+      <span class="badge-num azul">{{ vet.citas }} {{ vet.citas === 1 ? 'Cita' : 'Citas' }}</span>
     </div>
 
-    <div class="item-fila">
-      <div>
-        <h4>Dr. Roberto Vega</h4>
-        <span class="subtxt">Medicina General</span>
-      </div>
-      <span class="badge-num azul">8 Citas</span>
+    <div class="item-fila" *ngIf="veterinariosPopulares.length === 0" style="justify-content: center; color: #999; font-size: 0.8rem;">
+      No se registran citas para los facultativos.
     </div>
   </div>
 

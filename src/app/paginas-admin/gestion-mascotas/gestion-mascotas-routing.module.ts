@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: GestionMascotasPage
+  },
+  {
+    path: 'agregar-mascotas',
+    loadChildren: () => import('./agregar-mascotas/agregar-mascotas.module').then( m => m.AgregarMascotasPageModule)
   }
 ];
 

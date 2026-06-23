@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background: #ffffff; padding-top: 5px;">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/gestion-duenos" text="" color="dark"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-formulario-blanco ion-padding">
+
+  <div class="titulo-seccion-formulario">
+    <span class="emoji-titulo">➕</span>
+    <h2>Agregar Dueño</h2>
+  </div>
+
+  <div class="tarjeta-formulario">
+
+    <form (ngSubmit)="guardarDueno()">
+      
+      <div class="campo-formulario">
+        <label>DNI</label>
+        <input type="text" name="dni" [(ngModel)]="dueno.dni" placeholder="12345678" required />
+      </div>
+
+      <div class="campo-formulario">
+        <label>NOMBRE COMPLETO</label>
+        <input type="text" name="nombre" [(ngModel)]="dueno.nombre" placeholder="Ingrese el nombre completo" required />
+      </div>
+
+      <div class="campo-formulario">
+        <label>TELÉFONO</label>
+        <input type="text" name="telefono" [(ngModel)]="dueno.telefono" placeholder="987654321" required />
+      </div>
+
+      <div class="campo-formulario">
+        <label>DIRECCIÓN</label>
+        <input type="text" name="direccion" [(ngModel)]="dueno.direccion" placeholder="Ingrese la dirección completa" required />
+      </div>
+
+      <div class="contenedor-botones-accion">
+        <button type="submit" class="btn-accion btn-guardar">
+          GUARDAR
+        </button>
+        
+        <button type="button" class="btn-accion btn-cancelar" (click)="cancelar()">
+          CANCELAR
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</ion-content>

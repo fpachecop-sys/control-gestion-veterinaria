@@ -25,7 +25,7 @@
     </div>
 
     <div class="action-container">
-      <button class="btn-agregar-cita-moderno ion-activatable">
+      <button class="btn-agregar-cita-moderno ion-activatable" [routerLink]="['agregar-cita']">
         <ion-icon name="add-circle-outline"></ion-icon>
         AGREGAR CITA
         <ion-ripple-effect></ion-ripple-effect>
@@ -34,23 +34,23 @@
 
     <div class="contenedor-tarjetas">
 
-      <div class="tarjeta-cita">
+      <div class="tarjeta-cita" *ngFor="let c of citas">
         <div class="tarjeta-main-content">
-          <h3 class="nombre-mascota">Canela</h3>
-          <p class="txt-dueno"><strong>Dueño:</strong> Franco Pacheco</p>
+          <h3 class="nombre-mascota">{{ c.mascota }}</h3>
+          <p class="txt-dueno"><strong>Dueño:</strong> {{ c.dueno }}</p>
 
           <div class="bloque-horario">
-            <h2>30/11/2025 | 21:30</h2>
+            <h2>{{ c.fecha | date:'yyyy-MM-dd':'UTC' }} | {{ c.hora.substring(0, 5) }}</h2>
           </div>
 
-          <div class="badge-estado atendida">
-            <span>ATENDIDA</span>
+          <div class="badge-estado" [ngClass]="c.estado?.toLowerCase()">
+            <span>{{ c.estado | uppercase }}</span>
           </div>
         </div>
 
         <div class="detalles-sub-box">
-          <p><strong>Veterinario:</strong> Dr. Roberto Vega</p>
-          <p><strong>Motivo:</strong> Quimioterapia</p>
+          <p><strong>Veterinario:</strong> {{ c.veterinario }}</p>
+          <p><strong>Motivo:</strong> {{ c.motivo }}</p>
         </div>
 
         <div class="tarjeta-acciones">
@@ -65,35 +65,8 @@
         </div>
       </div>
 
-      <div class="tarjeta-cita">
-        <div class="tarjeta-main-content">
-          <h3 class="nombre-mascota">Toby</h3>
-          <p class="txt-dueno"><strong>Dueño:</strong> Maria Torres</p>
-
-          <div class="bloque-horario">
-            <h2>01/12/2025 | 09:15</h2>
-          </div>
-
-          <div class="badge-estado pendiente">
-            <span>PENDIENTE</span>
-          </div>
-        </div>
-
-        <div class="detalles-sub-box">
-          <p><strong>Veterinario:</strong> Dra. Ana Martínez</p>
-          <p><strong>Motivo:</strong> Control / Vacuna</p>
-        </div>
-
-        <div class="tarjeta-acciones">
-          <button class="btn-card editar ion-activatable">
-            EDITAR
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
-          <button class="btn-card eliminar ion-activatable">
-            ELIMINAR
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
-        </div>
+      <div *ngIf="citas.length === 0" style="text-align: center; padding: 20px; color: #777;">
+        No hay citas registradas en el sistema.
       </div>
 
     </div>

@@ -3,12 +3,22 @@ Este repositorio contiene el avance del frontend (Ionic/Angular) y backend (Node
 ---
 ## Estado Actual del Avance
 Se agregaron registros para dueños, citas, mascotas, veterinarios en la vista de administrador
+
 Todavia no se mejoró el apartado de user normal.
-USUARIOS:
-**estos son los unicos usuarios que por momento se usan para pruebas rapidas, aun no se implementa registro con base de datos**
+
 Registro funciona perfectamente como simulacion de registro, aun no se pueden logear.
+
+USUARIOS:
+
+**estos son los unicos usuarios que por momento se usan para pruebas rapidas, aun no se implementa registro con base de datos**
+
+
 ADMIN.- admin@correo.com contra: admin123
+
+----
+
 USER.- franco@correo.com contra: franco123
+
 ---
 
 ##  Lógica de Vinculación Inteligente (DNI)
@@ -21,5 +31,7 @@ Para optimizar la experiencia de usuario y evitar duplicados en la base de datos
 ## Nota de Despliegue / Base de Datos
  [!IMPORTANTE]
 AVANCE MAS DEL 70% DEL PROYECTO
+
 RESTANTE:
+
 IMPLEMENTACION DE LOGIN Y REGISTRO DE USUARIOS NORMALES, CHAT EN TIEMPO REAL ENTRE USUARIOS Y ADMINISTRADORES.

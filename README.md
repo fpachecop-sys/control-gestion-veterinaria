@@ -17,7 +17,6 @@ ADMIN.- admin@correo.com contra: admin123
 ----
 
 USER.- francomarianopp@gmail.com contra: franco123
-
 ---
 
 ##  Lógica de Vinculación Inteligente (DNI)

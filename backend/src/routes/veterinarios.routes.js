@@ -58,5 +58,39 @@ router.post("/", async (req, res) => {
   }
 
 });
+// Actualizar veterinario
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nombre, especialidad, correo, telefono } = req.body;
+
+    await db.query(
+      `UPDATE veterinarios 
+       SET nombre=?, especialidad=?, correo=?, telefono=? 
+       WHERE id_veterinario=?`,
+      [nombre, especialidad, correo, telefono, id]
+    );
+
+    res.json({ mensaje: "Veterinario actualizado" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Eliminar veterinario
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await db.query(
+      "DELETE FROM veterinarios WHERE id_veterinario=?",
+      [id]
+    );
+
+    res.json({ mensaje: "Veterinario eliminado" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 module.exports = router;

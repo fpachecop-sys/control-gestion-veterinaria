@@ -24,38 +24,28 @@
     <div class="perfil-cuerpo">
       
       <div class="fila-perfil">
-        <span class="label">Nombre:</span>
-        <span class="valor">Franco Mariano</span>
-      </div>
-
-      <div class="fila-perfil">
-        <span class="label">Apellido:</span>
-        <span class="valor">Pacheco</span>
+        <span class="label">Nombre Completo:</span>
+        <span class="valor">{{ datosPerfil.nombre }}</span>
       </div>
 
       <div class="fila-perfil">
         <span class="label">DNI:</span>
-        <span class="valor">75085925</span>
+        <span class="valor">{{ datosPerfil.dni }}</span>
       </div>
 
-      <div class="fila-perfil">
+      <div class="fila-perfil" *ngIf="datosPerfil.correo">
         <span class="label">Correo:</span>
-        <span class="valor-correo">fpachecop@ucvvirtual.edu.pe</span>
+        <span class="valor-correo">{{ datosPerfil.correo }}</span>
       </div>
 
       <div class="fila-perfil">
         <span class="label">Teléfono:</span>
-        <span class="valor">978475665</span>
+        <span class="valor">{{ datosPerfil.telefono }}</span>
       </div>
 
       <div class="fila-perfil">
         <span class="label">Dirección:</span>
-        <span class="valor-direccion">mzd1 lt1 urb. virgen del rosario</span>
-      </div>
-
-      <div class="fila-perfil">
-        <span class="label">Miembro desde:</span>
-        <span class="valor">27/11/2025</span>
+        <span class="valor-direccion">{{ datosPerfil.direccion || 'No especificada' }}</span>
       </div>
 
     </div>

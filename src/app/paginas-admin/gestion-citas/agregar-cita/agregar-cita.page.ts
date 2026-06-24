@@ -10,35 +10,56 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class AgregarCitaPage implements OnInit {
 
-  // Adaptamos las variables idénticas a los parámetros estructurados en la query del backend
   cita = {
     fecha: '',
     hora: '',
     id_mascota: '',
     id_veterinario: '',
-    motivo: ''
+    motivo: '',
+    estado: 'PENDIENTE' // Guardamos el estado actual por si se edita
   };
 
   mascotas: any[] = [];
   veterinarios: any[] = [];
+  esEdicion: boolean = false; // Flag detector
+  idCitaEditar!: number;
 
-  constructor(private router: Router, private api: ApiService) { }
+  constructor(private router: Router, private api: ApiService) { 
+    // 📦 Capturamos el objeto enviado por la lista
+    const navegacion = this.router.getCurrentNavigation();
+    if (navegacion?.extras.state && navegacion.extras.state['cita']) {
+      const citaCargada = navegacion.extras.state['cita'];
+      
+      // Formateamos la fecha a YYYY-MM-DD para que el input tipo date la pinte correctamente
+      const fechaFormateada = citaCargada.fecha ? citaCargada.fecha.split('T')[0] : '';
+
+      this.cita = {
+        fecha: fechaFormateada,
+        hora: citaCargada.hora,
+        id_mascota: citaCargada.id_mascota,
+        id_veterinario: citaCargada.id_veterinario,
+        motivo: citaCargada.motivo,
+        estado: citaCargada.estado
+      };
+
+      this.idCitaEditar = citaCargada.id_cita;
+      this.esEdicion = true;
+    }
+  }
 
   ngOnInit() {
     this.cargarDatosSelects();
   }
 
   cargarDatosSelects() {
-    // 1. Obtener Mascotas reales de la BD
     this.api.obtenerMascotas().subscribe({
       next: (data: any) => this.mascotas = data,
-      error: (err) => console.error('Error cargando mascotas:', err)
+      error: (err) => console.error(err)
     });
 
-    // 2. Obtener Veterinarios reales de la BD
     this.api.obtenerVeterinarios().subscribe({
       next: (data: any) => this.veterinarios = data,
-      error: (err) => console.error('Error cargando veterinarios:', err)
+      error: (err) => console.error(err)
     });
   }
 
@@ -48,19 +69,31 @@ export class AgregarCitaPage implements OnInit {
       return;
     }
 
-    console.log('Enviando cita al backend:', this.cita);
-
-    this.api.registrarCita(this.cita).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        alert('¡Cita registrada y agendada con éxito!');
-        this.router.navigate(['/gestion-citas']); // Usa la ruta base para asegurar el retorno
-      },
-      error: (error) => {
-        console.error('Error al agendar cita:', error);
-        alert('Hubo un error al registrar en el servidor.');
-      }
-    });
+    if (this.esEdicion) {
+      // 🔄 MODO EDICIÓN: Invoca el PUT modificado
+      this.api.actualizarCita(this.idCitaEditar, this.cita).subscribe({
+        next: (response: any) => {
+          alert('¡Cita modificada con éxito!');
+          this.router.navigate(['/gestion-citas']);
+        },
+        error: (error) => {
+          console.error('Error al editar cita:', error);
+          alert('Error al actualizar en el servidor.');
+        }
+      });
+    } else {
+      // 🚀 MODO REGISTRO: Invoca el POST original
+      this.api.registrarCita(this.cita).subscribe({
+        next: (response: any) => {
+          alert('¡Cita registrada y agendada con éxito!');
+          this.router.navigate(['/gestion-citas']);
+        },
+        error: (error) => {
+          console.error('Error al agendar cita:', error);
+          alert('Hubo un error al registrar en el servidor.');
+        }
+      });
+    }
   }
 
   cancelar() {

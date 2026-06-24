@@ -8,10 +8,11 @@
 
 <ion-content class="bg-formulario-blanco ion-padding">
 
-  <div class="titulo-seccion-formulario">
-    <span class="emoji-titulo">➕</span>
-    <h2>Agregar Dueño</h2>
-  </div>
+  <!-- Cambia el bloque del título para hacerlo dinámico -->
+<div class="titulo-seccion-formulario">
+  <span class="emoji-titulo">{{ esEdicion ? '✏️' : '➕' }}</span>
+  <h2>{{ esEdicion ? 'Editar Dueño' : 'Agregar Dueño' }}</h2>
+</div>
 
   <div class="tarjeta-formulario">
 

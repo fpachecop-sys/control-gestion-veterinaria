@@ -21,31 +21,40 @@
 
   <hr class="linea-divisoria" />
 
-  <div class="contenedor-tarjetas">
+  <!-- 🔄 Contenedor Dinámico de Tarjetas -->
+  <div class="contenedor-tarjetas" *ngIf="listaMascotas.length > 0; else sinMascotas">
 
-    <div class="tarjeta-datos">
+    <div class="tarjeta-datos" *ngFor="let mascota of listaMascotas">
       <div class="tarjeta-header">
-        <h3 class="nombre-principal">Canela</h3>
-        <span class="id-badge">ID: 1</span>
+        <h3 class="nombre-principal">{{ mascota.nombre }}</h3>
+        <span class="id-badge">ID: {{ mascota.id_mascota }}</span>
       </div>
 
       <div class="tag-especie">
-        <span>Perro • Pitbull</span>
+        <span>{{ mascota.especie }} • {{ mascota.raza }}</span>
       </div>
 
       <div class="tarjeta-cuerpo">
         <div class="info-grupo">
           <label>Edad</label>
-          <p>5 años</p>
+          <p>{{ mascota.edad }} {{ mascota.edad === 1 ? 'año' : 'años' }}</p>
         </div>
         <div class="info-grupo">
-          <label>Registrado</label>
-          <p>27/11/2025</p>
+          <label>Estado</label>
+          <p>Activo en Clínica</p>
         </div>
       </div>
     </div>
 
   </div>
+
+  <!-- 📭 Plantilla alternativa si el usuario no tiene ninguna mascota asociada -->
+  <ng-template #sinMascotas>
+    <div class="ion-text-center ion-padding" style="margin-top: 20px;" *ngIf="!cargando">
+      <ion-icon name="paw-outline" style="font-size: 64px; color: #b0b0b0;"></ion-icon>
+      <p style="color: #707070; font-weight: 500;">No encontramos mascotas registradas bajo tu cuenta.</p>
+    </div>
+  </ng-template>
 
   <div class="seccion-registro-nueva">
     <h3>¿Tienes una nueva mascota?</h3>

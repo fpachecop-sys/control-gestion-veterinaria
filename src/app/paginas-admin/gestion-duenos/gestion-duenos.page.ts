@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router'; // 👈 Importamos el Router
+
 @Component({
   selector: 'app-gestion-duenos',
   templateUrl: './gestion-duenos.page.html',
@@ -10,13 +12,10 @@ export class GestionDuenosPage implements OnInit {
 
   duenos: any[] = [];
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { } // 👈 Inyectamos Router
 
-  ngOnInit() {
-    // Se deja vacío por buenas prácticas o para cosas estáticas
-  }
+  ngOnInit() {}
 
-  // 🚀 Este evento se dispara SIEMPRE que regresas a esta pantalla, refrescando la lista de la BD
   ionViewWillEnter() {
     this.cargarDuenos();
   }
@@ -24,12 +23,33 @@ export class GestionDuenosPage implements OnInit {
   cargarDuenos() {
     this.api.obtenerDuenos().subscribe({
       next: (data: any) => {
-        this.duenos = data; // Aquí se guarda el arreglo de filas que retorna Express
+        this.duenos = data;
         console.log('Dueños traídos de la base de datos:', this.duenos);
       },
       error: (error) => {
         console.error('Error al cargar dueños:', error);
       }
     });
+  }
+
+  // 🚀 Envia los datos del dueño a la otra pantalla de forma inteligente
+  editarDueno(dueno: any) {
+    this.router.navigate(['/gestion-duenos/agregar-dueno'], { state: { dueno: dueno } });
+  }
+
+  // 🗑️ Elimina al dueño pidiendo una confirmación rápida
+  eliminarDueno(id: number, nombre: string) {
+    if (confirm(`¿Estás seguro de que deseas eliminar a ${nombre}?`)) {
+      this.api.eliminarDueno(id).subscribe({
+        next: (res: any) => {
+          alert('Dueño eliminado con éxito.');
+          this.cargarDuenos(); // Refresca la lista automáticamente
+        },
+        error: (error) => {
+          console.error('Error al eliminar:', error);
+          alert('No se pudo eliminar al dueño.');
+        }
+      });
+    }
   }
 }

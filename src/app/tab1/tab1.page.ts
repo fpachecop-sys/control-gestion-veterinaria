@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular'; // Cambiado Router por NavController para mayor fluidez en Ionic
+import { NavController } from '@ionic/angular'; 
 import { AuthService } from '../services/auth'; 
+import { ApiService } from '../services/api.service'; // 🚀 Inyectamos tu servicio API
 
 @Component({
   selector: 'app-tab1',
@@ -13,17 +14,17 @@ export class Tab1Page {
   correo: string = '';
   contrasena: string = '';
 
-  // Inyectamos NavController de Ionic y el AuthService
-  constructor(private navCtrl: NavController, private authService: AuthService) {}
+  constructor(
+    private navCtrl: NavController, 
+    private authService: AuthService,
+    private api: ApiService // 🚀 Declarado aquí
+  ) {}
 
   ionViewWillEnter() {
-    // Cada vez que entramos al login, nos aseguramos de que el rol esté en limpio si viene de un deslogueo
-    // Esto garantiza que la barra de tabs permanezca oculta al 100%
     if (this.authService.getRol() !== 'ninguno') {
       this.authService.clearSession();
     }
 
-    // Revisamos si el servicio tiene datos del registro reciente
     const datosRegistro = this.authService.obtenerCredencialesRegistro();
     if (datosRegistro.correo && datosRegistro.contrasena) {
       this.correo = datosRegistro.correo;
@@ -32,36 +33,39 @@ export class Tab1Page {
   }
 
   iniciarSesion() {
-    if (this.correo === '' || this.contrasena === '') {
+    if (!this.correo || !this.contrasena) {
       alert('Por favor, completa todos los campos.');
+      return;
     } 
-    // Validación para entrar como ADMINISTRADOR 
-    else if (this.correo === 'admin@correo.com' && this.contrasena === 'admin123') {
-      this.authService.setRol('admin'); // Guarda el rol 'admin' de manera persistente en LocalStorage
+
+    // 1. Hardcodeo Seguro únicamente para el Administrador Global
+    if (this.correo === 'admin@correo.com' && this.contrasena === 'admin123') {
+      this.authService.setRol('admin');
       alert('¡Bienvenido Administrador!');
-      this.navCtrl.navigateRoot('/tabs/tab4'); // navigateRoot limpia el historial y redibuja la barra de tabs del admin
+      this.navCtrl.navigateRoot('/tabs/tab4');
     } 
-    // Validación para entrar como CLIENTE
-    else if (this.correo === 'franco@correo.com' && this.contrasena === 'franco123') {
-      this.authService.setRol('cliente'); // Guarda el rol 'cliente' de manera persistente en LocalStorage
-      alert('¡Hola Franco, bienvenido de vuelta!');
-      this.navCtrl.navigateRoot('/tabs/tab3'); // navigateRoot limpia el historial y redibuja la barra de tabs del cliente
-    } 
-    // Si ponen cualquier otro dato
+    // 2. Consulta Real a Base de Datos en la Nube para Clientes/Dueños
     else {
-      alert('Usuario no reconocido. Prueba con:\n- franco@correo.com (franco123)\n- admin@correo.com (admin123)');
+      this.api.loginUsuario(this.correo, this.contrasena).subscribe({
+        next: (res: any) => {
+          this.authService.setRol('cliente');
+          
+          // 💡 Guardamos el DNI o ID del cliente que devolvió MySQL en localStorage para filtrar sus citas en el Tab 3
+          localStorage.setItem('dniClienteLogueado', res.usuario.dni);
+
+          localStorage.setItem('usuario', JSON.stringify(res.usuario));
+          
+          alert(`¡Hola ${res.usuario.nombre}, bienvenido de vuelta!`);
+          this.navCtrl.navigateRoot('/tabs/tab3');
+        },
+        error: (err) => {
+          console.error(err);
+          alert(err.error?.error || 'Credenciales incorrectas o usuario no registrado.');
+        }
+      });
     }
   }
 
-  activarFaceID() {
-    alert('Iniciando escaneo de Reconocimiento Facial...');
-  }
-
-  registrarCuenta(){
-    alert('Intentando registrar Cuenta');
-  }
-
-  recuperarContrasena(){
-    alert('Se ha enviado un enlace de recuperación a tu correo...');
-  }
+  activarFaceID() { alert('Iniciando escaneo de Reconocimiento Facial...'); }
+  recuperarContrasena() { alert('Se ha enviado un enlace de recuperación a tu correo...'); }
 }

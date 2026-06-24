@@ -130,4 +130,22 @@ router.delete("/:id", async (req, res) => {
 
 });
 
+// Obtener mascotas de un dueño en específico (Para el Cliente Logueado)
+router.get("/dueno/:id_dueno", async (req, res) => {
+  try {
+    const { id_dueno } = req.params;
+
+    const [rows] = await db.query(
+      "SELECT id_mascota, nombre, especie, raza, edad FROM mascotas WHERE id_dueno = ?",
+      [id_dueno]
+    );
+
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
+});
+
 module.exports = router;

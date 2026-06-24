@@ -14,47 +14,71 @@
     <h2>Mis Citas</h2>
   </div>
 
-  <div class="contenedor-citas">
+  <!-- 🔄 Contenedor Dinámico de Citas -->
+  <div class="contenedor-citas" *ngIf="listaCitas.length > 0; else sinCitas">
 
-    <div class="tarjeta-cita status-atendida">
+    <!-- Recorremos cada cita real -->
+    <div class="tarjeta-cita" 
+         *ngFor="let cita of listaCitas" 
+         [ngClass]="{
+           'status-atendida': cita.estado?.toLowerCase() === 'atendida',
+           'status-pendiente': cita.estado?.toLowerCase() === 'pendiente',
+           'status-cancelada': cita.estado?.toLowerCase() === 'cancelada'
+         }">
       
       <div class="cita-header">
         <div class="fecha-tiempo">
           <div class="fila-fecha">
             <span class="emoji-reloj">📅</span>
-            <h3>30/11/2025</h3>
+            <h3>{{ formatearFecha(cita.fecha) }}</h3>
           </div>
           <div class="fila-hora">
             <ion-icon name="time-outline"></ion-icon>
-            <p>21:30</p>
+            <p>{{ cita.hora.substring(0, 5) }}</p> <!-- Corta los segundos (ej: '21:30:00' -> '21:30') -->
           </div>
         </div>
         
-        <span class="badge-estado atendida">Atendida</span>
+        <!-- Badge dinámico de estado -->
+        <span class="badge-estado" 
+              [ngClass]="{
+                'atendida': cita.estado?.toLowerCase() === 'atendida',
+                'pendiente': cita.estado?.toLowerCase() === 'pendiente',
+                'cancelada': cita.estado?.toLowerCase() === 'cancelada'
+              }">
+          {{ cita.estado }}
+        </span>
       </div>
 
       <div class="cita-cuerpo">
         <div class="detalle-fila">
           <span class="icono-detalle">🐾</span>
           <span class="label">Mascota:</span>
-          <span class="valor">Canela</span>
+          <span class="valor">{{ cita.mascota }}</span>
         </div>
 
         <div class="detalle-fila">
           <span class="icono-detalle">⚕️</span>
           <span class="label">Veterinario:</span>
-          <span class="valor">Dr. Roberto Vega</span>
+          <span class="valor">{{ cita.veterinario }}</span>
         </div>
 
         <div class="detalle-fila">
           <span class="icono-detalle">📋</span>
           <span class="label">Motivo:</span>
-          <span class="valor">Quimioterapia</span>
+          <span class="valor">{{ cita.motivo }}</span>
         </div>
       </div>
 
     </div>
 
   </div>
+
+  <!-- 📭 Plantilla alternativa si el usuario no registra ninguna cita en el sistema -->
+  <ng-template #sinCitas>
+    <div class="ion-text-center ion-padding" style="margin-top: 40px;" *ngIf="!cargando">
+      <ion-icon name="calendar-outline" style="font-size: 64px; color: #b0b0b0;"></ion-icon>
+      <p style="color: #707070; font-weight: 500; margin-top: 15px;">No registras citas programadas en este momento.</p>
+    </div>
+  </ng-template>
 
 </ion-content>

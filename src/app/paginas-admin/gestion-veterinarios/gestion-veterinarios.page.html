@@ -55,11 +55,11 @@
     </div>
 
     <div class="tarjeta-acciones">
-      <button class="btn-card editar ion-activatable">
+      <button class="btn-card editar ion-activatable" (click)="editarVeterinario(v)">
         EDITAR
         <ion-ripple-effect></ion-ripple-effect>
       </button>
-      <button class="btn-card eliminar ion-activatable">
+      <button class="btn-card eliminar ion-activatable" (click)="eliminarVeterinario(v.id_veterinario, v.nombre)">
         ELIMINAR
         <ion-ripple-effect></ion-ripple-effect>
       </button>

@@ -9,8 +9,8 @@
 <ion-content class="bg-formulario-verde ion-padding">
 
   <div class="titulo-seccion-formulario">
-    <span class="emoji-titulo">📆</span>
-    <h2>Agendar Nueva Cita</h2>
+    <span class="emoji-titulo">{{ esEdicion ? '✏️' : '🐾' }}</span>
+    <h2>{{ esEdicion ? 'Editar Cita' : 'Agendar Cita' }}</h2>
   </div>
 
   <div class="tarjeta-formulario">

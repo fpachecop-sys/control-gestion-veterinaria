@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth'; // 1. Importamos el servicio
+import { AuthService } from '../services/auth'; 
+import { ApiService } from '../services/api.service'; // 🚀 Inyectamos tu servicio API
 
 @Component({
   selector: 'app-tab2',
@@ -10,49 +11,68 @@ import { AuthService } from '../services/auth'; // 1. Importamos el servicio
 })
 export class Tab2Page {
 
-  nombreCompleto : string='';
-  dni : string='';
-  telefono: string='';
-  correo: string='';
-  contrasena: string='';
-  confirmarContrasena: string='';
+  nombreCompleto: string = '';
+  dni: string = '';
+  telefono: string = '';
+  correo: string = '';
+  contrasena: string = '';
+  confirmarContrasena: string = '';
   aceptaTerminos: boolean = false;
 
-  // 2. Inyectamos el AuthService en el constructor
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router, 
+    private authService: AuthService,
+    private api: ApiService // 🚀 Declarado aquí
+  ) {}
 
-  registrarCuenta(){
-    if (this.nombreCompleto === '' || this.dni === '' || this.telefono === '' || 
-        this.correo === '' || this.contrasena === '' || this.confirmarContrasena === '') {
+  registrarCuenta() {
+    if (!this.nombreCompleto || !this.dni || !this.telefono || !this.correo || !this.contrasena || !this.confirmarContrasena) {
       alert('Por favor, completa todos los campos del formulario.');
       return;
     }
 
-    if(this.contrasena !== this.confirmarContrasena){
+    if (this.contrasena !== this.confirmarContrasena) {
       alert('Las contraseñas no coinciden');
       return;
     } 
 
-    if(this.aceptaTerminos == false){
+    if (!this.aceptaTerminos) {
       alert('Debes aceptar los Términos y Condiciones para completar el registro');
       return;
     }
 
-    alert('Cuenta registrada con éxito');
+    // 📦 Creamos el objeto para el Backend
+    const bodyRegistro = {
+      nombre: this.nombreCompleto,
+      dni: this.dni,
+      telefono: this.telefono,
+      correo: this.correo,
+      contrasena: this.contrasena
+    };
 
-    // 3. Enviamos el correo y contraseña al servicio antes de borrar las variables
-    this.authService.guardarCredencialesRegistro(this.correo, this.contrasena);
+    // 🚀 Consumo real del Endpoint Condicional
+    this.api.registrarUsuario(bodyRegistro).subscribe({
+      next: (res: any) => {
+        alert(res.mensaje || 'Cuenta procesada con éxito');
 
-    // Limpiamos los campos del formulario
-    this.nombreCompleto = '';
-    this.dni = '';
-    this.telefono = '';
-    this.correo = '';
-    this.contrasena = '';
-    this.confirmarContrasena = '';
-    this.aceptaTerminos = false;
-    
-    // Redirigimos al Login (Tab 1)
-    this.router.navigate(['/tabs/tab1']);
+        // Guardamos credenciales temporales para el autocompletado en el Login
+        this.authService.guardarCredencialesRegistro(this.correo, this.contrasena);
+
+        // Limpieza de campos
+        this.nombreCompleto = '';
+        this.dni = '';
+        this.telefono = '';
+        this.correo = '';
+        this.contrasena = '';
+        this.confirmarContrasena = '';
+        this.aceptaTerminos = false;
+        
+        this.router.navigate(['/tabs/tab1']);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Error al registrar: ' + (err.error?.error || 'Problemas con el servidor'));
+      }
+    });
   }
 }

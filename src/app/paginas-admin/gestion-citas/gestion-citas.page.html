@@ -43,7 +43,8 @@
             <h2>{{ c.fecha | date:'yyyy-MM-dd':'UTC' }} | {{ c.hora.substring(0, 5) }}</h2>
           </div>
 
-          <div class="badge-estado" [ngClass]="c.estado?.toLowerCase()">
+          <!-- 📲 BADGE INTERACTIVO -->
+          <div class="badge-estado" [ngClass]="c.estado?.toLowerCase()" (click)="cambiarEstadoSelector(c)" style="cursor: pointer;">
             <span>{{ c.estado | uppercase }}</span>
           </div>
         </div>
@@ -54,11 +55,12 @@
         </div>
 
         <div class="tarjeta-acciones">
-          <button class="btn-card editar ion-activatable">
-            EDITAR
+          <!-- 📲 BOTÓN EDITAR ESTADO TÁCTIL -->
+          <button class="btn-card editar ion-activatable" (click)="cambiarEstadoSelector(c)">
+            EDITAR ESTADO
             <ion-ripple-effect></ion-ripple-effect>
           </button>
-          <button class="btn-card eliminar ion-activatable">
+          <button class="btn-card eliminar ion-activatable" (click)="eliminarCita(c.id_cita, c.mascota)">
             ELIMINAR
             <ion-ripple-effect></ion-ripple-effect>
           </button>

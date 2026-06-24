@@ -8,9 +8,10 @@
 
 <ion-content class="bg-formulario-blanco ion-padding">
 
+   
   <div class="titulo-seccion-formulario">
-    <span class="emoji-titulo">🐾</span>
-    <h2>Agregar Mascota</h2>
+    <span class="emoji-titulo">{{ esEdicion ? '✏️' : '🐾' }}</span>
+    <h2>{{ esEdicion ? 'Editar Mascota' : 'Agregar Mascota' }}</h2>
   </div>
 
   <div class="tarjeta-formulario">

@@ -50,9 +50,10 @@
           </div>
         </div>
 
+        <!-- Busca la sección de los botones y déjala así: -->
         <div class="tarjeta-acciones">
-          <button class="btn-card editar">EDITAR</button>
-          <button class="btn-card eliminar">ELIMINAR</button>
+          <button class="btn-card editar" (click)="editarDueno(dueno)">EDITAR</button>
+          <button class="btn-card eliminar" (click)="eliminarDueno(dueno.id_dueno, dueno.nombre)">ELIMINAR</button>
         </div>
       </div>
     </div>

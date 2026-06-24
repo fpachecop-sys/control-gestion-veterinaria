@@ -53,12 +53,13 @@
         <p>{{ m.dueno }}</p> </div>
     </div>
 
+        
     <div class="tarjeta-acciones">
-      <button class="btn-moderno editar ion-activatable">
+      <button class="btn-moderno editar ion-activatable" (click)="editarMascota(m)">
         EDITAR
         <ion-ripple-effect></ion-ripple-effect>
       </button>
-      <button class="btn-moderno eliminar ion-activatable">
+      <button class="btn-moderno eliminar ion-activatable" (click)="eliminarMascota(m.id_mascota, m.nombre)">
         ELIMINAR
         <ion-ripple-effect></ion-ripple-effect>
       </button>

@@ -2,7 +2,7 @@
 
   <div class="header-container ion-padding-horizontal">
     <div class="saludo-bloque">
-      <h2>Hola Franco</h2>
+      <h2>Hola {{ nombreUsuario }}</h2>
       <p>Bienvenido de Vuelta!</p>
     </div>
     <div class="logo-bloque">
@@ -49,39 +49,39 @@
 
     <h3 class="seccion-titulo">Próximas Citas</h3>
 
-    <div class="tarjeta-cita">
-      <div class="bloque-fecha">
-        <span class="dia-numero">15</span>
-        <span class="mes-texto">NOV</span>
+    <!-- 🔄 Contenedor Dinámico para renderizar las citas del Backend -->
+    <div *ngIf="proximasCitas.length > 0; else sinCitasPendientes">
+      
+      <div class="tarjeta-cita" *ngFor="let cita of proximasCitas">
+        <div class="bloque-fecha">
+          <!-- Separamos dinámicamente Día y Mes -->
+          <span class="dia-numero">{{ obtenerDia(cita.fecha) }}</span>
+          <span class="mes-texto">{{ obtenerMesAbraviado(cita.fecha) }}</span>
+        </div>
+        
+        <div class="info-cita">
+          <h4>{{ cita.mascota }} - {{ cita.motivo }}</h4>
+          <p class="detalle-hora">
+            <ion-icon name="time-outline"></ion-icon> {{ cita.hora.substring(0, 5) }}
+          </p>
+          <p class="detalle-doctor">{{ cita.veterinario }}</p>
+        </div>
+        
+        <div class="estado-cita text-pendiente">
+          <span>{{ cita.estado }}</span>
+        </div>
       </div>
-      <div class="info-cita">
-        <h4>Firulais - Vacunación</h4>
-        <p class="detalle-hora">
-          <ion-icon name="time-outline"></ion-icon> 10:00 AM
-        </p>
-        <p class="detalle-doctor">Dr. Roberto Vega</p>
-      </div>
-      <div class="estado-cita text-pendiente">
-        <span>Pendiente</span>
-      </div>
+
     </div>
 
-    <div class="tarjeta-cita">
-      <div class="bloque-fecha">
-        <span class="dia-numero">18</span>
-        <span class="mes-texto">NOV</span>
-      </div>
-      <div class="info-cita">
-        <h4>Michi - Control</h4>
-        <p class="detalle-hora">
-          <ion-icon name="time-outline"></ion-icon> 2:30 PM
+    <!-- 📭 Plantilla si no tiene compromisos agendados a futuro -->
+    <ng-template #sinCitasPendientes>
+      <div class="ion-text-center ion-padding" style="border: 1.5px dashed #cccccc; border-radius: 14px; margin-top: 10px;" *ngIf="!cargando">
+        <p style="color: #7f8c8d; font-size: 0.9rem; font-weight: 500; margin: 0;">
+          No tienes próximas citas programadas.
         </p>
-        <p class="detalle-doctor">Dra. Ana Martínez</p>
       </div>
-      <div class="estado-cita text-pendiente">
-        <span>Pendiente</span>
-      </div>
-    </div>
+    </ng-template>
 
   </div>
 </ion-content>

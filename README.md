@@ -6,17 +6,25 @@ Se agregaron registros para dueños, citas, mascotas, veterinarios en la vista d
 
 Se mejoró el registro, login de cada usuario, se pueden vincular usuarios existentes registrados por un administrador usando el DNI como ID de conexion.
 
+EJECUCION:
+-------------
+npx ionic serve
+
+-----------
+INICIAR BASE DE DATOS:
+----------------------
+
+nueva terminal:  cd backend   ->>> npm run dev
 
 USUARIOS:
-
+---------------
 **estos son los unicos usuarios que por momento se usan para pruebas rapidas (correo user ejemplo funcional)**
-
 
 ADMIN.- admin@correo.com contra: admin123
 
 ----
-
 USER.- francomarianopp@gmail.com contra: franco123
+
 ---
 
 ##  Lógica de Vinculación Inteligente (DNI)

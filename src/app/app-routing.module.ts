@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'tab7',
     loadChildren: () => import('./tab7/tab7.module').then( m => m.Tab7PageModule)
   },
+  {
+    path: 'chat-admin',
+    loadChildren: () => import('./paginas-admin/chat-admin/chat-admin.module').then( m => m.ChatAdminPageModule)
+  },
   
 ];
 @NgModule({

@@ -14,25 +14,16 @@
 </ion-header>
 
 <ion-content class="bg-chat-usuario">
-
   <div class="chat-container ion-padding">
-    
     <div *ngFor="let msg of historialMensajes" 
-         [ngClass]="{'burbuja-recibida': msg.remitente === 'clinica', 'burbuja-enviada': msg.remitente === 'usuario'}">
+         [ngClass]="{'burbuja-recibida': msg.remitente === 'ADMIN', 'burbuja-enviada': msg.remitente === 'CLIENTE'}">
       
       <div class="contenido-burbuja">
-        <p class="saludo-automatica" *ngIf="msg.remitente === 'clinica' && msg.texto.includes('Franco')">
-          
-        </p>
-        
-        <p>{{ msg.texto }}</p>
-        <span class="hora-mensaje">{{ msg.hora }}</span>
+        <p>{{ msg.mensaje }}</p>
+        <span class="hora-mensaje">{{ msg.fecha | date:'HH:mm' }}</span>
       </div>
-
     </div>
-
   </div>
-
 </ion-content>
 
 <ion-footer class="ion-no-border bg-footer-chat">

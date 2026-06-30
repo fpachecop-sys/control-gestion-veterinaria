@@ -1,0 +1,106 @@
+ion-toolbar {
+  --background: #ffffff;
+  border-bottom: 1px solid #eef2f1;
+}
+
+.toolbar-user-info {
+  display: flex;
+  flex-direction: column;
+  
+  .user-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  .user-status {
+    font-size: 0.72rem;
+    color: #10957d; // Estado en línea con tu tono corporativo
+    font-weight: 500;
+  }
+}
+
+.chat-chatbox-content {
+  --background: #f8fafc; // Color gris claro de fondo limpio
+}
+
+.messages-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// Estructuración de burbujas en espejo
+.msg-row-admin, .msg-row-client {
+  display: flex;
+  width: 100%;
+}
+
+.msg-row-admin {
+  justify-content: flex-end;
+  
+  .bubble-message {
+    background: #0b5a4b; // Esmeralda corporativo idéntico a tu diseño
+    color: #ffffff;
+    border-radius: 16px 16px 2px 16px;
+  }
+  .bubble-time {
+    color: #a3e2d7;
+  }
+}
+
+.msg-row-client {
+  justify-content: flex-start;
+  
+  .bubble-message {
+    background: #ffffff;
+    color: #334155;
+    border-radius: 16px 16px 16px 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  }
+  .bubble-time {
+    color: #94a3b8;
+  }
+}
+
+.bubble-message {
+  max-width: 75%;
+  padding: 10px 14px;
+  position: relative;
+
+  p {
+    margin: 0 0 4px 0;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+
+  .bubble-time {
+    font-size: 0.68rem;
+    display: block;
+    text-align: right;
+  }
+}
+
+// Sección de Entrada de Texto inferior
+.input-toolbar {
+  --background: #ffffff;
+  padding: 8px;
+}
+
+.input-chat-item {
+  --background: #f1f5f9;
+  --border-radius: 24px;
+  --inner-padding-end: 8px;
+  width: 100%;
+
+  ion-input {
+    --padding-start: 16px;
+    font-size: 0.92rem;
+    color: #1e293b;
+  }
+
+  ion-button {
+    --color: #0b5a4b;
+    margin: 0;
+  }
+}

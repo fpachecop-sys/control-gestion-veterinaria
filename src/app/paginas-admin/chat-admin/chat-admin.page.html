@@ -1,0 +1,42 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab5" color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="toolbar-user-info">
+        <span class="user-name">{{ nombreCliente }}</span>
+        <span class="user-status">Cliente de la veterinaria</span>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="chat-chatbox-content">
+  <div class="messages-container">
+    <div *ngFor="let msg of mensajes" 
+         [ngClass]="{'msg-row-admin': msg.remitente === 'ADMIN', 'msg-row-client': msg.remitente === 'CLIENTE'}">
+      
+      <div class="bubble-message">
+        <p class="text-body">{{ msg.mensaje }}</p>
+        <span class="bubble-time">{{ msg.fecha | date:'HH:mm' }}</span>
+      </div>
+
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar class="input-toolbar">
+    <ion-item lines="none" class="input-chat-item">
+      <ion-input [(ngModel)]="nuevoMensaje" 
+                 placeholder="Escribe una respuesta..." 
+                 (keyup.enter)="enviarMensajeAdmin()"
+                 mode="md">
+      </ion-input>
+      <ion-button slot="end" fill="clear" (click)="enviarMensajeAdmin()" [disabled]="!nuevoMensaje.trim()">
+        <ion-icon name="send" slot="icon-only" color="primary"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

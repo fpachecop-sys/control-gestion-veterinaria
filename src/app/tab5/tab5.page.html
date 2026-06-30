@@ -1,74 +1,41 @@
-<ion-content [fullscreen]="true" class="ion-padding bg-whatsapp-lista">
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Bandeja de Consultas</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="admin-header">
-    <div>
-      <h2 class="user-name">Panel Admin</h2>
-      <p class="welcome-text">Solicitudes de Consulta</p>
-    </div>
-    <img src="assets/icon/logo.jpg" alt="Logo" class="mini-logo">
+<ion-content [fullscreen]="true">
+  <div class="search-container">
+    <ion-searchbar placeholder="Buscar dueño o mensaje..." mode="md"></ion-searchbar>
   </div>
 
-  <hr class="divider">
-
-  <div class="listado-section">
-    <div class="title-with-icon">
-      <ion-icon name="chatbubbles" class="section-icon-chat"></ion-icon>
-      <h3 class="section-title">Bandeja de Solicitudes</h3>
-    </div>
-
-    <div class="contenedor-chats-whatsapp">
-
-      <div class="item-chat-wp ion-activatable">
-        <div class="avatar-chat">
-          <span>FP</span>
+  <div class="chat-list-wrapper">
+    <ion-list lines="none">
+      <ion-item *ngFor="let chat of listaChats" button (click)="abrirChatEspecifico(chat)" class="custom-chat-item">
+        <div slot="start" class="avatar-iniciales">
+          {{ obtenerIniciales(chat.nombre_cliente) }}
         </div>
-        <div class="contenido-chat">
-          <div class="fila-superior">
-            <h4 class="nombre-cliente">Franco Pacheco</h4>
-            <span class="tiempo-chat nuevo">9:36 PM</span>
+
+        <ion-label>
+          <div class="chat-header">
+            <h3>{{ chat.nombre_cliente }}</h3>
+            <span class="chat-tiempo">{{ chat.tiempo | date:'HH:mm' }}</span>
           </div>
-          <div class="fila-inferior">
-            <p class="ultimo-mensaje">🐾 Canela - Motivo: Quimioterapia urgente</p>
-            <span class="badge-wp-no-leido">1</span>
-          </div>
-        </div>
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
+          <p [ngClass]="{'no-leido': chat.no_leidos > 0}">
+            {{ chat.ultimo_mensaje }}
+          </p>
+        </ion-label>
 
-      <div class="item-chat-wp ion-activatable">
-        <div class="avatar-chat">
-          <span>MT</span>
-        </div>
-        <div class="contenido-chat">
-          <div class="fila-superior">
-            <h4 class="nombre-cliente">Maria Torres</h4>
-            <span class="tiempo-chat nuevo">7:15 PM</span>
-          </div>
-          <div class="fila-inferior">
-            <p class="ultimo-mensaje">🐱 Toby - Motivo: Control y vacunas anuales</p>
-            <span class="badge-wp-no-leido">1</span>
-          </div>
-        </div>
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
+        <ion-badge color="success" slot="end" *ngIf="chat.no_leidos > 0">
+          {{ chat.no_leidos }}
+        </ion-badge>
+      </ion-item>
+    </ion-list>
 
-      <div class="item-chat-wp leido ion-activatable">
-        <div class="avatar-chat">
-          <span>CR</span>
-        </div>
-        <div class="contenido-chat">
-          <div class="fila-superior">
-            <h4 class="nombre-cliente">Carlos Rodriguez</h4>
-            <span class="tiempo-chat">Ayer</span>
-          </div>
-          <div class="fila-inferior">
-            <p class="ultimo-mensaje">🐶 Firulais - Motivo: Control post-operatorio</p>
-            </div>
-        </div>
-        <ion-ripple-effect></ion-ripple-effect>
-      </div>
-
+    <div *ngIf="listaChats.length === 0" class="sin-chats-container">
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+      <h4>Sin mensajes nuevos</h4>
+      <p>Las dudas que envíen tus clientes aparecerán en esta sección de manera inmediata.</p>
     </div>
   </div>
-
 </ion-content>

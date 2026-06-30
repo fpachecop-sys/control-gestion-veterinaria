@@ -93,4 +93,13 @@ actualizarCita(id: number, data: any) {
 eliminarCita(id: number) {
   return this.http.delete(`${this.apiUrl}/citas/${id}`);
 }
+obtenerConversacionEspecifica(idDueno: number) {
+  return this.http.get(`${this.apiUrl}/chats/conversacion/${idDueno}`);
+}
+recuperarContrasenaUsuario(correo: string) {
+  return this.http.post(`${this.apiUrl}/duenos/recuperar-contrasena`, { correo });
+}
+actualizarPerfilUsuario(id: number, datos: any) {
+  return this.http.put(`${this.apiUrl}/duenos/${id}`, datos);
+}
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular'; 
+import { NavController, LoadingController } from '@ionic/angular'; // 👈 Inyectamos LoadingController
 import { AuthService } from '../services/auth'; 
-import { ApiService } from '../services/api.service'; // 🚀 Inyectamos tu servicio API
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-tab1',
@@ -17,7 +17,8 @@ export class Tab1Page {
   constructor(
     private navCtrl: NavController, 
     private authService: AuthService,
-    private api: ApiService // 🚀 Declarado aquí
+    private api: ApiService,
+    private loadingCtrl: LoadingController // 👈 Declarado aquí
   ) {}
 
   ionViewWillEnter() {
@@ -38,21 +39,16 @@ export class Tab1Page {
       return;
     } 
 
-    // 1. Hardcodeo Seguro únicamente para el Administrador Global
     if (this.correo === 'admin@correo.com' && this.contrasena === 'admin123') {
       this.authService.setRol('admin');
       alert('¡Bienvenido Administrador!');
       this.navCtrl.navigateRoot('/tabs/tab4');
     } 
-    // 2. Consulta Real a Base de Datos en la Nube para Clientes/Dueños
     else {
       this.api.loginUsuario(this.correo, this.contrasena).subscribe({
         next: (res: any) => {
           this.authService.setRol('cliente');
-          
-          // 💡 Guardamos el DNI o ID del cliente que devolvió MySQL en localStorage para filtrar sus citas en el Tab 3
           localStorage.setItem('dniClienteLogueado', res.usuario.dni);
-
           localStorage.setItem('usuario', JSON.stringify(res.usuario));
           
           alert(`¡Hola ${res.usuario.nombre}, bienvenido de vuelta!`);
@@ -66,6 +62,37 @@ export class Tab1Page {
     }
   }
 
-  activarFaceID() { alert('Iniciando escaneo de Reconocimiento Facial...'); }
-  recuperarContrasena() { alert('Se ha enviado un enlace de recuperación a tu correo...'); }
+  // 🚀 PERFECCIÓN: Recuperación con indicador de carga asíncrono
+  async recuperarContrasena() {
+    let correoDestino = this.correo.trim();
+
+    if (!correoDestino) {
+      const promptCorreo = prompt("Por favor, ingresa tu correo electrónico registrado para enviarte tus nuevas credenciales:");
+      if (promptCorreo) {
+        correoDestino = promptCorreo.trim();
+      } else {
+        return; 
+      }
+    }
+
+    // 1. Creamos y mostramos el Spinner de carga en la pantalla
+    const loading = await this.loadingCtrl.create({
+      message: 'Enviando clave temporal... Por favor, espera.',
+      spinner: 'crescent'
+    });
+    await loading.present(); // Aquí la pantalla se congela para evitar múltiples clicks 🛡️
+
+    // 2. Llamamos a la API
+    this.api.recuperarContrasenaUsuario(correoDestino).subscribe({
+      next: (res: any) => {
+        loading.dismiss(); // 🔥 Quitamos el spinner inmediatamente al recibir respuesta
+        alert(res.mensaje || 'Revisa tu bandeja de entrada o spam.');
+      },
+      error: (err) => {
+        loading.dismiss(); 
+        console.error(err);
+        alert(err.error?.error || 'No se pudo procesar la solicitud de recuperación.');
+      }
+    });
+  }
 }

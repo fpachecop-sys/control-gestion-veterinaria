@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
-interface Mensaje {
-  texto: string;
-  remitente: 'usuario' | 'clinica';
-  hora: string;
-}
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { io } from 'socket.io-client';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-tab6',
@@ -12,50 +8,69 @@ interface Mensaje {
   styleUrls: ['./tab6.page.scss'],
   standalone: false,
 })
-export class Tab6Page implements OnInit {
-
-   // Variable vinculada al input de texto
+export class Tab6Page implements OnInit, OnDestroy {
   nuevoMensaje: string = '';
+  historialMensajes: any[] = [];
+  usuarioLogueado: any = null;
+  private socket: any;
 
-  // Historial de mensajes de la conversación
-  historialMensajes: Mensaje[] = [
-    {
-      texto: '¡Hola Franco Mariano! 👋 Por favor, escríbenos detalladamente el motivo de tu consulta médica y el nombre de tu mascota. Un administrador agendará tu caso de inmediato.',
-      remitente: 'clinica',
-      hora: '9:40 PM'
-    }
-  ];
-
-  constructor() { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
+    const userStr = localStorage.getItem('usuario');
+    if (userStr) {
+      this.usuarioLogueado = JSON.parse(userStr);
+      
+      // Conectar al socket usando la URL de tu ApiService
+      this.socket = io(this.apiService.apiUrl);
+
+      // Unirse a su sala privada por id_dueno
+      this.socket.emit('unirse_chat', this.usuarioLogueado.id_dueno);
+
+      // Cargar historial inicial desde el backend en memoria
+      this.cargarHistorialEspecitico();
+
+      // Escuchar nuevos mensajes en tiempo real
+      this.socket.on('recibir_mensaje', (msg: any) => {
+        this.historialMensajes.push(msg);
+      });
+    }
   }
 
-  /**
-   * Captura el texto, genera la burbuja y limpia el campo de redacción
-   */
-  enviarMensaje() {
-    // Validamos que el usuario no envíe un texto vacío o lleno de puros espacios
-    if (!this.nuevoMensaje || this.nuevoMensaje.trim() === '') {
-      return;
+  ngOnDestroy() {
+    if (this.socket) {
+      this.socket.disconnect();
     }
+  }
 
-    // Obtenemos la hora actual formateada de forma sencilla (HH:MM)
-    const ahora = new Date();
-    const horaFormateada = ahora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    // Insertamos el nuevo mensaje del usuario al historial
-    this.historialMensajes.push({
-      texto: this.nuevoMensaje.trim(),
-      remitente: 'usuario',
-      hora: horaFormateada
+  cargarHistorialEspecitico() {
+    this.apiService.obtenerConversacionEspecifica(this.usuarioLogueado.id_dueno).subscribe({
+      next: (data: any) => {
+        this.historialMensajes = data;
+        if(this.historialMensajes.length === 0) {
+          // Mensaje de bienvenida por defecto si está vacío
+          this.historialMensajes.push({
+            mensaje: `¡Hola ${this.usuarioLogueado.nombre}! 👋 Por favor, escríbenos detalladamente el motivo de tu consulta médica y el nombre de tu mascota.`,
+            remitente: 'ADMIN',
+            fecha: new Date()
+          });
+        }
+      }
     });
+  }
 
-    console.log('Consulta enviada al administrador:', this.nuevoMensaje);
+  enviarMensaje() {
+    if (!this.nuevoMensaje.trim() || !this.usuarioLogueado) return;
 
-    // Limpiamos la caja de texto automáticamente
+    const payload = {
+      id_dueno: this.usuarioLogueado.id_dueno,
+      nombre_cliente: this.usuarioLogueado.nombre,
+      remitente: 'CLIENTE', // Homologado con el backend
+      mensaje: this.nuevoMensaje.trim()
+    };
+
+    // Emitir por Socket de verdad
+    this.socket.emit('enviar_mensaje', payload);
     this.nuevoMensaje = '';
   }
-
-
 }

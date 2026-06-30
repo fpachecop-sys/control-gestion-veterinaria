@@ -1,167 +1,107 @@
-.bg-whatsapp-lista {
+ion-toolbar {
   --background: #ffffff;
+  --color: #0b5a4b; // El tono verde principal de tu panel admin
+  font-weight: 700;
 }
 
-// Estructura del Header Superior del Admin
-.admin-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 15px;
-  margin-bottom: 10px;
-
-  .user-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 0;
-  }
-  .welcome-text {
-    font-size: 0.88rem;
-    color: #0f7a67; // Tu verde insignia
-    font-weight: 600;
-    margin: 2px 0 0 0;
-  }
-  .mini-logo {
-    height: 40px;
-    object-fit: contain;
+.search-container {
+  padding: 8px 16px;
+  background: #ffffff;
+  ion-searchbar {
+    --background: #f4f7f6;
+    --border-radius: 12px;
+    --box-shadow: none;
+    padding: 0;
   }
 }
 
-.divider {
-  border: 0;
-  border-top: 1px solid #f0f2f5;
-  margin: 15px 0;
-}
-
-.title-with-icon {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-
-  .section-icon-chat {
-    font-size: 1.4rem;
-    color: #075e54; // Verde oscuro característico de la barra de WhatsApp
-  }
-
-  .section-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #2c3e50;
-    margin: 0;
-  }
-}
-
-// --- CONTENEDOR ESTILO WHATSAPP ---
-.contenedor-chats-whatsapp {
-  display: flex;
-  flex-direction: column;
+.chat-list-wrapper {
+  padding: 0 16px;
   background: #ffffff;
 }
 
-.item-chat-wp {
-  display: flex;
-  align-items: center;
-  padding: 12px 4px;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid #f6f6f6;
-  cursor: pointer;
+.custom-chat-item {
+  --background: #ffffff;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --inner-padding-end: 0;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #eef2f1;
 
-  // Círculo del perfil (Avatar)
-  .avatar-chat {
-    width: 50px;
-    height: 50px;
+  .avatar-iniciales {
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: #e1f3ef; // Fondo suave para resaltar las letras
+    background: linear-gradient(135deg, #10957d, #0b5a4b);
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 14px;
-    flex-shrink: 0;
-
-    span {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #0f7a67; // Iniciales con el color de tu marca
-    }
+    font-weight: 700;
+    font-size: 1.05rem;
+    box-shadow: 0 3px 6px rgba(11, 90, 75, 0.15);
   }
 
-  // Contenido de la conversación
-  .contenido-chat {
-    flex: 1;
+  .chat-header {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-    
-    // Nombre del cliente y la hora
-    .fila-superior {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
 
-      .nombre-cliente {
-        font-size: 1.02rem;
-        font-weight: 700;
-        color: #111111;
-        margin: 0;
-      }
-
-      .tiempo-chat {
-        font-size: 0.78rem;
-        color: #8696a0;
-        font-weight: 500;
-
-        &.nuevo {
-          color: #25d366; // Hora en verde si hay mensajes pendientes
-          font-weight: 600;
-        }
-      }
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin: 0;
     }
 
-    // Texto de la consulta y el globo de notificación
-    .fila-inferior {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .ultimo-mensaje {
-        font-size: 0.88rem;
-        color: #667781;
-        margin: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis; // Agrega los tres puntos "..." si el texto es muy largo
-        max-width: 85%;
-      }
-
-      // Globo verde idéntico al de WhatsApp
-      .badge-wp-no-leido {
-        background-color: #25d366; 
-        color: #ffffff;
-        font-size: 0.75rem;
-        font-weight: 700;
-        min-width: 19px;
-        height: 19px;
-        padding: 2px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+    .chat-tiempo {
+      font-size: 0.75rem;
+      color: #94a3b8;
     }
   }
 
-  // Atenuación sutil para los mensajes ya leídos
-  &.leido {
-    .avatar-chat {
-      background: #f0f2f5;
-      span { color: #667781; }
+  p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &.no-leido {
+      color: #0f172a;
+      font-weight: 600;
     }
-    .contenido-chat .fila-superior .nombre-cliente {
-      font-weight: 600; // Un poco menos grueso que los no leídos
-      color: #3b3b3b;
-    }
+  }
+
+  ion-badge {
+    --background: #10957d;
+    font-size: 0.75rem;
+    padding: 5px 8px;
+    border-radius: 10px;
+  }
+}
+
+.sin-chats-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: #94a3b8;
+
+  ion-icon {
+    font-size: 4rem;
+    color: #cbd5e1;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 0.88rem;
+    line-height: 1.4;
   }
 }

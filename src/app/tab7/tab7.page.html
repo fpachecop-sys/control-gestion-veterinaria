@@ -25,7 +25,8 @@
       
       <div class="fila-perfil">
         <span class="label">Nombre Completo:</span>
-        <span class="valor">{{ datosPerfil.nombre }}</span>
+        <span *ngIf="!editando" class="valor">{{ datosPerfil.nombre }}</span>
+        <ion-input *ngIf="editando" type="text" [(ngModel)]="datosPerfil.nombre" class="input-editable"></ion-input>
       </div>
 
       <div class="fila-perfil">
@@ -33,23 +34,46 @@
         <span class="valor">{{ datosPerfil.dni }}</span>
       </div>
 
-      <div class="fila-perfil" *ngIf="datosPerfil.correo">
+      <div class="fila-perfil">
         <span class="label">Correo:</span>
-        <span class="valor-correo">{{ datosPerfil.correo }}</span>
+        <span *ngIf="!editando" class="valor-correo">{{ datosPerfil.correo || 'No asignado' }}</span>
+        <ion-input *ngIf="editando" type="email" [(ngModel)]="datosPerfil.correo" class="input-editable"></ion-input>
       </div>
 
       <div class="fila-perfil">
         <span class="label">Teléfono:</span>
-        <span class="valor">{{ datosPerfil.telefono }}</span>
+        <span *ngIf="!editando" class="valor">{{ datosPerfil.telefono }}</span>
+        <ion-input *ngIf="editando" type="tel" [(ngModel)]="datosPerfil.telefono" class="input-editable"></ion-input>
       </div>
 
       <div class="fila-perfil">
         <span class="label">Dirección:</span>
-        <span class="valor-direccion">{{ datosPerfil.direccion || 'No especificada' }}</span>
+        <span *ngIf="!editando" class="valor-direccion">{{ datosPerfil.direccion || 'No especificada' }}</span>
+        <ion-input *ngIf="editando" type="text" [(ngModel)]="datosPerfil.direccion" class="input-editable" placeholder="Ej. Av. Primavera 123"></ion-input>
+      </div>
+
+      <div class="fila-perfil" *ngIf="editando">
+        <span class="label">Nueva Contraseña:</span>
+        <ion-input type="password" [(ngModel)]="nuevaContrasena" placeholder="Dejar en blanco para no cambiar" class="input-editable"></ion-input>
       </div>
 
     </div>
 
+  </div>
+
+  <div class="ion-text-center ion-padding-top">
+    <ion-button *ngIf="!editando" expand="block" shape="round" color="light" (click)="activarEdicion()">
+      Editar Datos
+    </ion-button>
+
+    <div *ngIf="editando" class="botones-guardar-grupo">
+      <ion-button expand="block" shape="round" color="success" (click)="guardarCambiosPerfil()">
+        Guardar Cambios
+      </ion-button>
+      <ion-button expand="block" shape="round" fill="outline" color="danger" (click)="cancelarEdicion()">
+        Cancelar
+      </ion-button>
+    </div>
   </div>
 
 </ion-content>

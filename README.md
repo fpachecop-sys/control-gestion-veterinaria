@@ -4,20 +4,26 @@ Este repositorio contiene el avance del frontend (Ionic/Angular) y backend (Node
 ## Estado Actual del Avance
 Se agregaron registros para dueños, citas, mascotas, veterinarios en la vista de administrador
 
-Todavia no se mejoró el apartado de user normal.
+Se mejoró el registro, login de cada usuario, se pueden vincular usuarios existentes registrados por un administrador usando el DNI como ID de conexion.
 
-Registro funciona perfectamente como simulacion de registro, aun no se pueden logear.
+EJECUCION:
+-------------
+npx ionic serve
+
+-----------
+INICIAR BASE DE DATOS:
+----------------------
+
+nueva terminal:  cd backend   ->>> npm run dev
 
 USUARIOS:
-
-**estos son los unicos usuarios que por momento se usan para pruebas rapidas, aun no se implementa registro con base de datos**
-
+---------------
+**estos son los unicos usuarios que por momento se usan para pruebas rapidas (correo user ejemplo funcional)**
 
 ADMIN.- admin@correo.com contra: admin123
 
 ----
-
-USER.- franco@correo.com contra: franco123
+USER.- francomarianopp@gmail.com contra: franco123
 
 ---
 
@@ -34,4 +40,4 @@ AVANCE MAS DEL 70% DEL PROYECTO
 
 RESTANTE:
 
-IMPLEMENTACION DE LOGIN Y REGISTRO DE USUARIOS NORMALES, CHAT EN TIEMPO REAL ENTRE USUARIOS Y ADMINISTRADORES.
+IMPLEMENTACION DE CHAT EN TIEMPO REAL ENTRE USUARIOS Y ADMINISTRADORES.

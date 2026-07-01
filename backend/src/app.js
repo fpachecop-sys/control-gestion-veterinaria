@@ -2,8 +2,8 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const http = require("http"); // 👈 Para acoplar Socket.io
-const { Server } = require("socket.io"); // 👈 Sockets
+const http = require("http"); 
+const { Server } = require("socket.io"); 
 const db = require("./db");
 
 const app = express();
@@ -15,9 +15,6 @@ const io = new Server(server, {
         methods: ["GET", "POST"]
     }
 });
-
-// 🧠 BASE DE DATOS TEMPORAL EN MEMORIA (No romperá nada y emula el chat a la perfección)
-let mensajesTemporales = [];
 
 const duenosRoutes = require("./routes/duenos.routes");
 const mascotasRoutes = require("./routes/mascotas.routes");
@@ -31,42 +28,51 @@ app.use("/mascotas", mascotasRoutes);
 app.use("/veterinarios", veterinariosRoutes);
 app.use("/citas", citasRoutes);
 
-// 📬 ENDPOINT API: Estructura simulada para la bandeja estilo WhatsApp del admin
-app.get("/chats/bandeja", (req, res) => {
-    // Agrupamos el último mensaje de memoria por cada dueño de forma dinámica
-    const bandeja = [];
-    const duenosProcesados = new Set();
-
-    // Recorremos al revés para obtener los últimos mensajes primero
-    for (let i = mensajesTemporales.length - 1; i >= 0; i--) {
-        const msg = mensajesTemporales[i];
-        if (!duenosProcesados.has(msg.id_dueno)) {
-            duenosProcesados.add(msg.id_dueno);
-            bandeja.push({
-                id_dueno: msg.id_dueno,
-                nombre_cliente: msg.nombre_cliente,
-                ultimo_mensaje: msg.mensaje,
-                tiempo: msg.fecha,
-                remitente: msg.remitente,
-                no_leidos: msg.remitente === 'CLIENTE' ? 1 : 0 // Simulación rápida
-            });
-        }
+// 📬 ENDPOINT API: Bandeja estilo WhatsApp real desde MySQL
+app.get("/chats/bandeja", async (req, res) => {
+    try {
+        // Seleccionamos el último mensaje de cada dueño usando tu columna 'id' y 'fecha'
+        const [rows] = await db.query(`
+            SELECT m.id_dueno, d.nombre AS nombre_cliente, m.mensaje AS ultimo_mensaje, 
+                   m.fecha AS tiempo, m.remitente,
+                   (SELECT COUNT(*) FROM mensajes WHERE id_dueno = m.id_dueno AND remitente = 'CLIENTE') AS no_leidos
+            FROM mensajes m
+            INNER JOIN duenos d ON m.id_dueno = d.id_dueno
+            WHERE m.id IN (
+                SELECT MAX(id) 
+                FROM mensajes 
+                GROUP BY id_dueno
+            )
+            ORDER BY m.id DESC
+        `);
+        res.json(rows);
+    } catch (error) {
+        console.error("Error al cargar la bandeja real:", error);
+        res.status(500).json({ error: error.message });
     }
-    res.json(bandeja);
 });
 
-// 📬 NUEVO ENDPOINT: Obtener los mensajes específicos de un solo dueño
-app.get("/chats/conversacion/:id_dueno", (req, res) => {
-    const idDueno = parseInt(req.params.id_dueno);
-    const historial = mensajesTemporales.filter(msg => msg.id_dueno === idDueno);
-    res.json(historial);
+// 📬 ENDPOINT API: Obtener la conversación específica desde MySQL
+app.get("/chats/conversacion/:id_dueno", async (req, res) => {
+    try {
+        const idDueno = parseInt(req.params.id_dueno);
+        // Traemos el historial ordenado cronológicamente por tu id autoincremental
+        const [rows] = await db.query(
+            "SELECT id_dueno, remitente, mensaje, fecha FROM mensajes WHERE id_dueno = ? ORDER BY id ASC",
+            [idDueno]
+        );
+        res.json(rows);
+    } catch (error) {
+        console.error("Error al recuperar conversación desde la BD:", error);
+        res.status(500).json({ error: error.message });
+    }
 });
 
 app.get("/", async (req, res) => {
     try {
         const [rows] = await db.query("SELECT NOW() AS fecha");
         res.json({
-            mensaje: "API y WebSockets en memoria funcionando de forma segura",
+            mensaje: "API y WebSockets conectados a MySQL de forma segura",
             servidor: rows[0]
         });
     } catch (error) {
@@ -75,7 +81,7 @@ app.get("/", async (req, res) => {
     }
 });
 
-// 🔌 LÓGICA DE SOCKETS (Sin consultas SQL)
+// 🔌 LÓGICA DE WEBSONCKETS EN TIEMPO REAL CON PERSISTENCIA
 io.on("connection", (socket) => {
     console.log(`📡 Dispositivo conectado al chat: ${socket.id}`);
 
@@ -83,21 +89,30 @@ io.on("connection", (socket) => {
         socket.join(`sala_${id_dueno}`);
     });
 
-    socket.on("enviar_mensaje", (datos) => {
-        const nuevoMensaje = {
-            id_dueno: datos.id_dueno,
-            nombre_cliente: datos.nombre_cliente || "Usuario",
-            remitente: datos.remitente,
-            mensaje: datos.mensaje,
-            fecha: new Date()
-        };
+    socket.on("enviar_mensaje", async (datos) => {
+        try {
+            // 1. Guardar en la Base de Datos Real de MySQL 💾
+            await db.query(
+                "INSERT INTO mensajes (id_dueno, remitente, mensaje) VALUES (?, ?, ?)", 
+                [datos.id_dueno, datos.remitente, datos.mensaje.trim()]
+            );
 
-        // Guardamos en el almacén de memoria temporal
-        mensajesTemporales.push(nuevoMensaje);
+            // 2. Estructurar el objeto para la transmisión inmediata
+            const mensajeParaEnviar = {
+                id_dueno: datos.id_dueno,
+                nombre_cliente: datos.nombre_cliente || "Usuario",
+                remitente: datos.remitente,
+                mensaje: datos.mensaje.trim(),
+                fecha: new Date()
+            };
 
-        // Retransmitimos en tiempo real
-        io.to(`sala_${datos.id_dueno}`).emit("recibir_mensaje", nuevoMensaje);
-        io.emit("actualizar_bandeja_admin");
+            // 3. Retransmitir por Sockets a la sala correspondiente 📡
+            io.to(`sala_${datos.id_dueno}`).emit("recibir_mensaje", mensajeParaEnviar);
+            io.emit("actualizar_bandeja_admin");
+
+        } catch (error) {
+            console.error("❌ Error crítico guardando mensaje en MySQL:", error);
+        }
     });
 
     socket.on("disconnect", () => {
@@ -107,14 +122,13 @@ io.on("connection", (socket) => {
 
 (async () => {
   try {
-    const [rows] = await db.query("SELECT 1");
+    await db.query("SELECT 1");
     console.log("✅ Conexión exitosa a la nube de tu compañero");
   } catch (error) {
     console.error("❌ Error de conexión:", error.message);
   }
 })();
 
-// Escuchamos desde server
 server.listen(3000, () => {
     console.log("Servidor híbrido seguro ejecutándose en el puerto 3000");
 });

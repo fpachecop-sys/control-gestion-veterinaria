@@ -2,9 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { ApiService } from '../services/api.service'; // 👈 Asegúrate de que la ruta a tu api.service sea la correcta
+import { ApiService } from '../services/api.service'; 
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
+import { io } from 'socket.io-client'; // 👈 Importamos socket cliente
 
 @Component({
   selector: 'app-tab5',
@@ -16,26 +17,26 @@ import { NavController } from '@ionic/angular';
 export class Tab5Page implements OnInit, OnDestroy {
 
   listaChats: any[] = [];
-  private intervaloBandeja: any;
+  private socket: any; // 👈 Manejador de socket
 
-  constructor(private apiService: ApiService, private http: HttpClient,private navCtrl: NavController) { }
+  constructor(private apiService: ApiService, private http: HttpClient, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.cargarBandejaAdmin();
     
-    // Al ser un desarrollo temporal en memoria, haremos una consulta corta de actualización automática cada 4 segundos
-    this.intervaloBandeja = setInterval(() => {
-      this.cargarBandejaAdmin();
-    }, 4000);
+    // Conectamos al socket para escuchar actualizaciones de mensajes entrantes de inmediato
+    this.socket = io(this.apiService.apiUrl);
+    this.socket.on('actualizar_bandeja_admin', () => {
+      this.cargarBandejaAdmin(); // 🚀 Se refresca sola como por arte de magia
+    });
   }
 
   ngOnDestroy() {
-    if (this.intervaloBandeja) {
-      clearInterval(this.intervaloBandeja);
+    if (this.socket) {
+      this.socket.disconnect();
     }
   }
 
-  // Obtener los datos desde el nuevo endpoint temporal de tu backend
   cargarBandejaAdmin() {
     this.http.get<any[]>(`${this.apiService.apiUrl}/chats/bandeja`).subscribe({
       next: (data) => {
@@ -47,7 +48,6 @@ export class Tab5Page implements OnInit, OnDestroy {
     });
   }
 
-  // ✨ Generador dinámico de iniciales para el avatar circular ("Franco Pacheco" -> "FP")
   obtenerIniciales(nombre: string): string {
     if (!nombre) return 'US';
     const partes = nombre.trim().split(' ');
@@ -57,13 +57,12 @@ export class Tab5Page implements OnInit, OnDestroy {
     return partes[0].slice(0, 2).toUpperCase();
   }
 
-  // Acción al presionar una conversación estilo WhatsApp
   abrirChatEspecifico(chat: any) {
     this.navCtrl.navigateForward('/chat-admin', {
-    queryParams: {
-      id_dueno: chat.id_dueno,
-      nombre: chat.nombre_cliente
-    }
-  });
+      queryParams: {
+        id_dueno: chat.id_dueno,
+        nombre: chat.nombre_cliente
+      }
+    });
   }
 }

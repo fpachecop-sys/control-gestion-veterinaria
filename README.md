@@ -5,6 +5,9 @@ Este repositorio contiene el avance del frontend (Ionic/Angular) y backend (Node
 Se agregaron registros para dueños, citas, mascotas, veterinarios en la vista de administrador
 
 Se mejoró el registro, login de cada usuario, se pueden vincular usuarios existentes registrados por un administrador usando el DNI como ID de conexion.
+Se aplicó cifrado de contraseñas, Chats en tiempo real con administrador, Chat en tiempo real con cada usuario.
+Se agrego recuperacion de contraseña
+Se agrego funcionamiento de gmails, utilizando los comandos de SOCKET.IO  Y GMAIL:  nodemailer   , bcryptjs
 
 EJECUCION:
 -------------
@@ -18,12 +21,9 @@ nueva terminal:  cd backend   ->>> npm run dev
 
 USUARIOS:
 ---------------
-**estos son los unicos usuarios que por momento se usan para pruebas rapidas (correo user ejemplo funcional)**
+Puedes Crear tu usuario con gmail funcional. (USER NORMAL, NO ADMIN)
 
 ADMIN.- admin@correo.com contra: admin123
-
-----
-USER.- francomarianopp@gmail.com contra: franco123
 
 ---
 
@@ -36,8 +36,5 @@ Para optimizar la experiencia de usuario y evitar duplicados en la base de datos
 ---
 ## Nota de Despliegue / Base de Datos
  [!IMPORTANTE]
-AVANCE MAS DEL 70% DEL PROYECTO
+AVANCE MAS DEL 90% DEL PROYECTO
 
-RESTANTE:
-
-IMPLEMENTACION DE CHAT EN TIEMPO REAL ENTRE USUARIOS Y ADMINISTRADORES.

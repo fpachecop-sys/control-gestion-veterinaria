@@ -13,7 +13,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="bg-chat-usuario">
+<ion-content class="bg-chat-usuario" #miChatContent>
   <div class="chat-container ion-padding">
     <div *ngFor="let msg of historialMensajes" 
          [ngClass]="{'burbuja-recibida': msg.remitente === 'ADMIN', 'burbuja-enviada': msg.remitente === 'CLIENTE'}">
@@ -30,15 +30,17 @@
   <ion-toolbar style="--background: #ffffff;" class="ion-padding-horizontal">
     <div class="caja-envio-mensaje">
       
-      <ion-input 
-        type="text" 
+      <ion-textarea 
         placeholder="Escribe el nombre de tu mascota y síntoma..." 
         class="input-chat-personalizado"
         [(ngModel)]="nuevoMensaje"
-        (keyup.enter)="enviarMensaje()">
-      </ion-input>
+        [autoGrow]="true"
+        rows="1"
+        (keyup.enter)="enviarMensaje()"
+        mode="md">
+      </ion-textarea>
 
-      <button class="btn-enviar-consulta" (click)="enviarMensaje()">
+      <button class="btn-enviar-consulta" (click)="enviarMensaje()" [disabled]="!nuevoMensaje || !nuevoMensaje.trim()">
         <ion-icon name="send"></ion-icon>
       </button>
 

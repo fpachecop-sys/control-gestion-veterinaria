@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 const nodemailer = require("nodemailer");
-const bcrypt = require("bcryptjs"); // 👈 Inyección de seguridad para encriptar
+const bcrypt = require("bcryptjs");
 
-const SALTRON_ROUNDS = 10; // Nivel de seguridad para la encriptación
+const SALTRON_ROUNDS = 10;
 
 // Configuración del transportador de Gmail para la veterinaria
 const transporter = nodemailer.createTransport({
@@ -43,7 +43,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Registrar o Vincular dueño (Con contraseñas encriptadas y correos reales)
+// Registrar o Vincular dueño
 router.post("/", async (req, res) => {
     try {
         const { nombre, dni, telefono, direccion, correo, contrasena } = req.body;
@@ -52,7 +52,6 @@ router.post("/", async (req, res) => {
             return res.status(400).json({ error: "El DNI es obligatorio." });
         }
 
-        // Encriptamos la contraseña elegida por el usuario para la app si viene en la petición
         let contrasenaEncriptada = null;
         if (contrasena) {
             contrasenaEncriptada = await bcrypt.hash(contrasena, SALTRON_ROUNDS);
@@ -63,7 +62,6 @@ router.post("/", async (req, res) => {
         if (rows.length > 0) {
             const duenoExistente = rows[0];
             
-            // 🚀 CASO A: Vinculación inteligente (El admin ya lo creó previamente en la veterinaria)
             await db.query(
                 `UPDATE duenos 
                  SET correo = ?, 
@@ -80,7 +78,7 @@ router.post("/", async (req, res) => {
                         <h2 style="color: #2c3e50; text-align: center;">¡Tu cuenta ha sido vinculada! 🏥</h2>
                         <p>Hola <strong>${duenoExistente.nombre}</strong>,</p>
                         <p>Te damos la bienvenida formal a la app móvil de <strong>Mascotas Portalino y Rondón</strong>.</p>
-                        <p>Hemos vinculado con éxito tus datos veterinarios usando tu DNI (<strong>${dni}</strong>). Ya puedes acceder para revisar las próximas citas y el historial clínico de tus mascotas de forma segura.</p>
+                        <p>Hemos vinculado con éxito tus datos veterinarios usando tu DNI (<strong>${dni}</strong>).</p>
                         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
                         <p style="font-size: 0.8rem; color: #7f8c8d; text-align: center;">Veterinaria Mascotas Portalino y Rondón</p>
                     </div>
@@ -91,7 +89,6 @@ router.post("/", async (req, res) => {
             return res.json({ mensaje: "Cuenta vinculada con éxito. ¡Tus datos y mascotas están listos!" });
 
         } else {
-            // 📝 CASO B: Registro desde cero
             await db.query(
                 `INSERT INTO duenos (nombre, dni, telefono, direccion, correo, contrasena) 
                  VALUES (?, ?, ?, ?, ?, ?)`,
@@ -104,7 +101,6 @@ router.post("/", async (req, res) => {
                         <h2 style="color: #27ae60; text-align: center;">¡Bienvenido a la Veterinaria! 🐾</h2>
                         <p>Hola <strong>${nombre}</strong>,</p>
                         <p>Tu cuenta ha sido creada exitosamente en nuestro sistema.</p>
-                        <p>Estamos muy felices de acompañarte en el cuidado de tus mejores amigos de cuatro patas.</p>
                         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
                         <p style="text-align: center; color: #7f8c8d;">Veterinaria Mascotas Portalino y Rondón</p>
                     </div>
@@ -119,27 +115,24 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-// Actualizar datos del perfil de un dueño por su ID (Incluye Correo y Contraseña segura)
+
+// Actualizar datos del perfil de un dueño por su ID
 router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const { nombre, dni, telefono, direccion, correo, contrasena } = req.body;
 
-        // 1. Verificamos si el usuario ingresó una nueva contraseña desde su perfil
         let queryContrasena = "";
         let parametros = [nombre, dni, telefono, direccion || null, correo || null];
 
         if (contrasena && contrasena.trim() !== "") {
-            // Si escribió algo, encriptamos la nueva clave usando bcryptjs
             const contrasenaEncriptada = await bcrypt.hash(contrasena, SALTRON_ROUNDS);
             queryContrasena = `, contrasena = ?`;
             parametros.push(contrasenaEncriptada);
         }
 
-        // Añadimos el ID al final de los parámetros para el WHERE
         parametros.push(id);
 
-        // 2. Ejecutamos la actualización completa en MySQL
         await db.query(
             `UPDATE duenos 
              SET nombre = ?, 
@@ -152,7 +145,6 @@ router.put("/:id", async (req, res) => {
             parametros
         );
 
-        // 3. Volvemos a consultar los datos actualizados del usuario (sin mandar el hash) para devolvérselos al frontend
         const [rows] = await db.query(
             "SELECT id_dueno, nombre, dni, telefono, direccion, correo FROM duenos WHERE id_dueno = ?",
             [id]
@@ -168,13 +160,11 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-// Endpoint para el Inicio de Sesión de Clientes (Login Seguro)
-// Endpoint para el Inicio de Sesión de Clientes (Login Seguro)
+// Login Seguro
 router.post("/login", async (req, res) => {
     try {
         const { correo, contrasena } = req.body;
 
-        // Buscamos al dueño por correo electrónico (AQUÍ agregamos 'correo' 🚀)
         const [rows] = await db.query(
             "SELECT id_dueno, nombre, dni, telefono, direccion, correo, contrasena FROM duenos WHERE correo = ?",
             [correo]
@@ -185,15 +175,12 @@ router.post("/login", async (req, res) => {
         }
 
         const usuario = rows[0];
-
-        // Comparamos la contraseña ingresada con el hash guardado en MySQL de forma segura
         const contraseñaCorrecta = await bcrypt.compare(contrasena, usuario.contrasena);
 
         if (!contraseñaCorrecta) {
             return res.status(401).json({ error: "El correo electrónico o la contraseña son incorrectos." });
         }
 
-        // Eliminamos la contraseña del objeto antes de enviarlo al frontend por seguridad
         delete usuario.contrasena;
 
         res.json({
@@ -206,11 +193,10 @@ router.post("/login", async (req, res) => {
     }
 });
 
-// Endpoint para el restablecimiento de credenciales por correo electrónico
+// Recuperar Contraseña
 router.post("/recuperar-contrasena", async (req, res) => {
     try {
         const { correo } = req.body;
-
         const [rows] = await db.query("SELECT id_dueno, nombre FROM duenos WHERE correo = ?", [correo]);
 
         if (rows.length === 0) {
@@ -218,13 +204,7 @@ router.post("/recuperar-contrasena", async (req, res) => {
         }
 
         const usuario = rows[0];
-
-        // 💡 Explicación de seguridad para producción:
-        // Como las contraseñas ahora están encriptadas con un hash que no se puede revertir, 
-        // lo correcto para un sistema real es generar una contraseña provisoria aleatoria, 
-        // actualizarla en la base de datos y enviarle esa clave temporal al cliente para que acceda.
-
-        const claveTemporal = Math.random().toString(36).substring(2, 10).toUpperCase(); // Genera una clave aleatoria de 8 caracteres
+        const claveTemporal = Math.random().toString(36).substring(2, 10).toUpperCase();
         const hashTemporal = await bcrypt.hash(claveTemporal, SALTRON_ROUNDS);
 
         await db.query("UPDATE duenos SET contrasena = ? WHERE id_dueno = ?", [hashTemporal, usuario.id_dueno]);
@@ -233,7 +213,6 @@ router.post("/recuperar-contrasena", async (req, res) => {
             <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
                 <h2 style="color: #e67e22; text-align: center;">Recuperación de Contraseña Real 🔑</h2>
                 <p>Hola <strong>${usuario.nombre}</strong>,</p>
-                <p>Recibimos una solicitud para restablecer tu acceso a la app móvil de la veterinaria.</p>
                 <p>Hemos generado una contraseña de acceso temporal segura. Úsala para iniciar sesión y cámbiala de inmediato en tu perfil:</p>
                 <div style="background-color: #f8f9fa; padding: 15px; text-align: center; font-size: 1.4rem; letter-spacing: 2px; border-radius: 5px; border: 1px dashed #e67e22; margin: 20px 0; font-family: monospace;">
                     <strong>${claveTemporal}</strong>
@@ -244,10 +223,97 @@ router.post("/recuperar-contrasena", async (req, res) => {
         `;
 
         await enviarCorreoElectronico(correo, "Restablecimiento de Credenciales - Veterinaria", plantillaHtml);
-
         res.json({ mensaje: "Se ha enviado un correo electrónico con tu nueva clave temporal de acceso." });
 
     } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Eliminar Dueño Seguro
+router.delete("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const [citas] = await db.query(`
+            SELECT COUNT(*) AS total 
+            FROM citas c 
+            INNER JOIN mascotas m ON c.id_mascota = m.id_mascota 
+            WHERE m.id_dueno = ?`, 
+            [id]
+        );
+
+        if (citas[0].total > 0) {
+            return res.status(400).json({ 
+                error: `No se puede eliminar al dueño. Sus mascotas tienen ${citas[0].total} cita(s) registrada(s) en el historial clínico.` 
+            });
+        }
+
+        await db.query("DELETE FROM duenos WHERE id_dueno = ?", [id]);
+        res.json({ mensaje: "Dueño y registros asociados eliminados con éxito." });
+
+    } catch (error) {
+        console.error("Error al intentar eliminar dueño:", error);
+        res.status(500).json({ error: "Error interno del servidor al eliminar." });
+    }
+});
+
+// Marcar mensajes como leídos (Afecta solo mensajes entrantes de CLIENTES)
+router.post("/leer/:id_dueno", async (req, res) => {
+    try {
+        const { id_dueno } = req.params;
+
+        await db.query(
+            `UPDATE mensajes 
+             SET leido = 1 
+             WHERE id_dueno = ? AND remitente = 'CLIENTE' AND leido = 1`,
+            [id_dueno]
+        );
+
+        if (req.app.get('io')) { 
+            req.app.get('io').emit('actualizar_bandeja_admin');
+        }
+
+        res.json({ mensaje: "Mensajes marcados como leídos con éxito." });
+    } catch (error) {
+        console.error("❌ Error al marcar mensajes como leídos:", error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Bandeja de consultas optimizada con conteo real basado en mensajes no leídos
+router.get("/bandeja", async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                d.id_dueno,
+                d.nombre AS nombre_cliente,
+                (SELECT m.mensaje 
+                 FROM mensajes m 
+                 WHERE m.id_dueno = d.id_dueno 
+                 ORDER BY m.fecha DESC LIMIT 1) AS ultimo_mensaje,
+                (SELECT m.fecha 
+                 FROM mensajes m 
+                 WHERE m.id_dueno = d.id_dueno 
+                 ORDER BY m.fecha DESC LIMIT 1) AS tiempo,
+                COALESCE((
+                    SELECT COUNT(*) 
+                    FROM mensajes m 
+                    WHERE m.id_dueno = d.id_dueno 
+                      AND m.remitente = 'CLIENTE' 
+                      AND m.leido = 0
+                ), 0) AS no_leidos
+            FROM duenos d
+            WHERE EXISTS (
+                SELECT 1 FROM mensajes m WHERE m.id_dueno = d.id_dueno
+            )
+            ORDER BY tiempo DESC;
+        `;
+
+        const [rows] = await db.query(query);
+        res.json(rows);
+    } catch (error) {
+        console.error("❌ Error al cargar la bandeja de consultas:", error);
         res.status(500).json({ error: error.message });
     }
 });

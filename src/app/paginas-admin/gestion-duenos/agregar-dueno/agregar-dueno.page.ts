@@ -14,7 +14,9 @@ export class AgregarDuenoPage implements OnInit {
     dni: '',
     nombre: '',
     telefono: '',
-    direccion: ''
+    direccion: '',
+    correo: '',       
+    contrasena: ''    
   };
 
   esEdicion: boolean = false; // Nos ayuda a saber si estamos editando o creando
@@ -31,7 +33,9 @@ export class AgregarDuenoPage implements OnInit {
         dni: duenoCargado.dni,
         nombre: duenoCargado.nombre,
         telefono: duenoCargado.telefono,
-        direccion: duenoCargado.direccion
+        direccion: duenoCargado.direccion,
+        correo: duenoCargado.correo || '',       //  Conserva el correo si existe
+        contrasena: duenoCargado.contrasena || '' //  Conserva la contraseña si existe
       };
       
       this.idDuenoEditar = duenoCargado.id_dueno;

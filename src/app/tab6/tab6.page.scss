@@ -1,9 +1,8 @@
 // Forzar fondo gris claro clásico de aplicaciones de mensajería
 .bg-chat-usuario {
-  --background: #f7f9fa; 
+  --background: #f4f6f8; 
 }
 
-// Fondo blanco para la barra inferior de entrada de texto
 .bg-footer-chat {
   background: #ffffff;
 }
@@ -35,13 +34,13 @@
     .nombre-veterinaria-header {
       font-size: 0.95rem;
       font-weight: 700;
-      color: #111111;
+      color: #1e293b;
       margin: 0;
     }
 
     .estado-linea {
       font-size: 0.75rem;
-      color: #0f7a67; // Verde insignia de actividad médica
+      color: #0f7a67; 
       font-weight: 600;
       margin: 1px 0 0 0;
     }
@@ -57,42 +56,42 @@
   height: 100%;
 }
 
-// Burbuja para los mensajes que recibe el usuario (Clínica) -> Va a la IZQUIERDA
 .burbuja-recibida {
   display: flex;
   width: 100%;
   justify-content: flex-start;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 
   .contenido-burbuja {
     background: #ffffff;
-    color: #333333;
-    border-radius: 0px 16px 16px 16px; // Esquina superior izquierda recta
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-    border: 1px solid #ebebeb;
+    color: #2c3e50;
+    border-radius: 14px 14px 14px 2px; // Esquinas unificadas
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef0f2;
   }
 }
 
-// Burbuja para los mensajes que envía el usuario (Franco) -> Va a la DERECHA
 .burbuja-enviada {
   display: flex;
   width: 100%;
   justify-content: flex-end;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 
   .contenido-burbuja {
-    background: #e1f3ef; // Fondo verde claro suave tipo WhatsApp
-    color: #111111;
-    border-radius: 16px 0px 16px 16px; // Esquina superior derecha recta
-    box-shadow: 0 2px 6px rgba(15, 122, 103, 0.08);
-    border: 1px solid #cceadd;
+    background: #0f7a67; // Mismo verde corporativo que usa el admin
+    color: #ffffff;
+    border-radius: 14px 14px 2px 14px; 
+    box-shadow: 0 1px 3px rgba(15, 122, 103, 0.1);
+  }
+  
+  .hora-mensaje {
+    color: #a3e2d7 !important; // Hora legible sobre el fondo verde
   }
 }
 
-// Estilos comunes para el contenido interno de cualquier burbuja
 .contenido-burbuja {
-  max-width: 85%;
-  padding: 12px 14px;
+  max-width: 78%;
+  padding: 9px 12px;
   position: relative;
 
   p {
@@ -101,63 +100,62 @@
     margin: 0;
   }
 
-  .saludo-automatica {
-    font-weight: 700;
-    color: #0f7a67;
-    margin-bottom: 4px;
-  }
-
   .hora-mensaje {
     display: block;
-    font-size: 0.7rem;
-    color: #a0a0a0;
+    font-size: 0.68rem;
+    color: #94a3b8;
     text-align: right;
-    margin-top: 5px;
+    margin-top: 4px;
     font-weight: 500;
   }
 }
 
 // ==========================================
-// CAJA DE TEXTO INFERIOR (FOOTER DE ENVÍO)
+// CAJA DE TEXTO INFERIOR (FOOTER AUTO-EXPANDIBLE)
 // ==========================================
 .caja-envio-mensaje {
   display: flex;
-  align-items: center;
+  align-items: flex-end; // Hace que el botón de enviar se quede abajo si el texto crece
   gap: 10px;
   padding: 8px 0;
 
   .input-chat-personalizado {
-    --background: #f0f2f5;
-    --padding-start: 16px;
-    --border-radius: 24px;
-    border-radius: 24px;
-    font-size: 0.9rem;
-    color: #333333;
-    min-height: 44px;
+    --background: #f1f5f9;
+    --padding-start: 14px;
+    --padding-end: 14px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    --border-radius: 20px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    color: #1e293b;
+    margin: 0;
   }
 
   .btn-enviar-consulta {
-    width: 44px;
-    height: 44px;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: #0f7a67; // Círculo verde de envío
+    background: #0f7a67; 
     color: #ffffff;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(15, 122, 103, 0.3);
-    transition: transform 0.1s ease;
+    box-shadow: 0 2px 6px rgba(15, 122, 103, 0.2);
+    margin-bottom: 2px; // Alineación perfecta con la línea inferior del área de texto
 
     ion-icon {
-      font-size: 1.2rem;
-      margin-left: 2px; // Centra visualmente la flecha de envío
+      font-size: 1.1rem;
+      margin-left: 2px; 
     }
 
-    &:active {
-      transform: scale(0.95);
-      background: #0b594b;
+    &:disabled {
+      background: #cbd5e1;
+      box-shadow: none;
+      cursor: not-allowed;
     }
   }
 }

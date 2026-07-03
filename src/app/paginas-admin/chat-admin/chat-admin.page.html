@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="chat-chatbox-content">
+<ion-content class="chat-chatbox-content" #miChatContent>
   <div class="messages-container">
     <div *ngFor="let msg of mensajes" 
          [ngClass]="{'msg-row-admin': msg.remitente === 'ADMIN', 'msg-row-client': msg.remitente === 'CLIENTE'}">
@@ -29,13 +29,15 @@
 <ion-footer class="ion-no-border">
   <ion-toolbar class="input-toolbar">
     <ion-item lines="none" class="input-chat-item">
-      <ion-input [(ngModel)]="nuevoMensaje" 
-                 placeholder="Escribe una respuesta..." 
-                 (keyup.enter)="enviarMensajeAdmin()"
-                 mode="md">
-      </ion-input>
-      <ion-button slot="end" fill="clear" (click)="enviarMensajeAdmin()" [disabled]="!nuevoMensaje.trim()">
-        <ion-icon name="send" slot="icon-only" color="primary"></ion-icon>
+      <ion-textarea [(ngModel)]="nuevoMensaje" 
+                    placeholder="Escribe una respuesta..." 
+                    [autoGrow]="true"
+                    rows="1"
+                    (keyup.enter)="enviarMensajeAdmin()"
+                    mode="md">
+      </ion-textarea>
+      <ion-button slot="end" fill="clear" (click)="enviarMensajeAdmin()" [disabled]="!nuevoMensaje || !nuevoMensaje.trim()">
+        <ion-icon name="send" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-toolbar>

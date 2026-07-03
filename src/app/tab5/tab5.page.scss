@@ -1,12 +1,25 @@
+// Forzar el fondo blanco en Ionic y remover herencias oscuras
+.bg-blanco {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+}
+
 ion-toolbar {
   --background: #ffffff;
-  --color: #0b5a4b; // El tono verde principal de tu panel admin
+  --color: #0f7a67; // Mismo verde corporativo que las otras pantallas
   font-weight: 700;
+  
+  ion-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f7a67;
+  }
 }
 
 .search-container {
   padding: 8px 16px;
   background: #ffffff;
+  
   ion-searchbar {
     --background: #f4f7f6;
     --border-radius: 12px;
@@ -18,14 +31,21 @@ ion-toolbar {
 .chat-list-wrapper {
   padding: 0 16px;
   background: #ffffff;
+
+  // Asegura que la lista interna de Ionic no pinte un fondo oscuro
+  ion-list {
+    background: #ffffff !important;
+    --background: #ffffff !important;
+  }
 }
 
 .custom-chat-item {
-  --background: #ffffff;
-  --padding-start: 8px;
-  --padding-end: 8px;
+  --background: #ffffff !important;
+  background: #ffffff !important;
+  --padding-start: 4px;
+  --padding-end: 4px;
   --inner-padding-end: 0;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   border-bottom: 1px solid #eef2f1;
 
   .avatar-iniciales {
@@ -49,37 +69,46 @@ ion-toolbar {
     margin-bottom: 4px;
 
     h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #1e293b;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #000000; // Letras completamente legibles en negro
       margin: 0;
     }
 
     .chat-tiempo {
-      font-size: 0.75rem;
-      color: #94a3b8;
+      font-size: 0.8rem;
+      color: #8c96a3;
+      font-weight: 500;
     }
   }
 
   p {
-    font-size: 0.85rem;
-    color: #64748b;
+    font-size: 0.9rem;
+    color: #666666;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
     &.no-leido {
-      color: #0f172a;
-      font-weight: 600;
+      color: #000000;
+      font-weight: 700;
     }
   }
 
+  // Estilo del contador de notificaciones circular (verde badge)
   ion-badge {
-    --background: #10957d;
-    font-size: 0.75rem;
-    padding: 5px 8px;
-    border-radius: 10px;
+    --background: #27ae60 !important;
+    color: #ffffff !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 8px;
+    border-radius: 50%;
+    min-width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -87,6 +116,7 @@ ion-toolbar {
   text-align: center;
   padding: 60px 20px;
   color: #94a3b8;
+  background: #ffffff;
 
   ion-icon {
     font-size: 4rem;

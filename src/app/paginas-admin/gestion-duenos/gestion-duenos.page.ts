@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { Router } from '@angular/router'; // 👈 Importamos el Router
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-gestion-duenos',
@@ -12,7 +12,7 @@ export class GestionDuenosPage implements OnInit {
 
   duenos: any[] = [];
 
-  constructor(private api: ApiService, private router: Router) { } // 👈 Inyectamos Router
+  constructor(private api: ApiService, private router: Router) { } 
 
   ngOnInit() {}
 
@@ -32,24 +32,31 @@ export class GestionDuenosPage implements OnInit {
     });
   }
 
-  // 🚀 Envia los datos del dueño a la otra pantalla de forma inteligente
+  // 🚀 Envía los datos del dueño a la otra pantalla de forma inteligente
   editarDueno(dueno: any) {
     this.router.navigate(['/gestion-duenos/agregar-dueno'], { state: { dueno: dueno } });
   }
 
-  // 🗑️ Elimina al dueño pidiendo una confirmación rápida
-  eliminarDueno(id: number, nombre: string) {
-    if (confirm(`¿Estás seguro de que deseas eliminar a ${nombre}?`)) {
-      this.api.eliminarDueno(id).subscribe({
-        next: (res: any) => {
-          alert('Dueño eliminado con éxito.');
-          this.cargarDuenos(); // Refresca la lista automáticamente
-        },
-        error: (error) => {
-          console.error('Error al eliminar:', error);
-          alert('No se pudo eliminar al dueño.');
-        }
-      });
+  confirmarEliminar(id: number, nombre: string) {
+    const seguro = confirm(`¿Estás seguro de que deseas eliminar a ${nombre}?`);
+    if (seguro) {
+      this.eliminarCliente(id);
     }
+  }
+
+  eliminarCliente(id: number) {
+    this.api.eliminarDueno(id).subscribe({
+      next: (res: any) => {
+        alert('¡Dueño eliminado con éxito!');
+        this.cargarDuenos(); 
+      },
+      error: (err) => {
+        if (err.status === 400 && err.error?.error) {
+          alert(err.error.error); 
+        } else {
+          alert('Ocurrió un error inesperado al intentar eliminar.');
+        }
+      }
+    });
   }
 }

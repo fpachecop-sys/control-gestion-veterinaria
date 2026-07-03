@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="bg-blanco">
 
   <div class="admin-header">
     <div>
@@ -50,10 +50,9 @@
           </div>
         </div>
 
-        <!-- Busca la sección de los botones y déjala así: -->
         <div class="tarjeta-acciones">
           <button class="btn-card editar" (click)="editarDueno(dueno)">EDITAR</button>
-          <button class="btn-card eliminar" (click)="eliminarDueno(dueno.id_dueno, dueno.nombre)">ELIMINAR</button>
+          <button class="btn-card eliminar" (click)="confirmarEliminar(dueno.id_dueno, dueno.nombre)">ELIMINAR</button>
         </div>
       </div>
     </div>

@@ -64,8 +64,6 @@ actualizarDueno(id: number, datos: any) {
 eliminarDueno(id: number) {
   return this.http.delete(`${this.apiUrl}/duenos/${id}`);
 }
-
-
 actualizarMascota(id: number, data: any) {
   return this.http.put(`${this.apiUrl}/mascotas/${id}`, data);
 }
@@ -101,5 +99,8 @@ recuperarContrasenaUsuario(correo: string) {
 }
 actualizarPerfilUsuario(id: number, datos: any) {
   return this.http.put(`${this.apiUrl}/duenos/${id}`, datos);
+}
+marcarMensajesComoLeidos(idDueno: number) {
+  return this.http.post(`${this.apiUrl}/duenos/leer/${idDueno}`, {});
 }
 }

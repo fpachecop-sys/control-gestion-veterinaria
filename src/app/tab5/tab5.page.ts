@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { ApiService } from '../services/api.service'; 
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
-import { io } from 'socket.io-client'; // 👈 Importamos socket cliente
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-tab5',
@@ -17,18 +17,21 @@ import { io } from 'socket.io-client'; // 👈 Importamos socket cliente
 export class Tab5Page implements OnInit, OnDestroy {
 
   listaChats: any[] = [];
-  private socket: any; // 👈 Manejador de socket
+  private socket: any;
 
   constructor(private apiService: ApiService, private http: HttpClient, private navCtrl: NavController) { }
 
   ngOnInit() {
-    this.cargarBandejaAdmin();
-    
-    // Conectamos al socket para escuchar actualizaciones de mensajes entrantes de inmediato
+    // Conectamos al socket para escuchar actualizaciones
     this.socket = io(this.apiService.apiUrl);
     this.socket.on('actualizar_bandeja_admin', () => {
-      this.cargarBandejaAdmin(); // 🚀 Se refresca sola como por arte de magia
+      this.cargarBandejaAdmin();
     });
+  }
+
+  // 🚀 CAMBIO CLAVE: Se ejecuta SIEMPRE que regresas a esta pantalla
+  ionViewWillEnter() {
+    this.cargarBandejaAdmin();
   }
 
   ngOnDestroy() {
@@ -58,6 +61,10 @@ export class Tab5Page implements OnInit, OnDestroy {
   }
 
   abrirChatEspecifico(chat: any) {
+    // Truco visual (UX): Ponemos temporalmente los no leídos en 0 
+    // para que la burbuja desaparezca inmediatamente al hacer click
+    chat.no_leidos = 0;
+
     this.navCtrl.navigateForward('/chat-admin', {
       queryParams: {
         id_dueno: chat.id_dueno,

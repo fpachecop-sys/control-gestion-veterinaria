@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="bg-blanco">
   <div class="search-container">
     <ion-searchbar placeholder="Buscar dueño o mensaje..." mode="md"></ion-searchbar>
   </div>
@@ -26,13 +26,13 @@
           </p>
         </ion-label>
 
-        <ion-badge color="success" slot="end" *ngIf="chat.no_leidos > 0">
+        <ion-badge slot="end" *ngIf="chat.no_leidos > 0">
           {{ chat.no_leidos }}
         </ion-badge>
       </ion-item>
     </ion-list>
 
-    <div *ngIf="listaChats.length === 0" class="sin-chats-container">
+    <div *ngIf="listaChats && listaChats.length === 0" class="sin-chats-container">
       <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
       <h4>Sin mensajes nuevos</h4>
       <p>Las dudas que envíen tus clientes aparecerán en esta sección de manera inmediata.</p>

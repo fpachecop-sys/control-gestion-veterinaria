@@ -4,12 +4,12 @@ const db = require("../db");
 
 // Listar citas
 router.get("/", async (req, res) => {
-
     try {
-
         const [rows] = await db.query(`
             SELECT
                 c.id_cita,
+                c.id_mascota,
+                c.id_veterinario,
                 c.fecha,
                 c.hora,
                 c.motivo,
@@ -20,29 +20,15 @@ router.get("/", async (req, res) => {
                 v.nombre AS veterinario
 
             FROM citas c
-
-            INNER JOIN mascotas m
-                ON c.id_mascota = m.id_mascota
-
-            INNER JOIN duenos d
-                ON m.id_dueno = d.id_dueno
-
-            INNER JOIN veterinarios v
-                ON c.id_veterinario = v.id_veterinario
-
+            INNER JOIN mascotas m ON c.id_mascota = m.id_mascota
+            INNER JOIN duenos d ON m.id_dueno = d.id_dueno
+            INNER JOIN veterinarios v ON c.id_veterinario = v.id_veterinario
             ORDER BY c.fecha DESC
         `);
-
         res.json(rows);
-
     } catch (error) {
-
-        res.status(500).json({
-            error: error.message
-        });
-
+        res.status(500).json({ error: error.message });
     }
-
 });
 
 // Registrar cita

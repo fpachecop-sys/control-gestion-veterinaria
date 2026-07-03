@@ -1,3 +1,9 @@
+// Forzar el fondo blanco en Ionic
+.bg-blanco {
+  --background: #ffffff;
+  background: #ffffff;
+}
+
 // Estilos del Layout Base Compartido
 .admin-header {
   display: flex;
@@ -40,7 +46,7 @@
 
     .section-icon {
       font-size: 1.5rem;
-      color: #0f7a67; // Tu verde de marca
+      color: #0f7a67;
     }
 
     .section-title {
@@ -85,37 +91,37 @@
   padding-bottom: 20px;
 }
 
-// Tarjeta estructural basada en image_f8be13.png
+// Tarjeta Estructural Homologada a la segunda vista
 .tarjeta-cita {
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
-  border: 1px solid #eef0f3;
+  background: #ffffff; // Fondo de la tarjeta limpio
+  border-radius: 16px; // Bordes suavizados igual que mascotas
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef0f2;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 
   // Zona interna superior de la tarjeta
   .tarjeta-main-content {
-    padding: 18px 18px 12px 18px;
+    padding: 16px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     .nombre-mascota {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
-      color: #000000;
+      color: #1a1a1a;
       margin: 0 0 4px 0;
     }
 
     .txt-dueno {
-      font-size: 0.95rem;
-      color: #444444;
-      margin: 0 0 14px 0;
+      font-size: 0.9rem;
+      color: #7d8793;
+      margin: 0 0 12px 0;
       strong {
-        color: #000000;
+        color: #2c3e50;
       }
     }
 
@@ -134,7 +140,7 @@
     // Badge del estado de atención
     .badge-estado {
       display: inline-block;
-      padding: 6px 16px;
+      padding: 5px 14px;
       border-radius: 20px;
       font-size: 0.78rem;
       font-weight: 700;
@@ -152,55 +158,53 @@
     }
   }
 
-  // Caja inferior gris para Veterinario y Motivo
+  // Caja inferior sutil para Veterinario y Motivo
   .detalles-sub-box {
-    background: #f4f5f7;
-    padding: 12px 18px;
-    border-top: 1px solid #eaeaea;
-    border-bottom: 1px solid #eaeaea;
+    background: #f8f9fa; // Gris claro idéntico a la segunda pantalla
+    padding: 12px 16px;
+    border-top: 1px solid #eaedf1;
+    border-bottom: 1px solid #eaedf1;
     display: flex;
     flex-direction: column;
     gap: 4px;
 
     p {
-      font-size: 0.92rem;
-      color: #333333;
+      font-size: 0.88rem;
+      color: #4f5e71;
       margin: 0;
       
       strong {
-        color: #000000;
+        color: #1a1a1a;
         font-weight: 600;
       }
     }
   }
 
-  // Fila inferior de botones de acción
+  // Fila inferior de botones de acción moderna
   .tarjeta-acciones {
     display: flex;
     gap: 12px;
-    padding: 12px 18px 16px 18px;
+    padding: 12px 16px 16px 16px;
 
     .btn-card {
       position: relative;
       overflow: hidden;
       flex: 1;
       border: none;
-      padding: 11px;
-      font-size: 0.88rem;
+      padding: 10px;
+      font-size: 0.85rem;
       font-weight: 700;
-      border-radius: 10px;
+      border-radius: 8px; // Mismo redondeado que mascotas
       cursor: pointer;
       text-align: center;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     }
 
-    // Naranja Vibrante para Editar
     .editar {
       background: #f39c12;
       color: #ffffff;
     }
 
-    // Rojo Suave / Coral para Eliminar
     .eliminar {
       background: #e74c3c;
       color: #ffffff;

@@ -41,20 +41,20 @@ export class GestionCitasPage implements OnInit {
         {
           type: 'radio',
           label: '⏳ Pendiente',
-          value: 'PENDIENTE',
-          checked: cita.estado?.toUpperCase() === 'PENDIENTE'
+          value: 'pendiente',
+          checked: cita.estado?.toUpperCase() === 'pendiente'
         },
         {
           type: 'radio',
-          label: '✅ Atendido',
-          value: 'ATENDIDO',
-          checked: cita.estado?.toUpperCase() === 'ATENDIDO'
+          label: '✅ Atendida',
+          value: 'atendida',
+          checked: cita.estado?.toUpperCase() === 'atendida'
         },
         {
           type: 'radio',
           label: '❌ Cancelada',
-          value: 'CANCELADA',
-          checked: cita.estado?.toUpperCase() === 'CANCELADA'
+          value: 'cancelada',
+          checked: cita.estado?.toUpperCase() === 'cancelada'
         }
       ],
       buttons: [

@@ -8,41 +8,41 @@ ion-toolbar {
   flex-direction: column;
   
   .user-name {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 700;
     color: #1e293b;
   }
   .user-status {
-    font-size: 0.72rem;
-    color: #10957d; // Estado en línea con tu tono corporativo
-    font-weight: 500;
+    font-size: 0.75rem;
+    color: #0f7a67;
+    font-weight: 600;
   }
 }
 
 .chat-chatbox-content {
-  --background: #f8fafc; // Color gris claro de fondo limpio
+  --background: #f4f6f8;
 }
 
 .messages-container {
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
-// Estructuración de burbujas en espejo
 .msg-row-admin, .msg-row-client {
   display: flex;
   width: 100%;
+  margin-bottom: 2px;
 }
 
 .msg-row-admin {
   justify-content: flex-end;
   
   .bubble-message {
-    background: #0b5a4b; // Esmeralda corporativo idéntico a tu diseño
+    background: #0f7a67;
     color: #ffffff;
-    border-radius: 16px 16px 2px 16px;
+    border-radius: 14px 14px 2px 14px;
   }
   .bubble-time {
     color: #a3e2d7;
@@ -54,9 +54,9 @@ ion-toolbar {
   
   .bubble-message {
     background: #ffffff;
-    color: #334155;
-    border-radius: 16px 16px 16px 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    color: #2c3e50;
+    border-radius: 14px 14px 14px 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   }
   .bubble-time {
     color: #94a3b8;
@@ -64,8 +64,8 @@ ion-toolbar {
 }
 
 .bubble-message {
-  max-width: 75%;
-  padding: 10px 14px;
+  max-width: 78%;
+  padding: 9px 12px;
   position: relative;
 
   p {
@@ -78,29 +78,35 @@ ion-toolbar {
     font-size: 0.68rem;
     display: block;
     text-align: right;
+    font-weight: 500;
   }
 }
 
-// Sección de Entrada de Texto inferior
 .input-toolbar {
   --background: #ffffff;
-  padding: 8px;
+  padding: 8px 12px;
 }
 
 .input-chat-item {
   --background: #f1f5f9;
-  --border-radius: 24px;
-  --inner-padding-end: 8px;
+  --border-radius: 20px;
+  --inner-padding-end: 4px;
   width: 100%;
+  align-items: flex-end;
 
-  ion-input {
-    --padding-start: 16px;
-    font-size: 0.92rem;
+  ion-textarea {
+    --padding-start: 14px;
+    --padding-end: 8px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    font-size: 0.95rem;
     color: #1e293b;
+    margin: 0;
   }
 
   ion-button {
-    --color: #0b5a4b;
-    margin: 0;
+    --color: #0f7a67;
+    margin: 0 0 2px 0;
+    height: 36px;
   }
 }

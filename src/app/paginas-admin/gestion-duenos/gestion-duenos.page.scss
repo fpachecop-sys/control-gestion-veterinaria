@@ -1,3 +1,9 @@
+// Forzar el fondo blanco en Ionic para evitar herencias oscuras
+.bg-blanco {
+  --background: #ffffff;
+  background: #ffffff;
+}
+
 // Estilos base de tu Layout original
 .admin-header {
   display: flex;
@@ -87,7 +93,7 @@
 
 // Estructura de cada Tarjeta / Cuadrado de datos
 .tarjeta-datos {
-  background: #f8f9fa;
+  background: #f8f9fa; // Gris sutil idéntico al de Mascotas
   border-radius: 16px;
   padding: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);

@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true" class="ion-padding ion-text-center">
+<ion-content [fullscreen]="true" class="ion-padding ion-text-center bg-blanco">
   <div class="header-container">
     <img src="assets/icon/logo.jpg" alt="Logo" class="logo-img"> 
     <h1 class="main-title">Veterinaria Mascotas <br> Portalino y Rondon</h1>
@@ -11,7 +11,7 @@
     <h2 class="welcome-text">Bienvenido</h2>
     <p class="instruction-text">Inicia Sesión para continuar</p>
 
-    <ion-item lines="outline" class="custom-input">
+    <ion-item fill="outline" mode="md" class="custom-input">
       <ion-label position="stacked">Correo Electrónico</ion-label>
       <ion-input type="email" placeholder="ejemplo@correo.com" [(ngModel)]="correo"></ion-input>
     </ion-item>
@@ -21,11 +21,10 @@
       <ion-input type="password" placeholder="*********" [(ngModel)]="contrasena"></ion-input>
     </ion-item>
 
-    <p class="forgot-password ion-text-end" 
-    (click)="recuperarContrasena()">¿Olvidaste tu Contraseña?</p>
+    <p class="forgot-password ion-text-end" (click)="recuperarContrasena()">¿Olvidaste tu Contraseña?</p>
 
     <div class="button-group ion-text-center">
-      <ion-button expand="block" shape="round" color="light" class="btn-login" (click)="iniciarSesion()">
+      <ion-button expand="block" shape="round" class="btn-login" (click)="iniciarSesion()">
         Inicia Sesión
       </ion-button>
 

@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiService {
 
-  // URL del backend
-  apiUrl = 'http://localhost:3000';
+  // URL del backend Python (FastAPI)
+  apiUrl = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {}
 
@@ -27,80 +27,78 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/mascotas`, data);
   }
   obtenerVeterinarios() {
-  return this.http.get(`${this.apiUrl}/veterinarios`);
+    return this.http.get(`${this.apiUrl}/veterinarios`);
   }
 
   registrarVeterinario(data: any) {
-  return this.http.post(`${this.apiUrl}/veterinarios`, data);
+    return this.http.post(`${this.apiUrl}/veterinarios`, data);
   }
   obtenerCitas() {
-  return this.http.get(`${this.apiUrl}/citas`);
+    return this.http.get(`${this.apiUrl}/citas`);
   }
 
   registrarCita(data: any) {
-  return this.http.post(`${this.apiUrl}/citas`, data);
+    return this.http.post(`${this.apiUrl}/citas`, data);
   }
-  
-registrarUsuario(datos: any) {
-  return this.http.post(`${this.apiUrl}/duenos`, datos);
-}
 
-loginUsuario(correo: string, contrasena: string) {
-  return this.http.post(`${this.apiUrl}/duenos/login`, { correo, contrasena });
-}
-obtenerMascotasPorDueno(idDueno: number) {
-  return this.http.get(`${this.apiUrl}/mascotas/dueno/${idDueno}`); 
-  
-}
-obtenerCitasPorDueno(idDueno: number) {
-  return this.http.get(`${this.apiUrl}/citas/dueno/${idDueno}`);
-}
+  registrarUsuario(datos: any) {
+    return this.http.post(`${this.apiUrl}/duenos`, datos);
+  }
 
+  loginUsuario(correo: string, contrasena: string) {
+    return this.http.post(`${this.apiUrl}/duenos/login`, { correo, contrasena });
+  }
+  obtenerMascotasPorDueno(idDueno: number) {
+    return this.http.get(`${this.apiUrl}/mascotas/dueno/${idDueno}`);
+  }
+  obtenerCitasPorDueno(idDueno: number) {
+    return this.http.get(`${this.apiUrl}/citas/dueno/${idDueno}`);
+  }
 
-actualizarDueno(id: number, datos: any) {
-  return this.http.put(`${this.apiUrl}/duenos/${id}`, datos); 
-}
+  actualizarDueno(id: number, datos: any) {
+    return this.http.put(`${this.apiUrl}/duenos/${id}`, datos);
+  }
 
-eliminarDueno(id: number) {
-  return this.http.delete(`${this.apiUrl}/duenos/${id}`);
-}
-actualizarMascota(id: number, data: any) {
-  return this.http.put(`${this.apiUrl}/mascotas/${id}`, data);
-}
+  eliminarDueno(id: number) {
+    return this.http.delete(`${this.apiUrl}/duenos/${id}`);
+  }
+  actualizarMascota(id: number, data: any) {
+    return this.http.put(`${this.apiUrl}/mascotas/${id}`, data);
+  }
 
-eliminarMascota(id: number) {
-  return this.http.delete(`${this.apiUrl}/mascotas/${id}`);
-}
+  eliminarMascota(id: number) {
+    return this.http.delete(`${this.apiUrl}/mascotas/${id}`);
+  }
 
-actualizarVeterinario(id: number, data: any) {
-  return this.http.put(`${this.apiUrl}/veterinarios/${id}`, data);
-}
+  actualizarVeterinario(id: number, data: any) {
+    return this.http.put(`${this.apiUrl}/veterinarios/${id}`, data);
+  }
 
-eliminarVeterinario(id: number) {
-  return this.http.delete(`${this.apiUrl}/veterinarios/${id}`);
-}
+  eliminarVeterinario(id: number) {
+    return this.http.delete(`${this.apiUrl}/veterinarios/${id}`);
+  }
 
-actualizarEstadoCita(id: number, estado: string) {
-  return this.http.put(`${this.apiUrl}/citas/${id}`, { estado });
-}
+  actualizarEstadoCita(id: number, estado: string) {
+    return this.http.put(`${this.apiUrl}/citas/${id}`, { estado });
+  }
 
-actualizarCita(id: number, data: any) {
-  return this.http.put(`${this.apiUrl}/citas/${id}`, data);
-}
+  actualizarCita(id: number, data: any) {
+    return this.http.put(`${this.apiUrl}/citas/${id}`, data);
+  }
 
-eliminarCita(id: number) {
-  return this.http.delete(`${this.apiUrl}/citas/${id}`);
-}
-obtenerConversacionEspecifica(idDueno: number) {
-  return this.http.get(`${this.apiUrl}/chats/conversacion/${idDueno}`);
-}
-recuperarContrasenaUsuario(correo: string) {
-  return this.http.post(`${this.apiUrl}/duenos/recuperar-contrasena`, { correo });
-}
-actualizarPerfilUsuario(id: number, datos: any) {
-  return this.http.put(`${this.apiUrl}/duenos/${id}`, datos);
-}
-marcarMensajesComoLeidos(idDueno: number) {
-  return this.http.post(`${this.apiUrl}/duenos/leer/${idDueno}`, {});
-}
+  eliminarCita(id: number) {
+    return this.http.delete(`${this.apiUrl}/citas/${id}`);
+  }
+  obtenerConversacionEspecifica(idDueno: number) {
+    return this.http.get(`${this.apiUrl}/chats/conversacion/${idDueno}`);
+  }
+  recuperarContrasenaUsuario(correo: string) {
+    return this.http.post(`${this.apiUrl}/duenos/recuperar-contrasena`, { correo });
+  }
+  actualizarPerfilUsuario(id: number, datos: any) {
+    return this.http.put(`${this.apiUrl}/duenos/${id}`, datos);
+  }
+  marcarMensajesComoLeidos(idDueno: number) {
+    return this.http.post(`${this.apiUrl}/duenos/leer/${idDueno}`, {});
+  }
 }

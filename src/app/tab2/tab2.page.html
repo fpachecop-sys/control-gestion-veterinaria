@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding bg-blanco">
   <div class="logo-header ion-text-center">
     <img src="assets/icon/logo.jpg" alt="Logo" class="logo-small">
   </div>
@@ -24,12 +24,26 @@
 
     <ion-item fill="outline" mode="md" class="custom-input">
       <ion-label position="stacked">DNI</ion-label>
-      <ion-input type="number" placeholder="Número de documento" [(ngModel)]="dni"></ion-input>
+      <ion-input 
+        type="text" 
+        inputmode="numeric"
+        maxlength="8"
+        placeholder="Número de documento (8 dígitos)" 
+        [(ngModel)]="dni"
+        (ionInput)="filtrarDni($event)">
+      </ion-input>
     </ion-item>
 
     <ion-item fill="outline" mode="md" class="custom-input">
       <ion-label position="stacked">Teléfono</ion-label>
-      <ion-input type="tel" placeholder="999 999 999" [(ngModel)]="telefono"></ion-input>
+      <ion-input 
+        type="text" 
+        inputmode="numeric"
+        maxlength="9"
+        placeholder="999 999 999" 
+        [(ngModel)]="telefono"
+        (ionInput)="filtrarTelefono($event)">
+      </ion-input>
     </ion-item>
 
     <ion-item fill="outline" mode="md" class="custom-input">

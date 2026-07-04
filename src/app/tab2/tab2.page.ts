@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth'; 
-import { ApiService } from '../services/api.service'; // 🚀 Inyectamos tu servicio API
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-tab2',
@@ -22,12 +22,43 @@ export class Tab2Page {
   constructor(
     private router: Router, 
     private authService: AuthService,
-    private api: ApiService // 🚀 Declarado aquí
+    private api: ApiService
   ) {}
+
+  // 🔧 Filtra el DNI para permitir solo números mientras se escribe
+  filtrarDni(event: any) {
+    const valor = event.target.value || '';
+    this.dni = valor.replace(/[^0-9]/g, '');
+  }
+
+  // 🔧 Filtra el Teléfono para permitir solo números mientras se escribe
+  filtrarTelefono(event: any) {
+    const valor = event.target.value || '';
+    this.telefono = valor.replace(/[^0-9]/g, '');
+  }
 
   registrarCuenta() {
     if (!this.nombreCompleto || !this.dni || !this.telefono || !this.correo || !this.contrasena || !this.confirmarContrasena) {
       alert('Por favor, completa todos los campos del formulario.');
+      return;
+    }
+
+    // ✅ Validación de DNI: exactamente 8 dígitos numéricos
+    if (!/^\d{8}$/.test(this.dni)) {
+      alert('El DNI debe contener exactamente 8 números.');
+      return;
+    }
+
+    // ✅ Validación de Teléfono: exactamente 9 dígitos numéricos
+    if (!/^\d{9}$/.test(this.telefono)) {
+      alert('El teléfono debe contener exactamente 9 números.');
+      return;
+    }
+
+    // ✅ Validación de correo
+    const correoValido = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.correo);
+    if (!correoValido) {
+      alert('Por favor, ingresa un correo electrónico válido.');
       return;
     }
 
@@ -41,7 +72,6 @@ export class Tab2Page {
       return;
     }
 
-    // 📦 Creamos el objeto para el Backend
     const bodyRegistro = {
       nombre: this.nombreCompleto,
       dni: this.dni,
@@ -50,15 +80,10 @@ export class Tab2Page {
       contrasena: this.contrasena
     };
 
-    // 🚀 Consumo real del Endpoint Condicional
     this.api.registrarUsuario(bodyRegistro).subscribe({
       next: (res: any) => {
         alert(res.mensaje || 'Cuenta procesada con éxito');
-
-        // Guardamos credenciales temporales para el autocompletado en el Login
         this.authService.guardarCredencialesRegistro(this.correo, this.contrasena);
-
-        // Limpieza de campos
         this.nombreCompleto = '';
         this.dni = '';
         this.telefono = '';
@@ -66,12 +91,12 @@ export class Tab2Page {
         this.contrasena = '';
         this.confirmarContrasena = '';
         this.aceptaTerminos = false;
-        
         this.router.navigate(['/tabs/tab1']);
       },
       error: (err) => {
         console.error(err);
-        alert('Error al registrar: ' + (err.error?.error || 'Problemas con el servidor'));
+        const mensajeError = err.error?.detail?.[0]?.msg || err.error?.error || 'Problemas con el servidor';
+        alert('Error al registrar: ' + mensajeError);
       }
     });
   }

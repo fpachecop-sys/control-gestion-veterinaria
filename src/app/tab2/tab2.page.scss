@@ -1,66 +1,79 @@
+// Helper para forzar el fondo blanco absoluto y bloquear el modo oscuro
+.bg-blanco {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+}
+
 ion-content {
-  --background: #ffffff;
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 .logo-header {
   margin-top: 10px;
-}
-
-.logo-header .logo-small {
-  width: 60px;
-  height: auto;
-  opacity: 0.8;
+  
+  .logo-small {
+    width: 60px;
+    height: auto;
+    opacity: 0.8;
+  }
 }
 
 .title-section {
   margin: 20px 0 25px 10px;
-}
 
-.title-section .page-title {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #2c3e50;
-  margin: 0;
-}
+  .page-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1a1a1a; // Texto oscuro nítido
+    margin: 0;
+  }
 
-.title-section .page-subtitle {
-  font-size: 0.9rem;
-  color: #95a5a6;
-  margin-top: 4px;
+  .page-subtitle {
+    font-size: 0.9rem;
+    color: #7d8793;
+    margin-top: 4px;
+  }
 }
 
 .form-container {
   padding: 0 10px;
-}
 
-.form-container .custom-input {
-  margin-bottom: 15px;
-  --border-radius: 12px;
-  --border-color: #e0e0e0;
-  --highlight-color-focused: #3880ff;
-}
+  .custom-input {
+    margin-bottom: 15px;
+    --border-radius: 12px;
+    --border-color: #e2e8f0;
+    --highlight-color-focused: #0f7a67; // Mismo verde corporativo de tu app
+    --background: #ffffff !important; // Evita que el contenedor del input se oscurezca
+    background: #ffffff !important;
 
-.form-container .custom-input ion-label {
-  font-weight: 600 !important;
-  color: #555 !important;
-  margin-bottom: 8px !important;
+    ion-label {
+      font-weight: 700 !important;
+      color: #1a1a1a !important;
+      margin-bottom: 6px !important;
+    }
+
+    ion-input {
+      color: #1a1a1a !important; // Asegura que las letras que escribe el usuario sean negras
+    }
+  }
 }
 
 .terms-container {
   margin: 20px 0;
-}
-
-.terms-container ion-checkbox {
-  --size: 18px;
-  --checkbox-background-checked: #3880ff;
-  --border-radius: 4px;
-  font-size: 0.85rem;
+  
+  ion-checkbox {
+    --size: 18px;
+    --checkbox-background-checked: #0f7a67; // Checkbox verde corporativo
+    --border-radius: 4px;
+    font-size: 0.85rem;
+    color: #1a1a1a;
+  }
 }
 
 .terms-text {
-  color: #7f8c8d;
+  color: #4f5e71;
   margin-left: 10px;
+  font-weight: 500;
 }
 
 .button-container {
@@ -71,10 +84,11 @@ ion-content {
 .btn-create {
   height: 50px;
   --border-width: 1.5px;
-  --border-color: #222;
-  --color: #222;
-  --background: #f8f9fa;
+  --border-color: #0f7a67;
+  --color: #ffffff;
+  --background: #0f7a67; // Cambiado a verde corporativo para seguir tu línea gráfica premium
   font-weight: 700;
   letter-spacing: 0.5px;
-  text-transform: none; /* Para que no salga todo en mayúsculas */
+  text-transform: none; 
+  box-shadow: 0 4px 10px rgba(15, 122, 103, 0.2);
 }

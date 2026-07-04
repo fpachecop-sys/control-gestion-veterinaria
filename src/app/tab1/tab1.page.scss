@@ -1,6 +1,10 @@
-/* Centrado principal y fuente limpia */
+// Helper para forzar el fondo blanco absoluto y bloquear el modo oscuro
+.bg-blanco {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+}
+
 ion-content {
-  --background: #ffffff;
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -11,98 +15,98 @@ ion-content {
 .logo-img {
   width: 90px;
   margin-bottom: 15px;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1)); /* Sombra suave al logo */
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
 }
 
 .main-title {
   font-size: 1.6rem;
   font-weight: 800;
-  color: #2c3e50;
+  color: #1a1a1a; // Texto oscuro nítido
   line-height: 1.2;
   margin: 0;
 }
 
 .subtitle {
   font-size: 0.95rem;
-  color: #7f8c8d;
+  color: #7d8793;
   margin-top: 5px;
   letter-spacing: 0.5px;
 }
 
 .divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, #ddd, transparent);
+  background: linear-gradient(to right, transparent, #e2e8f0, transparent);
   border: none;
   margin: 30px 20px;
 }
 
 .login-container {
   padding: 0 25px;
+
+  .welcome-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .instruction-text {
+    color: #7d8793;
+    margin-bottom: 25px;
+  }
 }
 
-.login-container .welcome-text {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #333;
-}
-
-.login-container .instruction-text {
-  color: #95a5a6;
-  margin-bottom: 25px;
-}
-
-/* Inputs estilo moderno (sin recuadros pesados) */
+/* Inputs con fondo blanco blindado */
 .custom-input {
-  --border-color: #e0e0e0;
+  --border-color: #e2e8f0;
   --border-radius: 12px;
   --padding-start: 15px;
   margin-bottom: 15px;
-  --highlight-color-focused: #3880ff; /* Color azul suave al tocarlo */
-}
+  --highlight-color-focused: #0f7a67; // Enfocado con el verde de la veterinaria
+  --background: #ffffff !important; // Evita que se oscurezcan en modo noche
+  background: #ffffff !important;
 
-.custom-input ion-label {
-  font-weight: 600 !important;
-  color: #555 !important;
-  margin-bottom: 8px !important;
+  ion-label {
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin-bottom: 6px !important;
+  }
+
+  ion-input {
+    color: #1a1a1a !important;
+  }
 }
 
 .forgot-password {
   font-size: 0.85rem;
-  color: #3880ff;
-  font-weight: 500;
-  margin-top: 5px;
+  color: #0f7a67; // Link en verde corporativo elegante
+  font-weight: 600;
+  margin-top: 8px;
+  cursor: pointer;
 }
 
 .button-group {
   margin-top: 40px;
 }
 
-.button-group ion-button {
-  height: 50px; /* Botones más altos para dedos humanos */
-  --border-width: 1.5px;
-  font-weight: 600;
+// Botón de login con tu paleta verde premium
+.btn-login {
+  height: 50px;
+  --background: #0f7a67 !important;
+  --color: #ffffff !important;
+  font-weight: 700;
   letter-spacing: 0.5px;
   margin-bottom: 10px;
-}
-
-.btn-login {
-  --background: #f8f9fa;
-  --color: #222;
-  --border-color: #222;
-}
-
-.other-mode {
-  font-size: 0.85rem;
-  color: #95a5a6;
-  margin: 15px 0;
+  box-shadow: 0 4px 10px rgba(15, 122, 103, 0.2);
 }
 
 .register-text {
   margin-top: 30px;
-  color: #7f8c8d;
+  color: #4f5e71;
+  font-weight: 500;
 }
 
-.register-text span {
-  color: #3880ff;
-  font-weight: bold;
+.Link-interactivo {
+  color: #0f7a67 !important;
+  font-weight: 700;
+  cursor: pointer;
 }

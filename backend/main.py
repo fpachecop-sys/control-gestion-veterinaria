@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 import socketio
 from fastapi import FastAPI
@@ -57,12 +57,17 @@ def bandeja_chats():
             WHERE m.id IN (
                 SELECT MAX(id) FROM mensajes GROUP BY id_dueno
             )
-            ORDER BY d.nombre ASC
+            ORDER BY tiempo DESC
             """
         )
         rows = cursor.fetchall()
         cursor.close()
         conn.close()
+
+        for row in rows:
+            if row.get("tiempo") and row["tiempo"].tzinfo is None:
+                row["tiempo"] = row["tiempo"].replace(tzinfo=timezone.utc)
+
         return rows
     except Exception as error:
         return {"error": str(error)}
@@ -80,6 +85,11 @@ def conversacion(id_dueno: int):
         rows = cursor.fetchall()
         cursor.close()
         conn.close()
+
+        for row in rows:
+            if row.get("fecha") and row["fecha"].tzinfo is None:
+                row["fecha"] = row["fecha"].replace(tzinfo=timezone.utc)
+
         return rows
     except Exception as error:
         return {"error": str(error)}
@@ -109,11 +119,13 @@ async def unirse_chat(sid, id_dueno):
 @sio.on("enviar_mensaje")
 async def enviar_mensaje(sid, datos):
     try:
+        ahora_utc = datetime.now(timezone.utc)
+
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO mensajes (id_dueno, remitente, mensaje) VALUES (%s, %s, %s)",
-            (datos["id_dueno"], datos["remitente"], datos["mensaje"].strip()),
+            "INSERT INTO mensajes (id_dueno, remitente, mensaje, fecha) VALUES (%s, %s, %s, %s)",
+            (datos["id_dueno"], datos["remitente"], datos["mensaje"].strip(), ahora_utc),
         )
         conn.commit()
         cursor.close()
@@ -124,7 +136,7 @@ async def enviar_mensaje(sid, datos):
             "nombre_cliente": datos.get("nombre_cliente", "Usuario"),
             "remitente": datos["remitente"],
             "mensaje": datos["mensaje"].strip(),
-            "fecha": datetime.now().isoformat(),
+            "fecha": ahora_utc.isoformat(),
         }
 
         await sio.emit(
@@ -155,5 +167,4 @@ async def startup_event():
 
 if __name__ == "__main__":
     import uvicorn
-
     uvicorn.run(socket_app, host="0.0.0.0", port=8000)

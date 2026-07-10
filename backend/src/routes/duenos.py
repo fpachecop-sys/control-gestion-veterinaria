@@ -384,31 +384,3 @@ def marcar_leidos(id_dueno: int):
         return {"mensaje": "Mensajes marcados como leídos con éxito."}
     except Exception as error:
         raise HTTPException(status_code=500, detail=str(error))
-
-
-@router.get("/bandeja")
-def bandeja():
-    try:
-        conn = get_connection()
-        cursor = conn.cursor(dictionary=True)
-        query = """
-            SELECT
-                d.id_dueno,
-                d.nombre AS nombre_cliente,
-                (SELECT m.mensaje FROM mensajes m WHERE m.id_dueno = d.id_dueno ORDER BY m.fecha DESC LIMIT 1) AS ultimo_mensaje,
-                (SELECT m.fecha FROM mensajes m WHERE m.id_dueno = d.id_dueno ORDER BY m.fecha DESC LIMIT 1) AS tiempo,
-                COALESCE((
-                    SELECT COUNT(*) FROM mensajes m
-                    WHERE m.id_dueno = d.id_dueno AND m.remitente = 'CLIENTE' AND m.leido = 0
-                ), 0) AS no_leidos
-            FROM duenos d
-            WHERE EXISTS (SELECT 1 FROM mensajes m WHERE m.id_dueno = d.id_dueno)
-            ORDER BY d.nombre ASC
-        """
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        cursor.close()
-        conn.close()
-        return rows
-    except Exception as error:
-        raise HTTPException(status_code=500, detail=str(error))

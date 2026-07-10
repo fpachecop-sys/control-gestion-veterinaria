@@ -19,7 +19,7 @@
         <ion-label>
           <div class="chat-header">
             <h3>{{ chat.nombre_cliente }}</h3>
-            <span class="chat-tiempo">{{ chat.tiempo | date:'HH:mm' }}</span>
+            <span class="chat-tiempo">{{ chat.tiempo | date:'HH:mm':'America/Lima' }}</span>
           </div>
           <p [ngClass]="{'no-leido': chat.no_leidos > 0}">
             {{ chat.ultimo_mensaje }}

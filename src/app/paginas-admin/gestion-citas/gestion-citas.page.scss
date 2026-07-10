@@ -11,10 +11,12 @@
   align-items: center;
   margin-bottom: 10px;
 
-  .user-name {
+.user-name {
     font-size: 1.6rem;
-    font-weight: 700;
-    color: #000000;
+    font-weight: 800;
+    background: linear-gradient(120deg, #0b7a63, #1c3d36);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin: 0;
   }
 

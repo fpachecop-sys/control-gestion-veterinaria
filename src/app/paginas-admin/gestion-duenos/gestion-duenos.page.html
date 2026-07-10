@@ -51,8 +51,14 @@
         </div>
 
         <div class="tarjeta-acciones">
-          <button class="btn-card editar" (click)="editarDueno(dueno)">EDITAR</button>
-          <button class="btn-card eliminar" (click)="confirmarEliminar(dueno.id_dueno, dueno.nombre)">ELIMINAR</button>
+          <button class="btn-card editar ion-activatable" (click)="editarDueno(dueno)">
+            EDITAR
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+          <button class="btn-card eliminar ion-activatable" (click)="confirmarEliminar(dueno.id_dueno, dueno.nombre)">
+            ELIMINAR
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
         </div>
       </div>
     </div>

@@ -60,7 +60,7 @@ export class Tab3Page {
     const fecha = new Date(fechaString);
     if (isNaN(fecha.getTime())) return 'MES';
     const meses = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SET', 'OCT', 'NOV', 'DIC'];
-    return meses[fecha.getUTCDate() - 1];
+    return meses[fecha.getUTCMonth() - 1];
   }
 
   logout() {
